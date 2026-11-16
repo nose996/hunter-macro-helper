@@ -15,9 +15,7 @@
 
 ## 部署到 GitHub Pages
 
-1. 新建仓库（例如 `hunter-macro-helper`），把本目录文件推到 `main` 分支；
-2. 仓库 **Settings → Pages**，Source 选 `main` 分支、根目录 `/`；
-3. 访问 `https://<用户名>.github.io/<仓库名>/`。
+仓库自带 `.github/workflows/deploy-pages.yml`：推送到 `main` 分支后，GitHub Actions 自动构建并发布；仓库 **Settings → Pages** 的 Source 保持 GitHub Actions。线上地址 `https://<用户名>.github.io/<仓库名>/`。
 
 ## 口径与免责
 
