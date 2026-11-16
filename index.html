@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>兽王猎宏命令助手 · 1–60 练级常用宏</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%238C5A1B'/%3E%3Cpath d='M10 22 L16 9 L22 22 L16 18.5 Z' fill='%23FFF6E6'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#F4EFE4; --panel:#FFFDF8; --panel2:#EAE0CC; --text:#2E2417; --muted:#6E5C40;
+    --line:#DDCFB2; --accent:#8C5A1B; --accent-soft:#F1E3C7; --green:#557E3E; --warn:#A84E32; --radius:12px;
+    --code-bg:#2A2015; --code-text:#E9D9B4;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:"Noto Sans SC","Microsoft YaHei","PingFang SC",system-ui,sans-serif;line-height:1.7;min-width:320px}
+  .wrap{max-width:900px;margin:0 auto;padding:0 20px}
+
+  header.hero{padding:38px 0 22px}
+  .kicker{color:var(--accent);font-size:13px;letter-spacing:.12em;margin-bottom:10px;font-weight:600}
+  h1{font-family:"Noto Serif SC","Songti SC",serif;font-size:28px;line-height:1.35;font-weight:700}
+  .sub{color:var(--muted);font-size:14px;margin-top:10px}
+  .notice{margin-top:16px;background:var(--panel2);border-left:3px solid var(--warn);border-radius:0 var(--radius) var(--radius) 0;padding:12px 16px;font-size:13.5px;color:var(--text)}
+  .notice strong{color:var(--warn)}
+
+  nav.tabs{position:sticky;top:0;z-index:10;background:#EFE6D2;border-bottom:1px solid var(--line)}
+  nav.tabs ul{display:flex;flex-wrap:wrap;gap:6px;list-style:none;padding:11px 0}
+  nav.tabs button{border:1px solid transparent;background:none;color:#4A3A24;font-size:14px;font-weight:500;padding:8px 15px;border-radius:8px;cursor:pointer;font-family:inherit}
+  nav.tabs button:hover{background:var(--panel2)}
+  nav.tabs button.active{background:var(--accent);color:#FFF6E6;font-weight:600}
+
+  main{padding:26px 0 40px}
+  .cat-title{font-family:"Noto Serif SC","Songti SC",serif;font-size:19px;margin:26px 0 14px;padding-left:12px;border-left:4px solid var(--accent)}
+  .cat-title:first-of-type{margin-top:0}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;box-shadow:0 2px 10px rgba(90,60,20,.10);margin-bottom:14px}
+  .card-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .card-name{font-size:15.5px;font-weight:600}
+  .card-desc{color:var(--muted);font-size:13.5px;margin:6px 0 10px}
+
+  .target{display:inline-flex;gap:4px;background:var(--panel2);border-radius:8px;padding:3px}
+  .target button{border:none;background:none;color:var(--muted);font-size:12px;padding:4px 10px;border-radius:6px;cursor:pointer;font-family:inherit}
+  .target button.active{background:var(--panel);color:var(--text);font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.12)}
+
+  .codebar{display:flex;gap:10px;align-items:stretch}
+  pre{flex:1;background:var(--code-bg);color:var(--code-text);border-radius:8px;padding:12px 14px;font-family:ui-monospace,"Cascadia Code",Consolas,Menlo,monospace;font-size:13px;line-height:1.7;overflow-x:auto;white-space:pre}
+  .copy{flex:none;align-self:center;border:1px solid #6B5330;background:#332716;color:#E9D9B4;border-radius:8px;padding:8px 14px;font-size:13px;cursor:pointer;font-family:inherit;white-space:nowrap}
+  .copy:hover{border-color:#E6C88A}
+  .copy.done{background:var(--green);border-color:var(--green);color:#F2F8EC}
+  .note{margin-top:8px;font-size:12.5px;color:var(--muted)}
+
+  .howto{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin-top:26px}
+  .howto h2{font-family:"Noto Serif SC","Songti SC",serif;font-size:18px;margin-bottom:12px}
+  .howto ol{padding-left:20px}
+  .howto li{margin-bottom:8px;font-size:14px}
+  .howto code{background:var(--panel2);border-radius:4px;padding:1px 6px;font-size:13px}
+
+  footer{padding:22px 0 44px;color:var(--muted);font-size:12.5px}
+  footer p{margin-bottom:8px}
+
+  @media (max-width:640px){
+    .codebar{flex-direction:column}
+    .copy{align-self:stretch}
+    h1{font-size:23px}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">WORLD OF WARCRAFT · FOREVER 玩家自用工具</div>
+    <h1>兽王猎宏命令助手</h1>
+    <p class="sub">1–60 练级常用宏模板，按用途分类，选好作用对象后一键复制，粘到游戏宏里就能用。</p>
+    <div class="notice">
+      <strong>口径提示：</strong>宏命令为经典旧世通用写法；技能中文名、绷带名以游戏内实测为准。标注待核的条目，上线后请回客户端核对一遍再用。
+    </div>
+  </div>
+</header>
+
+<nav class="tabs">
+  <div class="wrap">
+    <ul id="tabs">
+      <li><button data-cat="all" class="active">全部</button></li>
+      <li><button data-cat="pet">宠物控制</button></li>
+      <li><button data-cat="dps">输出循环</button></li>
+      <li><button data-cat="survive">生存脱战</button></li>
+      <li><button data-cat="burst">爆发增益</button></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="wrap" id="list"></main>
+
+<section class="wrap">
+  <div class="howto">
+    <h2>宏怎么放进游戏</h2>
+    <ol>
+      <li>按 <code>Esc</code> → 打开「宏命令设置」→ 点「新建」，选个图标、起个名字。</li>
+      <li>把上面代码块里的内容整段复制粘贴进去。</li>
+      <li>把宏图标从列表拖到动作条，打怪时点按对应宏即可。</li>
+      <li>带「焦点」的宏：先把目标设为焦点（<code>/focus</code> 或右键目标头像设焦点），宝宝和技能就会作用到焦点身上。</li>
+    </ol>
+  </div>
+</section>
+
+<footer class="wrap">
+  <p>本页面为玩家自制非官方工具，与暴雪娱乐 / 网易无关。技能与宏命令内容整理自经典旧世通用写法，并对照无限服现有译名；服务器热修后若有变动，以游戏内为准。</p>
+</footer>
+
+<script>
+(function(){
+  var CATS = {
+    pet:    "宠物控制",
+    dps:    "输出循环",
+    survive:"生存脱战",
+    burst:  "爆发增益"
+  };
+
+  // code 中 {T} 为作用对象占位：当前目标留空，焦点替换为 [@focus]
+  var MACROS = [
+    {id:"pet_attack", cat:"pet", name:"宠物攻击当前目标", targetable:true,
+      desc:"让宝宝立刻扑向目标咬上去；起手或转火时用。",
+      code:["/petattack {T}"]},
+    {id:"pet_follow", cat:"pet", name:"宠物跟随",
+      desc:"召回宝宝回到身边，拉开距离、转场时用。",
+      code:["/petfollow"]},
+    {id:"pet_passive", cat:"pet", name:"宠物被动、停止攻击",
+      desc:"宝宝切被动并停下，避免它追太远引到额外的怪。",
+      code:["/petpassive"]},
+    {id:"mark_pet", cat:"pet", name:"印记起手 + 宠物上", targetable:true,
+      desc:"先挂猎人印记给目标加攻强，再让宝宝扑上去。",
+      code:["/cast {T} 猎人印记", "/petattack {T}"]},
+
+    {id:"sting_arcane", cat:"dps", name:"毒蛇钉刺 → 奥术射击",
+      desc:"按顺序打两个技能；切换目标后序列自动重置。",
+      code:["/castsequence reset=target 毒蛇钉刺, 奥术射击"]},
+    {id:"raptor_strike", cat:"dps", name:"猛禽一击",
+      desc:"被怪物贴脸时补的近战兜底，平时保持距离少用。",
+      code:["/cast 猛禽一击"]},
+    {id:"concussive", cat:"dps", name:"震荡射击",
+      desc:"远程减速，风筝时拉开距离用。",
+      code:["/cast 震荡射击"]},
+
+    {id:"feign", cat:"survive", name:"假死脱战",
+      desc:"立刻假死脱离战斗；建议先召回宝宝，别让它继续扛。",
+      code:["/feign death"]},
+    {id:"feign_bandage", cat:"survive", name:"假死 + 自绷带",
+      desc:"假死后对自己打绷带回血；绷带名按你包里当前等级替换。",
+      note:"绷带名待核：经典旧世高等级为厚符文布绷带，无限服若改名以客户端为准。",
+      code:["/feign death", "/use 厚符文布绷带"]},
+    {id:"stop_attack", cat:"survive", name:"停止攻击",
+      desc:"立刻停手，配合拉开距离或假死脱战。",
+      code:["/stopattack"]},
+    {id:"mend_pet", cat:"survive", name:"治疗宠物",
+      desc:"宝宝掉血时奶一口，打精英前提前补上。",
+      code:["/cast 治疗宠物"]},
+
+    {id:"aspect_rapid", cat:"burst", name:"雄鹰守护 + 急速射击",
+      desc:"开守护后接急速射击，一波小怪或压血线时爆发。",
+      code:["/cast 雄鹰守护", "/cast 急速射击"]},
+    {id:"wrath_intim", cat:"burst", name:"狂野怒火 + 胁迫",
+      desc:"兽王大招一起开，胁迫晕住目标，集中爆发期使用。",
+      code:["/cast 狂野怒火", "/cast 胁迫"]},
+    {id:"summon_hawk", cat:"burst", name:"召唤雄鹰",
+      desc:"新服核心技能，雄鹰快消失前再补，省蓝别提前刷。",
+      code:["/cast 召唤雄鹰"]}
+  ];
+
+  var list = document.getElementById("list");
+  var tabs = document.getElementById("tabs");
+  var state = { cat:"all", target:"target" }; // target | focus
+
+  function resolveCode(codeLines){
+    var t = state.target === "focus" ? "[@focus]" : "";
+    return codeLines.map(function(l){ return l.replace(/\{T\}/g, t); }).join("\n");
+  }
+
+  function render(){
+    var groups = {};
+    MACROS.forEach(function(m){
+      if(state.cat !== "all" && m.cat !== state.cat) return;
+      (groups[m.cat] = groups[m.cat] || []).push(m);
+    });
+
+    list.innerHTML = "";
+    Object.keys(CATS).forEach(function(cat){
+      var items = groups[cat];
+      if(!items || !items.length) return;
+      var h = document.createElement("div");
+      h.className = "cat-title";
+      h.textContent = CATS[cat];
+      list.appendChild(h);
+
+      items.forEach(function(m){
+        var card = document.createElement("div");
+        card.className = "card";
+
+        var head = document.createElement("div");
+        head.className = "card-head";
+        var name = document.createElement("span");
+        name.className = "card-name";
+        name.textContent = m.name;
+        head.appendChild(name);
+
+        if(m.targetable){
+          var tgt = document.createElement("div");
+          tgt.className = "target";
+          ["target","focus"].forEach(function(k){
+            var b = document.createElement("button");
+            b.textContent = k === "target" ? "当前目标" : "焦点";
+            if(state.target === k) b.classList.add("active");
+            b.onclick = function(){ state.target = k; render(); };
+            tgt.appendChild(b);
+          });
+          head.appendChild(tgt);
+        }
+        card.appendChild(head);
+
+        var desc = document.createElement("div");
+        desc.className = "card-desc";
+        desc.textContent = m.desc;
+        card.appendChild(desc);
+
+        var bar = document.createElement("div");
+        bar.className = "codebar";
+        var pre = document.createElement("pre");
+        pre.textContent = resolveCode(m.code);
+        bar.appendChild(pre);
+
+        var btn = document.createElement("button");
+        btn.className = "copy";
+        btn.textContent = "复制";
+        btn.onclick = function(){
+          var text = pre.textContent;
+          function done(){ btn.classList.add("done"); btn.textContent = "已复制"; setTimeout(function(){ btn.classList.remove("done"); btn.textContent = "复制"; }, 1500); }
+          fallbackCopy(text, done);
+          if(navigator.clipboard && navigator.clipboard.writeText){
+            navigator.clipboard.writeText(text).catch(function(){});
+          }
+        };
+        bar.appendChild(btn);
+        card.appendChild(bar);
+
+        if(m.note){
+          var note = document.createElement("div");
+          note.className = "note";
+          note.textContent = m.note;
+          card.appendChild(note);
+        }
+        list.appendChild(card);
+      });
+    });
+
+    if(!list.children.length){
+      var empty = document.createElement("p");
+      empty.className = "card-desc";
+      empty.textContent = "该分类暂无模板。";
+      list.appendChild(empty);
+    }
+  }
+
+  function fallbackCopy(text, done){
+    var ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    try{ document.execCommand("copy"); done(); }catch(e){}
+    document.body.removeChild(ta);
+  }
+
+  tabs.addEventListener("click", function(e){
+    var b = e.target.closest("button");
+    if(!b) return;
+    state.cat = b.dataset.cat;
+    [...tabs.querySelectorAll("button")].forEach(function(x){ x.classList.toggle("active", x === b); });
+    render();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
