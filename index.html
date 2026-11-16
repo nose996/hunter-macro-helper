@@ -99,7 +99,7 @@
       <li>按 <code>Esc</code> → 打开「宏命令设置」→ 点「新建」，选个图标、起个名字。</li>
       <li>把上面代码块里的内容整段复制粘贴进去。</li>
       <li>把宏图标从列表拖到动作条，打怪时点按对应宏即可。</li>
-      <li>带「焦点」的宏：先把目标设为焦点（<code>/focus</code> 或右键目标头像设焦点），宝宝和技能就会作用到焦点身上。</li>
+      <li>指向类宏自动按优先级选目标：鼠标悬停的敌对目标 &gt; 焦点 &gt; 当前目标；想固定盯某只怪，右键它头像设为焦点即可。</li>
     </ol>
   </div>
 </section>
@@ -117,20 +117,20 @@
     burst:  "爆发增益"
   };
 
-  // code 中 {T} 为作用对象占位：当前目标留空，焦点替换为 [@focus]
+  // 指向类宏条件优先级：[@mouseover] > [@focus] > 当前目标兜底
   var MACROS = [
-    {id:"pet_attack", cat:"pet", name:"宠物攻击当前目标", targetable:true,
-      desc:"指令类，动作条上没有可拖按钮；让宝宝立刻扑向目标，起手或转火时用。",
-      code:["/petattack {T}"]},
+    {id:"pet_attack", cat:"pet", name:"宠物攻击（指向 / 焦点 / 当前目标）",
+      desc:"一条宏三种目标：鼠标悬停的敌对目标优先，其次焦点，都没有就扑当前目标。",
+      code:["/petattack [@mouseover,harm,nodead] [@focus,harm,nodead] []"]},
     {id:"pet_follow", cat:"pet", name:"宠物跟随",
       desc:"指令类，召回宝宝回到身边，拉开距离、转场或假死前用。",
       code:["/petfollow"]},
     {id:"pet_passive", cat:"pet", name:"宠物被动、停止攻击",
       desc:"指令类，宝宝切被动并停下，避免它追太远引到额外的怪。",
       code:["/petpassive"]},
-    {id:"mark_pet", cat:"pet", name:"印记起手 + 宠物上", targetable:true,
-      desc:"一键组合：先挂猎人印记加攻强，再让宝宝扑上去。",
-      code:["/cast {T} 猎人印记", "/petattack {T}"]},
+    {id:"mark_pet", cat:"pet", name:"印记起手 + 宠物上（指向优先）",
+      desc:"先挂猎人印记加攻强，再让宝宝扑上；目标优先级：鼠标指向 > 焦点 > 当前目标。",
+      code:["/cast [@mouseover,harm,nodead] 猎人印记", "/cast [@focus,harm,nodead] 猎人印记", "/cast [harm,nodead] 猎人印记", "/petattack [@mouseover,harm,nodead] [@focus,harm,nodead] []"]},
 
     {id:"sting_arcane", cat:"dps", name:"毒蛇钉刺 → 奥术射击",
       desc:"技能序列：按顺序打两个技能，切换目标后自动重置。",
@@ -154,11 +154,10 @@
 
   var list = document.getElementById("list");
   var tabs = document.getElementById("tabs");
-  var state = { cat:"all", target:"target" }; // target | focus
+  var state = { cat:"all" };
 
   function resolveCode(codeLines){
-    var t = state.target === "focus" ? "[@focus]" : "";
-    return codeLines.map(function(l){ return l.replace(/\{T\}/g, t); }).join("\n");
+    return codeLines.join("\n");
   }
 
   function render(){
@@ -187,19 +186,6 @@
         name.className = "card-name";
         name.textContent = m.name;
         head.appendChild(name);
-
-        if(m.targetable){
-          var tgt = document.createElement("div");
-          tgt.className = "target";
-          ["target","focus"].forEach(function(k){
-            var b = document.createElement("button");
-            b.textContent = k === "target" ? "当前目标" : "焦点";
-            if(state.target === k) b.classList.add("active");
-            b.onclick = function(){ state.target = k; render(); };
-            tgt.appendChild(b);
-          });
-          head.appendChild(tgt);
-        }
         card.appendChild(head);
 
         var desc = document.createElement("div");
