@@ -98,6 +98,7 @@
     <ol>
       <li>按 <code>Esc</code> → 打开「宏命令设置」→ 点「新建」，选个图标、起个名字。</li>
       <li>把上面代码块里的内容整段复制粘贴进去。</li>
+      <li>以 <code>#showtooltip</code> 开头的行不执行动作，只让动作条显示对应技能的图标、冷却转圈和可用状态；纯宝宝指令宏没有技能图标，所以不带这行。</li>
       <li>把宏图标从列表拖到动作条，打怪时点按对应宏即可。</li>
       <li>指向类宏自动按优先级选目标：鼠标悬停的敌对目标 &gt; 当前目标 &gt; 焦点；想固定盯某只怪，右键它头像设为焦点即可。</li>
     </ol>
@@ -130,26 +131,26 @@
       code:["/petpassive"]},
     {id:"mark_pet", cat:"pet", name:"印记起手 + 宠物上（指向优先）",
       desc:"先挂猎人印记加攻强，再让宝宝扑上；目标优先级：鼠标指向 > 当前目标 > 焦点。",
-      code:["/cast [@mouseover,harm,nodead] [harm,nodead] [@focus,harm,nodead] 猎人印记", "/petattack [@mouseover,harm,nodead] [harm,nodead] [@focus,harm,nodead]"]},
+      code:["#showtooltip 猎人印记", "/cast [@mouseover,harm,nodead] [harm,nodead] [@focus,harm,nodead] 猎人印记", "/petattack [@mouseover,harm,nodead] [harm,nodead] [@focus,harm,nodead]"]},
 
     {id:"sting_arcane", cat:"dps", name:"毒蛇钉刺 → 奥术射击",
       desc:"技能序列：按顺序打两个技能，切换目标后自动重置。",
-      code:["/castsequence reset=target 毒蛇钉刺, 奥术射击"]},
+      code:["#showtooltip 毒蛇钉刺", "/castsequence reset=target 毒蛇钉刺, 奥术射击"]},
 
     {id:"feign", cat:"survive", name:"假死脱战（召回宝宝）",
       desc:"先停手、宝宝被动召回，再假死脱离战斗；假死成功后再手动绷带回血。",
       note:"绷带不要绑进宏：假死没成功时引导绷带会引怪，脱战后手动点绷带即可。",
-      code:["/stopattack", "/petpassive", "/petfollow", "/cast 假死"]},
+      code:["#showtooltip 假死", "/stopattack", "/petpassive", "/petfollow", "/cast 假死"]},
     {id:"stop_attack", cat:"survive", name:"停止攻击",
       desc:"指令类，立刻停手，配合拉开距离或假死脱战。",
       code:["/stopattack"]},
 
     {id:"aspect_rapid", cat:"burst", name:"雄鹰守护 + 急速射击",
       desc:"一键组合：开守护后接急速射击，一波小怪或压血线时爆发。",
-      code:["/cast 雄鹰守护", "/cast 急速射击"]},
+      code:["#showtooltip 雄鹰守护", "/cast 雄鹰守护", "/cast 急速射击"]},
     {id:"wrath_intim", cat:"burst", name:"狂野怒火 + 胁迫",
       desc:"一键组合：兽王大招一起开，胁迫晕住目标，集中爆发期使用。",
-      code:["/cast 狂野怒火", "/cast 胁迫"]}
+      code:["#showtooltip 狂野怒火", "/cast 狂野怒火", "/cast 胁迫"]}
   ];
 
   var list = document.getElementById("list");
