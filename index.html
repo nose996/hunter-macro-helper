@@ -71,9 +71,9 @@
   <div class="wrap">
     <div class="kicker">WORLD OF WARCRAFT · FOREVER 玩家自用工具</div>
     <h1>兽王猎宏命令助手</h1>
-    <p class="sub">1–60 练级常用宏模板，按用途分类，选好作用对象后一键复制，粘到游戏宏里就能用。</p>
+    <p class="sub">只列动作条上做不到的宏：一键组合、技能序列、焦点目标和宠物指令；技能书里能拖的技能，直接拖到动作条即可。</p>
     <div class="notice">
-      <strong>口径提示：</strong>宏命令为经典旧世通用写法；技能中文名、绷带名以游戏内实测为准。标注待核的条目，上线后请回客户端核对一遍再用。
+      <strong>口径提示：</strong>宏为经典旧世通用写法；技能中文名、绷带名以游戏内实测为准。组合宏里若两个技能同处公共冷却，第二个可能按不出来，以实战为准；标注待核的条目上线后回客户端核对。
     </div>
   </div>
 </header>
@@ -120,51 +120,36 @@
   // code 中 {T} 为作用对象占位：当前目标留空，焦点替换为 [@focus]
   var MACROS = [
     {id:"pet_attack", cat:"pet", name:"宠物攻击当前目标", targetable:true,
-      desc:"让宝宝立刻扑向目标咬上去；起手或转火时用。",
+      desc:"指令类，动作条上没有可拖按钮；让宝宝立刻扑向目标，起手或转火时用。",
       code:["/petattack {T}"]},
     {id:"pet_follow", cat:"pet", name:"宠物跟随",
-      desc:"召回宝宝回到身边，拉开距离、转场时用。",
+      desc:"指令类，召回宝宝回到身边，拉开距离、转场或假死前用。",
       code:["/petfollow"]},
     {id:"pet_passive", cat:"pet", name:"宠物被动、停止攻击",
-      desc:"宝宝切被动并停下，避免它追太远引到额外的怪。",
+      desc:"指令类，宝宝切被动并停下，避免它追太远引到额外的怪。",
       code:["/petpassive"]},
     {id:"mark_pet", cat:"pet", name:"印记起手 + 宠物上", targetable:true,
-      desc:"先挂猎人印记给目标加攻强，再让宝宝扑上去。",
+      desc:"一键组合：先挂猎人印记加攻强，再让宝宝扑上去。",
       code:["/cast {T} 猎人印记", "/petattack {T}"]},
 
     {id:"sting_arcane", cat:"dps", name:"毒蛇钉刺 → 奥术射击",
-      desc:"按顺序打两个技能；切换目标后序列自动重置。",
+      desc:"技能序列：按顺序打两个技能，切换目标后自动重置。",
       code:["/castsequence reset=target 毒蛇钉刺, 奥术射击"]},
-    {id:"raptor_strike", cat:"dps", name:"猛禽一击",
-      desc:"被怪物贴脸时补的近战兜底，平时保持距离少用。",
-      code:["/cast 猛禽一击"]},
-    {id:"concussive", cat:"dps", name:"震荡射击",
-      desc:"远程减速，风筝时拉开距离用。",
-      code:["/cast 震荡射击"]},
 
-    {id:"feign", cat:"survive", name:"假死脱战",
-      desc:"立刻假死脱离战斗；建议先召回宝宝，别让它继续扛。",
-      code:["/feign death"]},
-    {id:"feign_bandage", cat:"survive", name:"假死 + 自绷带",
-      desc:"假死后对自己打绷带回血；绷带名按你包里当前等级替换。",
+    {id:"feign_bandage", cat:"survive", name:"召回宝宝 + 假死 + 自绷带",
+      desc:"一键脱战自救：先召回宝宝，再假死脱离战斗，接着对自己打绷带回血。",
       note:"绷带名待核：经典旧世高等级为厚符文布绷带，无限服若改名以客户端为准。",
-      code:["/feign death", "/use 厚符文布绷带"]},
+      code:["/petfollow", "/feign death", "/use 厚符文布绷带"]},
     {id:"stop_attack", cat:"survive", name:"停止攻击",
-      desc:"立刻停手，配合拉开距离或假死脱战。",
+      desc:"指令类，立刻停手，配合拉开距离或假死脱战。",
       code:["/stopattack"]},
-    {id:"mend_pet", cat:"survive", name:"治疗宠物",
-      desc:"宝宝掉血时奶一口，打精英前提前补上。",
-      code:["/cast 治疗宠物"]},
 
     {id:"aspect_rapid", cat:"burst", name:"雄鹰守护 + 急速射击",
-      desc:"开守护后接急速射击，一波小怪或压血线时爆发。",
+      desc:"一键组合：开守护后接急速射击，一波小怪或压血线时爆发。",
       code:["/cast 雄鹰守护", "/cast 急速射击"]},
     {id:"wrath_intim", cat:"burst", name:"狂野怒火 + 胁迫",
-      desc:"兽王大招一起开，胁迫晕住目标，集中爆发期使用。",
-      code:["/cast 狂野怒火", "/cast 胁迫"]},
-    {id:"summon_hawk", cat:"burst", name:"召唤雄鹰",
-      desc:"新服核心技能，雄鹰快消失前再补，省蓝别提前刷。",
-      code:["/cast 召唤雄鹰"]}
+      desc:"一键组合：兽王大招一起开，胁迫晕住目标，集中爆发期使用。",
+      code:["/cast 狂野怒火", "/cast 胁迫"]}
   ];
 
   var list = document.getElementById("list");
