@@ -34,9 +34,11 @@
   .cat-title:first-of-type{margin-top:0}
 
   .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;box-shadow:0 2px 10px rgba(90,60,20,.10);margin-bottom:14px}
-  .card-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .card-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;cursor:pointer;user-select:none}
   .card-name{font-size:15.5px;font-weight:600}
   .card-desc{color:var(--muted);font-size:13.5px;margin:6px 0 10px}
+  .caret{margin-left:auto;color:var(--muted);font-size:12px;line-height:1;flex:none}
+  .card.collapsed .codebar,.card.collapsed .note{display:none}
 
   .target{display:inline-flex;gap:4px;background:var(--panel2);border-radius:8px;padding:3px}
   .target button{border:none;background:none;color:var(--muted);font-size:12px;padding:4px 10px;border-radius:6px;cursor:pointer;font-family:inherit}
@@ -51,9 +53,16 @@
 
   .howto{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin-top:26px}
   .howto h2{font-family:"Noto Serif SC","Songti SC",serif;font-size:18px;margin-bottom:12px}
+  .howto-head{display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none}
+  .howto-head h2{margin-bottom:0}
+  .howto.collapsed ol{display:none}
   .howto ol{padding-left:20px}
   .howto li{margin-bottom:8px;font-size:14px}
   .howto code{background:var(--panel2);border-radius:4px;padding:1px 6px;font-size:13px}
+
+  .tabs .wrap{display:flex;align-items:center;gap:10px}
+  .toggle-all{margin-left:auto;background:none;border:1px solid var(--line);color:var(--muted);font-size:12.5px;padding:6px 12px;border-radius:8px;cursor:pointer;font-family:inherit;white-space:nowrap}
+  .toggle-all:hover{background:var(--panel2)}
 
   footer{padding:22px 0 44px;color:var(--muted);font-size:12.5px}
   footer p{margin-bottom:8px}
@@ -109,14 +118,15 @@
       <li><button data-cat="survive">生存脱战</button></li>
       <li><button data-cat="burst">爆发增益</button></li>
     </ul>
+    <button id="toggleAll" class="toggle-all">全部展开</button>
   </div>
 </nav>
 
 <main class="wrap" id="list"></main>
 
 <section class="wrap">
-  <div class="howto">
-    <h2>宏怎么放进游戏</h2>
+  <div class="howto collapsed" id="howtoBox">
+    <h2 class="howto-head" id="howtoHead">宏怎么放进游戏 <span class="caret" id="howtoCaret">▸</span></h2>
     <ol>
       <li>按 <code>Esc</code> → 打开「宏命令设置」→ 点「新建」，选个图标、起个名字。</li>
       <li>把上面代码块里的内容整段复制粘贴进去。</li>
@@ -247,7 +257,7 @@
 
       items.forEach(function(m){
         var card = document.createElement("div");
-        card.className = "card";
+        card.className = "card collapsed";
 
         var head = document.createElement("div");
         head.className = "card-head";
@@ -255,6 +265,14 @@
         name.className = "card-name";
         name.textContent = m.name;
         head.appendChild(name);
+        var caret = document.createElement("span");
+        caret.className = "caret";
+        caret.textContent = "▸";
+        head.appendChild(caret);
+        head.onclick = function(){
+          var collapsed = card.classList.toggle("collapsed");
+          caret.textContent = collapsed ? "▸" : "▾";
+        };
         card.appendChild(head);
 
         var desc = document.createElement("div");
@@ -298,6 +316,7 @@
       empty.textContent = "该分类暂无模板。";
       list.appendChild(empty);
     }
+    toggleAll.textContent = "全部展开";
   }
 
   function fallbackCopy(text, done){
@@ -317,6 +336,28 @@
     [...tabs.querySelectorAll("button")].forEach(function(x){ x.classList.toggle("active", x === b); });
     render();
   });
+
+  // ===== 折叠：全局展开/收起 + 操作说明区 =====
+  var toggleAll = document.getElementById("toggleAll");
+  function setAllCards(collapsed){
+    document.querySelectorAll(".card").forEach(function(c){
+      c.classList.toggle("collapsed", collapsed);
+      var ct = c.querySelector(".caret");
+      if(ct) ct.textContent = collapsed ? "▸" : "▾";
+    });
+    toggleAll.textContent = collapsed ? "全部展开" : "全部收起";
+  }
+  toggleAll.onclick = function(){
+    var anyOpen = document.querySelector(".card:not(.collapsed)");
+    setAllCards(!!anyOpen);
+  };
+
+  var howtoBox = document.getElementById("howtoBox");
+  var howtoHead = document.getElementById("howtoHead");
+  howtoHead.onclick = function(){
+    var collapsed = howtoBox.classList.toggle("collapsed");
+    document.getElementById("howtoCaret").textContent = collapsed ? "▸" : "▾";
+  };
 
   // ===== 反馈入口（落地渠道可替换：改 buildFeedbackUrl 即可）=====
   var ISSUE_NEW = "https://github.com/nose996/hunter-macro-helper/issues/new";
