@@ -454,7 +454,7 @@
 <footer class="wrap">
   <p>本页面为玩家自制非官方工具，与暴雪娱乐 / 网易无关。宏命令整理自经典旧世通用写法；练级路线、技能、宠物与种族专业内容整理自公开英文练级指南并对照中文数据库核对译名；服务器热修后若有变动，待核条目以游戏内实测为准。</p>
   <p class="feedback-line"><button id="shareBtn" class="feedback-link">分享给朋友</button><button id="feedbackBtn" class="feedback-link">反馈问题 / 提建议</button></p>
-  <p class="feedback-line">本站访问 <span id="busuanzi_value_site_pv">–</span> 次 · 访客 <span id="busuanzi_value_site_uv">–</span> 人（计数由第三方不蒜子提供）</p>
+  <p class="feedback-line" id="siteStats">本站访问 <span id="busuanzi_value_site_pv">–</span> 次 · 访客 <span id="busuanzi_value_site_uv">–</span> 人（计数由第三方不蒜子提供）</p>
 </footer>
 
 <div id="feedbackModal" class="modal-mask" hidden>
@@ -1280,5 +1280,13 @@
 })();
 </script>
 <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+setTimeout(function(){
+  var pv=document.getElementById('busuanzi_value_site_pv');
+  if(pv && (pv.textContent.trim()===''||pv.textContent.trim()==='–')){
+    var line=document.getElementById('siteStats'); if(line) line.style.display='none';
+  }
+},5000);
+</script>
 </body>
 </html>
