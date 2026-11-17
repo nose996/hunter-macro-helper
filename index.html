@@ -1109,21 +1109,21 @@
     pathfinding:{c:0}, bestial_swiftness:{c:1}, unleashed_fury:{c:2},
     improved_mend:{c:0}, ferocity:{c:2}, summon_hawk:{c:3},
     soul_link:{c:0}, intimidation:{c:1,r:'bestial_swiftness'}, bestial_discipline:{c:3},
-    frenzy:{c:1,r:'ferocity'}, bestial_wrath:{c:1,r:'intimidation'},
+    frenzy:{c:2,r:'ferocity'}, bestial_wrath:{c:1,r:'intimidation'},
     // 射击
     hawk_eye:{c:0}, improved_concussive:{c:1}, lethal_attacks:{c:2},
     improved_sting:{c:0}, efficiency:{c:1}, careful_aim:{c:2},
-    rapid_killing:{c:0,r:'improved_sting'}, improved_arcane:{c:1}, lone_wolf:{c:3},
+    rapid_killing:{c:0}, improved_arcane:{c:1}, lone_wolf:{c:3},
     trueshot_aura:{c:1}, mortal_shots:{c:2,r:'careful_aim'},
-    rapid_recovery:{c:0,r:'rapid_killing'}, barrage:{c:1}, scatter:{c:2},
-    ranged_spec:{c:1,r:'trueshot_aura'}, sniper:{c:1,r:'ranged_spec'},
+    rapid_recovery:{c:0,r:'rapid_killing'}, barrage:{c:2}, scatter:{c:3},
+    ranged_spec:{c:2}, sniper:{c:1,r:'trueshot_aura'},
     // 生存
     improved_tracking:{c:1}, deflection:{c:2},
     entrapment:{c:0}, savage_strikes:{c:1}, survivalist:{c:2}, improved_trip:{c:3},
     trap_mastery:{c:0}, surefooted:{c:1}, deterrence:{c:2},
     survival_tactics:{c:0}, predator_claws:{c:1}, counterattack:{c:2,r:'deterrence'},
-    wild_hunt:{c:0}, expose_prey:{c:1,r:'predator_claws'}, survival_disc:{c:2}, raptor_kick:{c:3},
-    lightning_reflexes:{c:2}, tear:{c:1,r:'expose_prey'}
+    wild_hunt:{c:0}, expose_prey:{c:1}, survival_disc:{c:2}, raptor_kick:{c:3},
+    lightning_reflexes:{c:2}, tear:{c:1,r:'predator_claws'}
   };
   function talentById(id){ for(var i=0;i<TALENTS.length;i++){ if(TALENTS[i].id===id) return TALENTS[i]; } return null; }
   function treePoints(tree){ return TALENTS.reduce(function(s,t){ return s + (t.tree===tree ? (talentState[t.id]||0) : 0); },0); }
