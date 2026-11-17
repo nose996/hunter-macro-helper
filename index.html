@@ -196,6 +196,7 @@
   .talent.locked{opacity:.36}
   .rank{position:absolute;right:3px;bottom:1px;font-size:10px;color:#E6C88A;text-shadow:0 1px 2px #000}
   .rec-dot{position:absolute;left:3px;top:3px;width:7px;height:7px;border-radius:50%;background:#9BCB83;box-shadow:0 0 4px rgba(155,203,131,.8)}
+  .order-badge{position:absolute;left:2px;top:2px;min-width:15px;height:15px;padding:0 3px;border-radius:4px;background:rgba(20,14,6,.88);color:#E6C88A;font-size:10px;font-weight:700;line-height:15px;text-align:center}
   .tname{font-size:11px;color:#C9B894;text-align:center;line-height:1.25}
   .talent.on .tname{color:#F0D9A0}
   .talent.locked .tname{color:#8A7A5E}
@@ -410,7 +411,7 @@
         <button id="btn-reset" class="btn">重置</button>
       </div>
       <div class="sim-cols" id="sim-cols"></div>
-      <p class="sim-note">左键点击加点，右键点击减点；推荐配点为兽王 31 / 射击 20 / 生存 0。前置门槛：本系投入 0 / 5 / 10 / 15 / 20 / 25 / 30 点逐层解锁。图标取自客户端同源图标集，具体数值与译名以游戏内实测为准。</p>
+      <p class="sim-note">左键点击加点，右键点击减点；默认载入推荐配点（兽王 31 / 射击 20 / 生存 0），点亮天赋左上角数字为推荐加点先后。前置门槛：本系投入 0 / 5 / 10 / 15 / 20 / 25 / 30 点逐层解锁。图标取自客户端同源图标集，具体数值与译名以游戏内实测为准。</p>
     </div>
     <div id="tip" class="tip"></div>
   </main>
@@ -971,8 +972,16 @@
     summon_hawk:1, ferocity:5, intimidation:1, bestial_discipline:2, frenzy:3, bestial_wrath:1,
     lethal_attacks:5, careful_aim:5, rapid_killing:2, efficiency:5, trueshot_aura:1, mortal_shots:2
   };
+  // 推荐加点先后：先兽王出狂野怒火，再补射击
+  var PRESET_ORDER = [
+    'deadly_aspects','endurance','focused_fire','bestial_swiftness','unleashed_fury',
+    'ferocity','summon_hawk','intimidation','bestial_discipline','frenzy','bestial_wrath',
+    'lethal_attacks','efficiency','careful_aim','rapid_killing','trueshot_aura','mortal_shots'
+  ];
+  var ORDER_INDEX = {};
+  PRESET_ORDER.forEach(function(id,i){ ORDER_INDEX[id]=i+1; });
   var MAX_POINTS = 51;
-  var talentState = {};
+  var talentState = Object.assign({}, PRESET);
 
   var TREE_ICON = {
     bm:'<svg viewBox="0 0 24 24" fill="currentColor"><ellipse cx="12" cy="15" rx="4" ry="3.2"/><circle cx="6.5" cy="9.5" r="1.8"/><circle cx="10" cy="7" r="1.8"/><circle cx="14" cy="7" r="1.8"/><circle cx="17.5" cy="9.5" r="1.8"/></svg>',
@@ -1025,6 +1034,7 @@
     tip.appendChild(el('div','tip-name',t.name));
     tip.appendChild(el('div','tip-rank', rank+'/'+t.max+(locked?' · 未解锁':'')));
     tip.appendChild(el('div','tip-desc',t.desc));
+    if(ORDER_INDEX[t.id]) tip.appendChild(el('div','tip-req','推荐加点第 '+ORDER_INDEX[t.id]+' 步'));
     if(t.tier>0) tip.appendChild(el('div','tip-req','需本系投入 '+t.tier+' 点解锁'));
     tip.style.display='block';
     var r=evt.currentTarget.getBoundingClientRect();
@@ -1064,7 +1074,11 @@
           var img=el('img','ticon-img'); img.alt=t.name;
           if(im) img.src='assets/'+im[0]+'.svg#'+im[1];
           icon.appendChild(img);
-          if(t.rec) icon.appendChild(el('span','rec-dot'));
+          if(rank>0 && ORDER_INDEX[t.id]){
+            icon.appendChild(el('span','order-badge',String(ORDER_INDEX[t.id])));
+          } else if(t.rec){
+            icon.appendChild(el('span','rec-dot'));
+          }
           icon.appendChild(el('span','rank',rank+'/'+t.max));
           icon.onclick=function(){addTalent(t.id);};
           icon.oncontextmenu=function(e){e.preventDefault();removeTalent(t.id);};
