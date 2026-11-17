@@ -195,10 +195,13 @@
   .tree-name{font-size:14px;font-weight:600;color:#F0D9A0}
   .tree-pts{margin-left:auto;font-size:12.5px;color:#C9B894}
   .tree-pts b{color:#F0D9A0}
-  .tree-body{padding:14px 12px;display:flex;flex-direction:column;gap:16px;min-height:120px}
-  .tier{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
-
-  .talent{display:flex;flex-direction:column;align-items:center;gap:5px;width:60px}
+  .tree-body{padding:14px 12px;display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:auto;gap:18px 4px;min-height:120px;position:relative}
+  .talent{display:flex;flex-direction:column;align-items:center;gap:5px;width:60px;justify-self:center;position:relative}
+  .talent .link-v{position:absolute;left:50%;width:2px;background:#5C4722;transform:translateX(-50%);pointer-events:none}
+  .talent .link-v.up{top:-18px;height:18px}
+  .talent .link-v.down{bottom:-18px;height:18px}
+  .talent.on .link-v{background:#7E9A55}
+  .talent.locked .link-v{background:#3A2E1C}
   .ticon{position:relative;width:48px;height:48px;border-radius:9px;border:1px solid #4A3A22;background:#221A10;cursor:pointer;padding:0;display:flex;align-items:center;justify-content:center;overflow:hidden;transition:border-color .15s,box-shadow .15s}
   .ticon-img{width:100%;height:100%;object-fit:cover;display:block}
   .talent.avail .ticon-img{filter:grayscale(.7) brightness(.65)}
@@ -234,6 +237,9 @@
     .stage-dot{display:none}
     .rg{grid-template-columns:1fr;gap:2px}
     .sim-cols{grid-template-columns:1fr}
+    .tree-body{gap:14px 2px;padding:12px 8px}
+    .talent{width:52px}
+    .ticon{width:42px;height:42px}
   }
 </style>
 </head>
@@ -1096,6 +1102,12 @@
     '闪电反射':['shared','talents-spell_nature_invisibilty'],'裂伤打击':['shared','talents-ability_gouge']
   };
 
+  function colSlots(n){
+    if(n<=1) return [1];
+    if(n===2) return [1,2];
+    if(n===3) return [0,1,2];
+    return [0,1,2,3];
+  }
   function talentById(id){ for(var i=0;i<TALENTS.length;i++){ if(TALENTS[i].id===id) return TALENTS[i]; } return null; }
   function treePoints(tree){ return TALENTS.reduce(function(s,t){ return s + (t.tree===tree ? (talentState[t.id]||0) : 0); },0); }
   function usedPoints(){ return TALENTS.reduce(function(s,t){ return s + (talentState[t.id]||0); },0); }
@@ -1141,14 +1153,27 @@
       col.appendChild(head);
       var body=el('div','tree-body');
       var tiers=[0,5,10,15,20,25,30];
-      tiers.forEach(function(tier){
+      var layers=tiers.map(function(tier){
         var list=TALENTS.filter(function(t){ return t.tree===tree && t.tier===tier; });
-        if(!list.length) return;
-        var tierBox=el('div','tier');
-        list.forEach(function(t){
+        var slots=colSlots(list.length);
+        return {list:list, cols:list.map(function(_,i){ return slots[i]; })};
+      });
+      layers.forEach(function(layer, li){
+        layer.list.forEach(function(t, i){
+          var col=layer.cols[i];
           var rank=talentState[t.id]||0;
           var locked=treePoints(tree) < t.tier;
           var box=el('div','talent'+(locked?' locked':rank>0?' on':' avail'));
+          box.style.gridRow=String(li+1);
+          box.style.gridColumn=String(col+1);
+          var prev=layers[li-1], next=layers[li+1];
+          var upSame=!!(prev && prev.list.some(function(pt,pi){ return prev.cols[pi]===col; }));
+          var upNear=!upSame && !!(prev && prev.list.some(function(pt,pi){ return Math.abs(prev.cols[pi]-col)===1; }));
+          var downSame=!!(next && next.list.some(function(nt,ni){ return next.cols[ni]===col; }));
+          var downNear=!downSame && !!(next && next.list.some(function(nt,ni){ return Math.abs(next.cols[ni]-col)===1; }));
+          var hasUp=upSame||upNear;
+          var hasDown=downSame||downNear;
+          if(hasUp) box.appendChild(el('span','link-v up'));
           var icon=el('button','ticon');
           var im=ICON_MAP[t.name];
           var img=el('img','ticon-img'); img.alt=t.name;
@@ -1165,10 +1190,10 @@
           icon.onmouseenter=function(e){showTip(t,rank,locked,e);};
           icon.onmouseleave=hideTip;
           box.appendChild(icon);
+          if(hasDown) box.appendChild(el('span','link-v down'));
           box.appendChild(el('span','tname',t.name));
-          tierBox.appendChild(box);
+          body.appendChild(box);
         });
-        body.appendChild(tierBox);
       });
       col.appendChild(body);
       root.appendChild(col);
