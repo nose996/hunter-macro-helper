@@ -110,6 +110,11 @@
 
   /* ===== 指南章节 ===== */
   .guide{padding:26px 0 40px}
+  .guide-intro{margin:0 0 22px;padding:16px 18px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius)}
+  .guide-intro p{margin:0 0 12px;font-size:14px;color:var(--ink2);line-height:1.7}
+  .quick-chips{display:flex;gap:8px;flex-wrap:wrap}
+  .quick-chips button{border:1px solid var(--gold);background:transparent;color:var(--gold);font-size:13.5px;font-weight:600;padding:7px 14px;border-radius:6px;cursor:pointer;font-family:inherit}
+  .quick-chips button:hover{background:var(--gold-soft)}
   .g-section{padding:26px 0;border-bottom:1px solid var(--line);scroll-margin-top:12px}
   .g-section:last-child{border-bottom:none}
   .g-head{display:flex;align-items:center;gap:10px;width:100%;background:none;border:none;font-family:"Noto Serif SC","Songti SC",serif;font-size:18.5px;font-weight:700;color:var(--ink);padding:0;margin-bottom:6px;cursor:pointer;user-select:none;text-align:left}
@@ -230,13 +235,13 @@
 
 <nav class="viewnav">
   <div class="wrap">
-    <button data-view="macros" class="active">宏命令</button>
-    <button data-view="guide">练级指南</button>
+    <button data-view="macros">宏命令</button>
+    <button data-view="guide" class="active">练级指南</button>
     <button data-view="talent">天赋模拟</button>
   </div>
 </nav>
 
-<nav class="tabs" id="tabsNav">
+<nav class="tabs" id="tabsNav" hidden>
   <div class="wrap">
     <ul id="tabs">
       <li><button data-cat="all" class="active">全部</button></li>
@@ -249,7 +254,7 @@
   </div>
 </nav>
 
-<div id="view-macros">
+<div id="view-macros" hidden>
 <main class="wrap" id="list"></main>
 
 <section class="wrap">
@@ -266,7 +271,7 @@
 </section>
 </div><!-- /view-macros -->
 
-<div id="view-guide" hidden>
+<div id="view-guide">
   <nav class="guide-tabs" id="guideTabs">
     <div class="wrap">
       <ul>
@@ -279,6 +284,14 @@
     </div>
   </nav>
   <main class="wrap guide">
+
+    <div class="guide-intro">
+      <p>顺着 1–60 级往下走：去哪张图、学什么技能、带什么宝宝都在本页；要抄一键宏命令去「宏命令」，配点方案去「天赋模拟」。</p>
+      <div class="quick-chips">
+        <button type="button" data-view="macros">宏命令速查</button>
+        <button type="button" data-view="talent">天赋配点</button>
+      </div>
+    </div>
 
     <section class="g-section" id="g-route">
       <button class="g-head" type="button">练级路线图 <span class="caret"><svg class="ic-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg><svg class="ic-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></span></button>
@@ -890,6 +903,9 @@
   viewNav.addEventListener("click", function(e){
     var b=e.target.closest("button");
     if(b) switchView(b.dataset.view);
+  });
+  document.querySelectorAll(".quick-chips button[data-view]").forEach(function(b){
+    b.addEventListener("click", function(){ switchView(b.dataset.view); });
   });
 
   // ===== 天赋模拟器 =====
