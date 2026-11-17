@@ -1123,7 +1123,7 @@
     trap_mastery:{c:0}, surefooted:{c:1}, deterrence:{c:2},
     survival_tactics:{c:0}, predator_claws:{c:1}, counterattack:{c:2,r:'deterrence'},
     wild_hunt:{c:0}, expose_prey:{c:1}, survival_disc:{c:2}, raptor_kick:{c:3},
-    lightning_reflexes:{c:2}, tear:{c:1,r:'predator_claws'}
+    lightning_reflexes:{c:2}, tear:{c:1,r:'expose_prey'}
   };
   function talentById(id){ for(var i=0;i<TALENTS.length;i++){ if(TALENTS[i].id===id) return TALENTS[i]; } return null; }
   function treePoints(tree){ return TALENTS.reduce(function(s,t){ return s + (t.tree===tree ? (talentState[t.id]||0) : 0); },0); }
