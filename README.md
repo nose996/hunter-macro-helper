@@ -17,7 +17,7 @@
 
 ## 部署到 GitHub Pages
 
-仓库自带 `.github/workflows/deploy-pages.yml`：推送到 `main` 分支后，GitHub Actions 自动构建并发布；仓库 **Settings → Pages** 的 Source 保持 GitHub Actions。线上地址 `https://<用户名>.github.io/<仓库名>/`。
+仓库自带 `.github/workflows/deploy-pages.yml`：推送到 `main` 分支后，GitHub Actions 自动构建并发布；仓库 **Settings → Pages** 的 Source 保持 GitHub Actions。线上地址 `https://nose996.github.io/hunter-notes/`。
 
 ## 口径与免责
 
