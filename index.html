@@ -42,8 +42,8 @@
   .caret{margin-left:auto;color:var(--muted);flex:none;display:inline-flex}
   .caret svg{width:14px;height:14px;display:block}
   .caret .ic-right{display:none}
-  .cat-group.collapsed .ic-right,.howto.collapsed .ic-right{display:block}
-  .cat-group.collapsed .ic-down,.howto.collapsed .ic-down{display:none}
+  .cat-group.collapsed .ic-right,.howto.collapsed .ic-right,.g-section.collapsed .ic-right{display:block}
+  .cat-group.collapsed .ic-down,.howto.collapsed .ic-down,.g-section.collapsed .ic-down{display:none}
 
   .target{display:inline-flex;gap:4px;background:var(--panel2);border-radius:8px;padding:3px}
   .target button{border:none;background:none;color:var(--muted);font-size:12px;padding:4px 10px;border-radius:6px;cursor:pointer;font-family:inherit}
@@ -104,9 +104,10 @@
   .guide{padding:26px 0 40px}
   .g-section{padding:26px 0;border-bottom:1px solid var(--line)}
   .g-section:last-child{border-bottom:none}
-  .g-section h2{font-family:"Noto Serif SC","Songti SC",serif;font-size:20px;margin-bottom:6px;padding-left:12px;border-left:4px solid var(--accent)}
+  .g-head{display:flex;align-items:center;gap:8px;width:100%;background:none;border:none;font-family:"Noto Serif SC","Songti SC",serif;font-size:20px;font-weight:600;color:var(--text);padding:0;margin-bottom:6px;padding-left:12px;border-left:4px solid var(--accent);cursor:pointer;user-select:none;text-align:left}
   .g-section h3{font-size:15px;margin:16px 0 10px;color:var(--accent)}
   .g-section .sub{color:var(--muted);font-size:14px;margin-bottom:16px}
+  .g-section.collapsed .g-body{display:none}
 
   .table-scroll{overflow-x:auto}
   table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:14px}
@@ -208,13 +209,16 @@
   <main class="wrap guide">
 
     <section class="g-section">
-      <h2>练级路线图</h2>
+      <button class="g-head" type="button">练级路线图 <span class="caret"><svg class="ic-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg><svg class="ic-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></span></button>
+      <div class="g-body">
       <p class="sub">顺着等级往下翻，每段写这几级去哪张图、点啥天赋、带啥宠；地图为部落通用推荐路线，新图名称与任务密度以游戏内为准。标注「待核」的条目请回客户端核对。</p>
       <div class="route" id="guide-route"></div>
+      </div>
     </section>
 
     <section class="g-section">
-      <h2>技能全表</h2>
+      <button class="g-head" type="button">技能全表 <span class="caret"><svg class="ic-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg><svg class="ic-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></span></button>
+      <div class="g-body">
       <p class="sub">各等级首个等级技能；到训练师处记得及时学高等级技能。猛禽一击 10 级后价值大降，奥术射击 25 级后在练级中基本被召唤雄鹰取代。</p>
       <div class="card table-scroll">
         <table>
@@ -223,10 +227,12 @@
           <tbody id="guide-spells"></tbody>
         </table>
       </div>
+      </div>
     </section>
 
     <section class="g-section">
-      <h2>宠物选择与训练</h2>
+      <button class="g-head" type="button">宠物选择与训练 <span class="caret"><svg class="ic-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg><svg class="ic-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></span></button>
+      <div class="g-body">
       <p class="sub">无限服宠物属性跟随你的装备动态成长；兽栏常备两只：一只输出、一只抗压。下面按“带什么宝宝、技能怎么学、日常怎么养”分开说，标注「待核」的等级坐标以游戏内实测为准。</p>
       <div class="card">
         <h3>练级分工：两只宝宝用到 60</h3>
@@ -285,10 +291,12 @@
           <li><b>待核线索</b>：30 级左右凄凉之地左上海湾有自带急奔的陆行鸟；36 级闪光平原有尖啸秃鹫；具体等级、坐标需回游戏实地核对。</li>
         </ul>
       </div>
+      </div>
     </section>
 
     <section class="g-section">
-      <h2>种族与专业</h2>
+      <button class="g-head" type="button">种族与专业 <span class="caret"><svg class="ic-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg><svg class="ic-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></span></button>
+      <div class="g-body">
       <div class="card">
         <ul class="points">
           <li><b>部落推荐兽人</b>：血怒提供 10% 攻强持续 15 秒，命令使宠物伤害 +5%；坚韧缩短眩晕时长。种族整体差异不大，非极限冲分按喜好选即可（牛头人同样可玩）。</li>
@@ -296,6 +304,7 @@
           <li><b>副技能</b>：烹饪提供食物与经验增益，急救应急绷带，钓鱼供给烹饪或卖钱。</li>
           <li><b>休息经验</b>：尽量在旅店/营地篝火处下线攒双倍经验；舒适睡袋可在野外当作休息区，站立每分钟叠 1% 经验增益（最多 3%）。</li>
         </ul>
+      </div>
       </div>
     </section>
 
@@ -739,6 +748,13 @@
       tb.appendChild(tr);
     });
   }
+
+  // ===== 指南章节折叠 =====
+  document.querySelectorAll(".g-head").forEach(function(head){
+    head.onclick = function(){
+      head.closest(".g-section").classList.toggle("collapsed");
+    };
+  });
 
   // ===== 视图切换 =====
   var viewMacros=document.getElementById("view-macros");
