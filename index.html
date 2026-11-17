@@ -196,12 +196,10 @@
   .tree-pts{margin-left:auto;font-size:12.5px;color:#C9B894}
   .tree-pts b{color:#F0D9A0}
   .tree-body{padding:14px 12px;display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:auto;gap:18px 4px;min-height:120px;position:relative}
-  .talent{display:flex;flex-direction:column;align-items:center;gap:5px;width:60px;justify-self:center;position:relative}
-  .talent .link-v{position:absolute;left:50%;width:2px;background:#5C4722;transform:translateX(-50%);pointer-events:none}
-  .talent .link-v.up{top:-18px;height:18px}
-  .talent .link-v.down{bottom:-18px;height:18px}
-  .talent.on .link-v{background:#7E9A55}
-  .talent.locked .link-v{background:#3A2E1C}
+  .talent{display:flex;flex-direction:column;align-items:center;gap:5px;width:60px;justify-self:center;position:relative;z-index:1}
+  .tree-lines{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:visible}
+  .tree-line{stroke:#5C4722;stroke-width:2;fill:none;stroke-linecap:round}
+  .tree-line.hot{stroke:#7E9A55}
   .ticon{position:relative;width:48px;height:48px;border-radius:9px;border:1px solid #4A3A22;background:#221A10;cursor:pointer;padding:0;display:flex;align-items:center;justify-content:center;overflow:hidden;transition:border-color .15s,box-shadow .15s}
   .ticon-img{width:100%;height:100%;object-fit:cover;display:block}
   .talent.avail .ticon-img{filter:grayscale(.7) brightness(.65)}
@@ -985,6 +983,7 @@
     [...viewNav.querySelectorAll("button")].forEach(function(b){
       b.classList.toggle("active", b.dataset.view===v);
     });
+    if(v==="talent"){ requestAnimationFrame(function(){ renderTalent(); }); }
     window.scrollTo(0,0);
   }
   viewNav.addEventListener("click", function(e){
@@ -1102,12 +1101,30 @@
     '闪电反射':['shared','talents-spell_nature_invisibilty'],'裂伤打击':['shared','talents-ability_gouge']
   };
 
-  function colSlots(n){
-    if(n<=1) return [1];
-    if(n===2) return [1,2];
-    if(n===3) return [0,1,2];
-    return [0,1,2,3];
-  }
+  // 列位 c 与父子连线 r（依游戏内天赋树截图核对；r 为父天赋 id，无连线则省略）
+  var COL_REQ = {
+    // 野兽控制
+    deadly_aspects:{c:1}, endurance:{c:2},
+    focused_fire:{c:0}, improved_monkey:{c:1}, improved_revive:{c:2},
+    pathfinding:{c:0}, bestial_swiftness:{c:1}, unleashed_fury:{c:2},
+    improved_mend:{c:0}, ferocity:{c:2}, summon_hawk:{c:3},
+    soul_link:{c:0}, intimidation:{c:1,r:'bestial_swiftness'}, bestial_discipline:{c:3},
+    frenzy:{c:1,r:'ferocity'}, bestial_wrath:{c:1,r:'intimidation'},
+    // 射击
+    hawk_eye:{c:0}, improved_concussive:{c:1}, lethal_attacks:{c:2},
+    improved_sting:{c:0}, efficiency:{c:1}, careful_aim:{c:2},
+    rapid_killing:{c:0,r:'improved_sting'}, improved_arcane:{c:1}, lone_wolf:{c:3},
+    trueshot_aura:{c:1}, mortal_shots:{c:2,r:'careful_aim'},
+    rapid_recovery:{c:0,r:'rapid_killing'}, barrage:{c:1}, scatter:{c:2},
+    ranged_spec:{c:1,r:'trueshot_aura'}, sniper:{c:1,r:'ranged_spec'},
+    // 生存
+    improved_tracking:{c:1}, deflection:{c:2},
+    entrapment:{c:0}, savage_strikes:{c:1}, survivalist:{c:2}, improved_trip:{c:3},
+    trap_mastery:{c:0}, surefooted:{c:1}, deterrence:{c:2},
+    survival_tactics:{c:0}, predator_claws:{c:1}, counterattack:{c:2,r:'deterrence'},
+    wild_hunt:{c:0}, expose_prey:{c:1,r:'predator_claws'}, survival_disc:{c:2}, raptor_kick:{c:3},
+    lightning_reflexes:{c:2}, tear:{c:1,r:'expose_prey'}
+  };
   function talentById(id){ for(var i=0;i<TALENTS.length;i++){ if(TALENTS[i].id===id) return TALENTS[i]; } return null; }
   function treePoints(tree){ return TALENTS.reduce(function(s,t){ return s + (t.tree===tree ? (talentState[t.id]||0) : 0); },0); }
   function usedPoints(){ return TALENTS.reduce(function(s,t){ return s + (talentState[t.id]||0); },0); }
@@ -1138,9 +1155,35 @@
   }
   function hideTip(){ tip.style.display='none'; }
 
+  var SVG_NS='http://www.w3.org/2000/svg';
+  function drawLines(body){
+    var svg=document.createElementNS(SVG_NS,'svg');
+    svg.setAttribute('class','tree-lines');
+    svg.setAttribute('width', body.offsetWidth);
+    svg.setAttribute('height', body.offsetHeight);
+    body.appendChild(svg);
+    var br=body.getBoundingClientRect();
+    TALENTS.forEach(function(t){
+      var m=COL_REQ[t.id]; if(!m||!m.r) return;
+      var p=body.querySelector('[data-id="'+m.r+'"]');
+      var c=body.querySelector('[data-id="'+t.id+'"]');
+      if(!p||!c) return;
+      var pr=p.getBoundingClientRect(), cr=c.getBoundingClientRect();
+      var px=pr.left-br.left+pr.width/2, py=pr.bottom-br.top;
+      var cx=cr.left-br.left+cr.width/2, cy=cr.top-br.top;
+      var on=((talentState[t.id]||0)>0)&&((talentState[m.r]||0)>0);
+      var path=document.createElementNS(SVG_NS,'path');
+      var d=(Math.abs(px-cx)<1)?('M'+px+' '+py+' V'+cy):('M'+px+' '+py+' V'+((py+cy)/2)+' H'+cx+' V'+cy);
+      path.setAttribute('d',d);
+      path.setAttribute('class','tree-line'+(on?' hot':''));
+      svg.appendChild(path);
+    });
+  }
+
   function renderTalent(){
     var root=document.getElementById('sim-cols');
     root.textContent='';
+    var lineBodies=[];
     ['bm','mm','sv'].forEach(function(tree){
       var meta=TREE_META[tree];
       var col=el('div','tree '+tree);
@@ -1155,25 +1198,18 @@
       var tiers=[0,5,10,15,20,25,30];
       var layers=tiers.map(function(tier){
         var list=TALENTS.filter(function(t){ return t.tree===tree && t.tier===tier; });
-        var slots=colSlots(list.length);
-        return {list:list, cols:list.map(function(_,i){ return slots[i]; })};
+        return {list:list, cols:list.map(function(t){ return (COL_REQ[t.id]||{}).c!=null?(COL_REQ[t.id].c):1; })};
       });
       layers.forEach(function(layer, li){
         layer.list.forEach(function(t, i){
           var col=layer.cols[i];
+          var meta=COL_REQ[t.id]||{};
           var rank=talentState[t.id]||0;
           var locked=treePoints(tree) < t.tier;
           var box=el('div','talent'+(locked?' locked':rank>0?' on':' avail'));
+          box.dataset.id=t.id;
           box.style.gridRow=String(li+1);
           box.style.gridColumn=String(col+1);
-          var prev=layers[li-1], next=layers[li+1];
-          var upSame=!!(prev && prev.list.some(function(pt,pi){ return prev.cols[pi]===col; }));
-          var upNear=!upSame && !!(prev && prev.list.some(function(pt,pi){ return Math.abs(prev.cols[pi]-col)===1; }));
-          var downSame=!!(next && next.list.some(function(nt,ni){ return next.cols[ni]===col; }));
-          var downNear=!downSame && !!(next && next.list.some(function(nt,ni){ return Math.abs(next.cols[ni]-col)===1; }));
-          var hasUp=upSame||upNear;
-          var hasDown=downSame||downNear;
-          if(hasUp) box.appendChild(el('span','link-v up'));
           var icon=el('button','ticon');
           var im=ICON_MAP[t.name];
           var img=el('img','ticon-img'); img.alt=t.name;
@@ -1190,14 +1226,15 @@
           icon.onmouseenter=function(e){showTip(t,rank,locked,e);};
           icon.onmouseleave=hideTip;
           box.appendChild(icon);
-          if(hasDown) box.appendChild(el('span','link-v down'));
           box.appendChild(el('span','tname',t.name));
           body.appendChild(box);
         });
       });
       col.appendChild(body);
       root.appendChild(col);
+      lineBodies.push(body);
     });
+    requestAnimationFrame(function(){ lineBodies.forEach(drawLines); });
     var used=usedPoints();
     document.getElementById('tm-level').textContent=Math.min(60,10+used);
     document.getElementById('tm-used').textContent=used;
