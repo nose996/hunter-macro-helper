@@ -12,6 +12,15 @@
 <meta property="og:title" content="兽王猎练级笔记 · 宏命令与 1–60 指南">
 <meta property="og:description" content="1–60 级练级路线、宠物选择、常用猎人宏命令与三系天赋模拟器，兽王 31 / 射击 20 推荐配点。">
 <meta property="og:url" content="https://nose996.github.io/hunter-notes/">
+<meta property="og:site_name" content="兽王猎练级笔记">
+<meta property="og:image" content="https://nose996.github.io/hunter-notes/assets/share.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="兽王猎练级笔记 · 宏命令与 1–60 指南">
+<meta name="twitter:description" content="1–60 级练级路线、宠物选择、常用猎人宏命令与三系天赋模拟器，兽王 31 / 射击 20 推荐配点。">
+<meta name="twitter:image" content="https://nose996.github.io/hunter-notes/assets/share.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%238F5E1E'/%3E%3Cpath d='M10 22 L16 9 L22 22 L16 18.5 Z' fill='%23FBF3E2'/%3E%3C/svg%3E">
 <style>
   :root{
@@ -100,6 +109,12 @@
   .share-channels{display:flex;gap:14px;margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
   .share-link{color:var(--gold);font-size:13px;text-decoration:none;font-weight:600}
   .share-link:hover{text-decoration:underline}
+  .share-card{display:flex;gap:12px;background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:12px;margin-bottom:14px}
+  .share-card img{width:124px;height:78px;object-fit:cover;border-radius:6px;flex:none}
+  .share-card .sc-body{min-width:0}
+  .share-card .sc-title{font-weight:700;font-size:14px;color:var(--ink);line-height:1.4}
+  .share-card .sc-desc{font-size:12px;color:var(--ink2);margin-top:4px;line-height:1.5}
+  .share-card .sc-url{font-size:11.5px;color:var(--ink2);margin-top:6px}
 
   .modal-mask{position:fixed;inset:0;background:rgba(41,32,21,.45);display:flex;align-items:center;justify-content:center;padding:20px;z-index:30}
   .modal-mask[hidden]{display:none}
@@ -467,6 +482,14 @@
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="shareTitle">
     <h2 id="shareTitle">分享这个笔记</h2>
     <p class="fb-hint">把链接发给玩猎人的朋友，粘贴到 QQ / 微信群、游戏论坛即可；页面打开即用，不用装插件。</p>
+    <div class="share-card">
+      <img src="assets/share.png" alt="分享卡片预览">
+      <div class="sc-body">
+        <div class="sc-title">兽王猎练级笔记 · 宏命令与 1–60 指南</div>
+        <div class="sc-desc">1–60 级练级路线、宠物选择、常用猎人宏命令与三系天赋模拟器，含推荐配点。</div>
+        <div class="sc-url">nose996.github.io/hunter-notes</div>
+      </div>
+    </div>
     <label>链接
       <input id="shareUrl" type="text" readonly>
     </label>
@@ -740,10 +763,12 @@
   var shareUrl=document.getElementById("shareUrl");
   var shareCopy=document.getElementById("shareCopy");
   var shareTitle="兽王猎练级笔记：1–60 级路线、猎人宏命令与天赋模拟器";
+  var shareText="";
   function shareLink(){ return location.origin + location.pathname; }
   function openShare(){
     var url=shareLink();
     shareUrl.value=url;
+    shareText=shareTitle+"\n"+url;
     var eu=encodeURIComponent(url), et=encodeURIComponent(shareTitle);
     document.getElementById("shareWeibo").href="https://service.weibo.com/share/share.php?url="+eu+"&title="+et;
     document.getElementById("shareTg").href="https://t.me/share/url?url="+eu+"&text="+et;
@@ -768,7 +793,7 @@
   document.getElementById("shareCancel").onclick=closeShare;
   shareModal.addEventListener("click", function(e){ if(e.target===shareModal) closeShare(); });
   shareCopy.onclick=function(){
-    copyText(shareUrl.value, function(){
+    copyText(shareText, function(){
       var old=shareCopy.textContent; shareCopy.textContent="已复制";
       setTimeout(function(){ shareCopy.textContent=old; },1500);
     });
