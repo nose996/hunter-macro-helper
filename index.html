@@ -142,6 +142,57 @@
   .rg-body li:last-child{margin-bottom:0}
   .rg-body b{color:var(--text)}
 
+  /* ===== 天赋模拟器 ===== */
+  .talent-wrap{padding:26px 0 40px}
+  .sim-frame{background:linear-gradient(180deg,#2A2015,#1C150D);border:1px solid #6B5330;border-radius:14px;padding:18px;box-shadow:0 6px 20px rgba(40,26,10,.35)}
+  .sim-bar{display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-bottom:16px}
+  .sim-stat{font-size:13px;color:#C9B894}
+  .sim-stat b{color:#F0D9A0;font-size:17px;font-family:"Noto Serif SC",serif;margin-left:2px}
+  .sim-stat.tree-bm b{color:#9BCB83}
+  .sim-stat.tree-mm b{color:#E5B25A}
+  .sim-stat.tree-sv b{color:#7FB6CC}
+  .sim-bar .spacer{flex:1}
+  .btn{border:1px solid #6B5330;background:#332716;color:#E9D9B4;border-radius:8px;padding:8px 14px;font-size:13px;cursor:pointer;font-family:inherit}
+  .btn:hover{border-color:#E6C88A}
+  .btn.primary{background:#E5B25A;color:#241A0C;border-color:#E5B25A;font-weight:600}
+
+  .sim-cols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+  .tree{border:1px solid #574226;border-radius:12px;overflow:hidden}
+  .tree.bm{background:linear-gradient(180deg,#22303A,#151A12)}
+  .tree.mm{background:linear-gradient(180deg,#3A2E18,#1A140B)}
+  .tree.sv{background:linear-gradient(180deg,#1E3430,#121A16)}
+  .tree-head{display:flex;align-items:center;gap:9px;padding:11px 13px;border-bottom:1px solid rgba(120,90,45,.4)}
+  .tree-ic{width:24px;height:24px;flex:none;display:flex;align-items:center;justify-content:center;border-radius:50%;background:#2A2013;border:1px solid #574226;color:#F0D9A0}
+  .tree-ic svg{width:15px;height:15px}
+  .tree-name{font-size:14px;font-weight:600;color:#F0D9A0}
+  .tree-pts{margin-left:auto;font-size:12.5px;color:#C9B894}
+  .tree-pts b{color:#F0D9A0}
+  .tree-body{padding:14px 12px;display:flex;flex-direction:column;gap:16px;min-height:120px}
+  .tier{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+
+  .talent{display:flex;flex-direction:column;align-items:center;gap:5px;width:60px}
+  .ticon{position:relative;width:48px;height:48px;border-radius:9px;border:1px solid #4A3A22;background:#221A10;cursor:pointer;padding:0;display:flex;align-items:center;justify-content:center;overflow:hidden;transition:border-color .15s,box-shadow .15s}
+  .ticon-img{width:100%;height:100%;object-fit:cover;display:block}
+  .talent.avail .ticon-img{filter:grayscale(.7) brightness(.65)}
+  .talent.on .ticon-img{filter:none}
+  .talent.locked .ticon-img{filter:grayscale(1) brightness(.38)}
+  .talent.avail .ticon{border-color:#6B5330}
+  .talent.avail .ticon:hover{border-color:#E6C88A;box-shadow:0 0 9px rgba(216,164,65,.4)}
+  .talent.on .ticon{border-color:#AAD372;background:#2E3316;box-shadow:0 0 11px rgba(170,211,114,.4)}
+  .talent.locked{opacity:.36}
+  .rank{position:absolute;right:3px;bottom:1px;font-size:10px;color:#E6C88A;text-shadow:0 1px 2px #000}
+  .rec-dot{position:absolute;left:3px;top:3px;width:7px;height:7px;border-radius:50%;background:#9BCB83;box-shadow:0 0 4px rgba(155,203,131,.8)}
+  .tname{font-size:11px;color:#C9B894;text-align:center;line-height:1.25}
+  .talent.on .tname{color:#F0D9A0}
+  .talent.locked .tname{color:#8A7A5E}
+
+  .tip{position:fixed;z-index:30;max-width:260px;background:#1C150C;border:1px solid #8A6A36;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#E9D9B4;box-shadow:0 6px 18px rgba(0,0,0,.6);display:none;pointer-events:none}
+  .tip .tip-name{font-size:14px;font-weight:600;color:#E6C88A;margin-bottom:3px}
+  .tip .tip-rank{color:#C9B894;margin-bottom:5px}
+  .tip .tip-desc{color:#D8C9A8;line-height:1.55}
+  .tip .tip-req{margin-top:6px;color:#B9A67F;font-size:11px}
+  .sim-note{margin-top:14px;font-size:13px;color:#B9A67F;line-height:1.7}
+
   @media (max-width:640px){
     .codebar{flex-direction:column}
     .copy{align-self:stretch}
@@ -152,6 +203,7 @@
     .stage-badge{text-align:left;display:flex;align-items:baseline;gap:10px}
     .stage-dot{display:none}
     .rg{grid-template-columns:1fr;gap:2px}
+    .sim-cols{grid-template-columns:1fr}
   }
 </style>
 </head>
@@ -172,6 +224,7 @@
   <div class="wrap">
     <button data-view="macros" class="active">宏命令</button>
     <button data-view="guide">练级指南</button>
+    <button data-view="talent">天赋模拟</button>
   </div>
 </nav>
 
@@ -310,6 +363,26 @@
 
   </main>
 </div><!-- /view-guide -->
+
+<div id="view-talent" hidden>
+  <main class="wrap talent-wrap">
+    <div class="sim-frame">
+      <div class="sim-bar">
+        <span class="sim-stat">等级 <b id="tm-level">10</b></span>
+        <span class="sim-stat">已投入 <b id="tm-used">0</b> / 51</span>
+        <span class="sim-stat tree-bm">兽王 <b id="pt-bm">0</b></span>
+        <span class="sim-stat tree-mm">射击 <b id="pt-mm">0</b></span>
+        <span class="sim-stat tree-sv">生存 <b id="pt-sv">0</b></span>
+        <span class="spacer"></span>
+        <button id="btn-preset" class="btn primary">推荐配点</button>
+        <button id="btn-reset" class="btn">重置</button>
+      </div>
+      <div class="sim-cols" id="sim-cols"></div>
+      <p class="sim-note">左键点击加点，右键点击减点；推荐配点为兽王 31 / 射击 20 / 生存 0。前置门槛：本系投入 0 / 5 / 10 / 15 / 20 / 25 / 30 点逐层解锁。图标取自客户端同源图标集，具体数值与译名以游戏内实测为准。</p>
+    </div>
+    <div id="tip" class="tip"></div>
+  </main>
+</div><!-- /view-talent -->
 
 <footer class="wrap">
   <p>本页面为玩家自制非官方工具，与暴雪娱乐 / 网易无关。宏命令整理自经典旧世通用写法；练级路线、技能、宠物与种族专业内容整理自公开英文练级指南并对照中文数据库核对译名；服务器热修后若有变动，待核条目以游戏内实测为准。</p>
@@ -700,6 +773,7 @@
     if(text!=null) e.textContent=text;
     return e;
   }
+  var el=guideEl;
 
   function renderRoute(){
     var root=document.getElementById("guide-route");
@@ -759,11 +833,13 @@
   // ===== 视图切换 =====
   var viewMacros=document.getElementById("view-macros");
   var viewGuide=document.getElementById("view-guide");
+  var viewTalent=document.getElementById("view-talent");
   var tabsNav=document.getElementById("tabsNav");
   var viewNav=document.querySelector(".viewnav");
   function switchView(v){
     viewMacros.hidden = v!=="macros";
     viewGuide.hidden = v!=="guide";
+    viewTalent.hidden = v!=="talent";
     tabsNav.hidden = v!=="macros";
     [...viewNav.querySelectorAll("button")].forEach(function(b){
       b.classList.toggle("active", b.dataset.view===v);
@@ -775,9 +851,192 @@
     if(b) switchView(b.dataset.view);
   });
 
+  // ===== 天赋模拟器 =====
+  var TALENTS = [
+    {id:'deadly_aspects', tree:'bm', tier:0,  max:5, name:'致命守护', rec:1, desc:'雄鹰守护激活时，自动射击有10%几率使远程攻速提高30%，持续12秒。'},
+    {id:'endurance',      tree:'bm', tier:0,  max:5, name:'耐久训练', rec:1, desc:'宠物生命值和护甲提高15%。'},
+    {id:'focused_fire',   tree:'bm', tier:5,  max:2, name:'集中火力', rec:1, desc:'宠物激活时，你和宠物造成的所有伤害提高2%。'},
+    {id:'improved_monkey',tree:'bm', tier:5,  max:3, name:'强化灵猴守护', desc:'灵猴守护躲闪加成提高6%，宠物获得50%效果。'},
+    {id:'improved_revive', tree:'bm', tier:5,  max:2, name:'强化复活宠物', desc:'复活宠物施法时间减6秒、耗蓝降40%，复活生命提高30%。'},
+    {id:'pathfinding',     tree:'bm', tier:10, max:2, name:'寻路', desc:'猎豹/豹群守护速度加成提高6%。'},
+    {id:'bestial_swiftness',tree:'bm',tier:10,max:1, name:'野兽迅捷', rec:1, desc:'宠物移动速度提高30%。'},
+    {id:'unleashed_fury', tree:'bm', tier:10, max:5, name:'狂怒释放', rec:1, desc:'宠物和雄鹰造成的伤害提高15%。'},
+    {id:'improved_mend',  tree:'bm', tier:15, max:2, name:'强化治疗宠物', desc:'治疗宠物有50%几率净化1个负面效果，耗蓝降20%。'},
+    {id:'ferocity',       tree:'bm', tier:15, max:5, name:'凶暴', rec:1, desc:'宠物和雄鹰的爆击几率提高10%。'},
+    {id:'summon_hawk',    tree:'bm', tier:15, max:1, name:'召唤雄鹰', rec:1, desc:'雄鹰俯冲攻击目标18秒，同时最多2只；与奥术射击共享冷却。'},
+    {id:'soul_link',      tree:'bm', tier:20, max:2, name:'灵魂联结', desc:'宠物激活时，你和宠物每5秒回复1%生命值。'},
+    {id:'intimidation',   tree:'bm', tier:20, max:1, name:'胁迫', rec:1, desc:'宠物下次攻击眩晕目标3秒，该次攻击必爆，产生大量仇恨。'},
+    {id:'bestial_discipline',tree:'bm',tier:20,max:2, name:'野兽戒律', rec:1, desc:'宠物集中值回复提速20%，施法时保持50%法力回复。'},
+    {id:'frenzy',         tree:'bm', tier:25, max:5, name:'狂乱', rec:1, desc:'宠物爆击后100%几率获得30%攻速，持续8秒。'},
+    {id:'bestial_wrath',  tree:'bm', tier:30, max:1, name:'狂野怒火', rec:1, desc:'宠物伤害提高50%，持续18秒，进入疯狂状态。'},
+    {id:'hawk_eye',       tree:'mm', tier:0,  max:3, name:'鹰眼', desc:'远程武器射程延长6码。'},
+    {id:'improved_concussive',tree:'mm',tier:0,max:5,name:'强化震荡射击', desc:'震荡射击20%几率令目标昏迷3秒。'},
+    {id:'lethal_attacks', tree:'mm', tier:0,  max:5, name:'致命攻击', rec:1, desc:'所有攻击爆击几率提高5%。'},
+    {id:'improved_sting', tree:'mm', tier:5,  max:3, name:'强化钉刺', desc:'毒蛇钉刺伤害提高20%，蝰蛇钉刺冷却减6秒，毒蝎钉刺持续延长。'},
+    {id:'efficiency',     tree:'mm', tier:5,  max:5, name:'效率', rec:1, desc:'射击、钉刺和近战技能耗蓝降低15%。'},
+    {id:'careful_aim',    tree:'mm', tier:5,  max:5, name:'精确瞄准', rec:1, desc:'攻击强度提高，数值相当于智力的100%。'},
+    {id:'rapid_killing', tree:'mm', tier:10, max:2, name:'疾速杀戮', rec:1, desc:'急速射击冷却减2分钟；击杀后下一射击20秒内伤害提高20%。'},
+    {id:'improved_arcane',tree:'mm', tier:10, max:5, name:'强化奥术射击', desc:'奥术射击冷却缩短1.5秒。'},
+    {id:'lone_wolf',      tree:'mm', tier:10, max:1, name:'独来独往', desc:'没有激活宠物时，所有攻击伤害提高20%。'},
+    {id:'trueshot_aura',  tree:'mm', tier:15, max:1, name:'强击光环', rec:1, desc:'45码内小队/团队远程攻强提高20点。'},
+    {id:'mortal_shots',   tree:'mm', tier:15, max:5, name:'致死射击', rec:1, desc:'远程技能爆击伤害加成提高30%。'},
+    {id:'rapid_recovery', tree:'mm', tier:20, max:2, name:'急速恢复', desc:'毒蛇钉刺下施法保持50%回蓝；疾速杀戮消耗后提升至100%。'},
+    {id:'barrage',        tree:'mm', tier:20, max:3, name:'弹幕', desc:'多重射击、瞄准射击、乱射伤害提高15%。'},
+    {id:'scatter',        tree:'mm', tier:20, max:1, name:'驱散射击', desc:'短程射击造成50%武器伤害并困惑4秒，伤害打断。'},
+    {id:'ranged_spec',    tree:'mm', tier:25, max:5, name:'远程武器专精', desc:'远程武器伤害提高5%。'},
+    {id:'sniper',         tree:'mm', tier:30, max:1, name:'狙击', desc:'长距离射击外加320点伤害，接下来3次射击射程延长10码。'},
+    {id:'improved_tracking',tree:'sv',tier:0,  max:5, name:'强化追踪', desc:'对被追踪类型生物造成的所有伤害提高5%。'},
+    {id:'deflection',     tree:'sv', tier:0,  max:5, name:'偏斜', desc:'招架几率提高5%。'},
+    {id:'entrapment',     tree:'sv', tier:5,  max:5, name:'诱捕', desc:'陷阱触发时目标被定身5秒。'},
+    {id:'savage_strikes', tree:'sv', tier:5,  max:2, name:'野蛮打击', desc:'所有近战技能爆击几率提高4%。'},
+    {id:'survivalist',    tree:'sv', tier:5,  max:5, name:'生存专家', desc:'总生命值提高10%。'},
+    {id:'improved_trip',  tree:'sv', tier:5,  max:3, name:'强化摔绊', desc:'摔绊20%几率令目标5秒无法移动。'},
+    {id:'trap_mastery',   tree:'sv', tier:10, max:2, name:'灵巧陷阱', desc:'冰冻/冰霜陷阱持续+30%，献祭/爆炸陷阱伤害+30%。'},
+    {id:'surefooted',     tree:'sv', tier:10, max:3, name:'稳固', desc:'命中几率提高3%，移动限制持续时间缩短30%。'},
+    {id:'deterrence',     tree:'sv', tier:10, max:1, name:'威慑', desc:'躲闪和招架几率提高25%，持续10秒。'},
+    {id:'survival_tactics',tree:'sv',tier:15, max:2, name:'生存战术', desc:'陷阱和假死命中几率提高10%。'},
+    {id:'predator_claws', tree:'sv', tier:15, max:5, name:'掠食者之锋', desc:'近战技能爆击伤害+30%，副手武器伤害+50%。'},
+    {id:'counterattack',   tree:'sv', tier:15, max:1, name:'反击', desc:'招架后可用，50%武器伤害外加13点，定身5秒。'},
+    {id:'wild_hunt',      tree:'sv', tier:20, max:2, name:'游刃有余', desc:'陷阱和近战耗蓝降60%；爆击后施法保持50%回蓝30秒。'},
+    {id:'expose_prey',    tree:'sv', tier:20, max:2, name:'暴露猎物', desc:'对印记目标攻击有10%几率激活猫鼬撕咬。'},
+    {id:'survival_disc',  tree:'sv', tier:20, max:2, name:'生存专家的戒律', desc:'陷阱和威慑冷却缩短40%。'},
+    {id:'raptor_kick',    tree:'sv', tier:20, max:1, name:'陆行鸟踢击', desc:'100%近战武器伤害，移速提高30%持续3秒。'},
+    {id:'lightning_reflexes',tree:'sv',tier:25,max:5,name:'闪电反射', desc:'敏捷提高15%。'},
+    {id:'tear',           tree:'sv', tier:30, max:1, name:'裂伤打击', desc:'猫鼬撕咬附加流血，21秒内造成其40%伤害。'}
+  ];
+  var TREE_META = {
+    bm:{name:'野兽控制', stat:'pt-bm'},
+    mm:{name:'射击',     stat:'pt-mm'},
+    sv:{name:'生存',     stat:'pt-sv'}
+  };
+  var PRESET = {
+    deadly_aspects:5, focused_fire:2, endurance:5, bestial_swiftness:1, unleashed_fury:5,
+    summon_hawk:1, ferocity:5, intimidation:1, bestial_discipline:2, frenzy:3, bestial_wrath:1,
+    lethal_attacks:5, careful_aim:5, rapid_killing:2, efficiency:5, trueshot_aura:1, mortal_shots:2
+  };
+  var MAX_POINTS = 51;
+  var talentState = {};
+
+  var TREE_ICON = {
+    bm:'<svg viewBox="0 0 24 24" fill="currentColor"><ellipse cx="12" cy="15" rx="4" ry="3.2"/><circle cx="6.5" cy="9.5" r="1.8"/><circle cx="10" cy="7" r="1.8"/><circle cx="14" cy="7" r="1.8"/><circle cx="17.5" cy="9.5" r="1.8"/></svg>',
+    mm:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="20" x2="18" y2="6"/><path d="M14 5h5v5"/><path d="M6 18l-2 2 3-1"/></svg>',
+    sv:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/></svg>'
+  };
+  var ICON_MAP = {
+    '致命守护':['shared','talents-spell_nature_ravenform'],'耐久训练':['shared','talents-spell_nature_reincarnation'],
+    '集中火力':['hunter','talents-inv_weapon_crossbow_10'],'强化灵猴守护':['hunter','talents-ability_hunter_aspectofthemonkey'],
+    '强化复活宠物':['hunter','talents-ability_hunter_beastsoothe'],'寻路':['hunter','talents-ability_mount_jungletiger'],
+    '野兽迅捷':['hunter','talents-ability_druid_dash'],'狂怒释放':['shared','talents-ability_bullrush'],
+    '强化治疗宠物':['hunter','talents-ability_hunter_mendpet'],'凶暴':['shared','talents-inv_misc_monsterclaw_04'],
+    '召唤雄鹰':['hunter','talents-ability_hunter_animalhandler'],'灵魂联结':['hunter','talents-ability_druid_demoralizingroar'],
+    '胁迫':['hunter','talents-ability_devour'],'野兽戒律':['shared','talents-spell_nature_abolishmagic'],
+    '狂乱':['hunter','talents-inv_misc_monsterclaw_03'],'狂野怒火':['hunter','talents-ability_druid_ferociousbite'],
+    '鹰眼':['hunter','talents-ability_townwatch'],'强化震荡射击':['shared','talents-spell_frost_stun'],
+    '致命攻击':['shared','talents-ability_searingarrow'],'强化钉刺':['hunter','talents-ability_hunter_quickshot'],
+    '效率':['shared','talents-spell_frost_wizardmark'],'精确瞄准':['hunter','talents-ability_hunter_zenarchery'],
+    '疾速杀戮':['hunter','talents-ability_hunter_rapidkilling'],'强化奥术射击':['hunter','talents-ability_impalingbolt'],
+    '独来独往':['hunter','talents-ability_mount_whitedirewolf'],'强击光环':['hunter','talents-ability_trueshot'],
+    '致死射击':['hunter','talents-ability_piercedamage'],'急速恢复':['hunter','talents-ability_hunter_rapidregeneration'],
+    '弹幕':['hunter','talents-ability_upgrademoonglaive'],'驱散射击':['hunter','talents-ability_golemstormbolt'],
+    '远程武器专精':['hunter','talents-inv_weapon_rifle_06'],'狙击':['hunter','talents-hunter_pvp_snipershot'],
+    '强化追踪':['hunter','talents-inv_misc_head_dragon_black'],'偏斜':['shared','talents-ability_parry'],
+    '诱捕':['shared','talents-spell_nature_stranglevines'],'野蛮打击':['shared','talents-ability_racial_bloodrage'],
+    '生存专家':['shared','talents-spell_shadow_twilight'],'强化摔绊':['hunter','talents-ability_rogue_trip'],
+    '灵巧陷阱':['hunter','talents-spell_nature_timestop'],'稳固':['shared','talents-ability_kick'],
+    '威慑':['shared','talents-ability_whirlwind'],'生存战术':['hunter','talents-ability_ensnare'],
+    '掠食者之锋':['shared','talents-ability_dualwield'],'反击':['shared','talents-ability_warrior_challange'],
+    '游刃有余':['hunter','talents-ability_hunter_resourcefulness'],'暴露猎物':['hunter','talents-ability_hunter_swiftstrike'],
+    '生存专家的戒律':['hunter','talents-ability_hunter_mastertactitian'],'陆行鸟踢击':['hunter','talents-ability_hunter_pet_tallstrider'],
+    '闪电反射':['shared','talents-spell_nature_invisibilty'],'裂伤打击':['shared','talents-ability_gouge']
+  };
+
+  function talentById(id){ for(var i=0;i<TALENTS.length;i++){ if(TALENTS[i].id===id) return TALENTS[i]; } return null; }
+  function treePoints(tree){ return TALENTS.reduce(function(s,t){ return s + (t.tree===tree ? (talentState[t.id]||0) : 0); },0); }
+  function usedPoints(){ return TALENTS.reduce(function(s,t){ return s + (talentState[t.id]||0); },0); }
+  function canAddTalent(t){
+    if((talentState[t.id]||0) >= t.max) return false;
+    if(usedPoints() >= MAX_POINTS) return false;
+    if(treePoints(t.tree) < t.tier) return false;
+    return true;
+  }
+  function addTalent(id){ var t=talentById(id); if(!t||!canAddTalent(t)) return; talentState[id]=(talentState[id]||0)+1; renderTalent(); }
+  function removeTalent(id){ var t=talentById(id); if(!t||(talentState[id]||0)<=0) return; talentState[id]--; if(talentState[id]===0) delete talentState[id]; renderTalent(); }
+
+  var tip=document.getElementById('tip');
+  function showTip(t, rank, locked, evt){
+    tip.textContent='';
+    tip.appendChild(el('div','tip-name',t.name));
+    tip.appendChild(el('div','tip-rank', rank+'/'+t.max+(locked?' · 未解锁':'')));
+    tip.appendChild(el('div','tip-desc',t.desc));
+    if(t.tier>0) tip.appendChild(el('div','tip-req','需本系投入 '+t.tier+' 点解锁'));
+    tip.style.display='block';
+    var r=evt.currentTarget.getBoundingClientRect();
+    var left=r.right+10, top=r.top;
+    if(left+260>window.innerWidth) left=r.left-270;
+    if(top+130>window.innerHeight) top=window.innerHeight-140;
+    tip.style.left=Math.max(8,left)+'px';
+    tip.style.top=Math.max(8,top)+'px';
+  }
+  function hideTip(){ tip.style.display='none'; }
+
+  function renderTalent(){
+    var root=document.getElementById('sim-cols');
+    root.textContent='';
+    ['bm','mm','sv'].forEach(function(tree){
+      var meta=TREE_META[tree];
+      var col=el('div','tree '+tree);
+      var head=el('div','tree-head');
+      var ic=el('span','tree-ic'); ic.innerHTML=TREE_ICON[tree]; head.appendChild(ic);
+      head.appendChild(el('span','tree-name',meta.name));
+      var pts=el('span','tree-pts','');
+      pts.innerHTML='<b>'+treePoints(tree)+'</b> 点';
+      head.appendChild(pts);
+      col.appendChild(head);
+      var body=el('div','tree-body');
+      var tiers=[0,5,10,15,20,25,30];
+      tiers.forEach(function(tier){
+        var list=TALENTS.filter(function(t){ return t.tree===tree && t.tier===tier; });
+        if(!list.length) return;
+        var tierBox=el('div','tier');
+        list.forEach(function(t){
+          var rank=talentState[t.id]||0;
+          var locked=treePoints(tree) < t.tier;
+          var box=el('div','talent'+(locked?' locked':rank>0?' on':' avail'));
+          var icon=el('button','ticon');
+          var im=ICON_MAP[t.name];
+          var img=el('img','ticon-img'); img.alt=t.name;
+          if(im) img.src='assets/'+im[0]+'.svg#'+im[1];
+          icon.appendChild(img);
+          if(t.rec) icon.appendChild(el('span','rec-dot'));
+          icon.appendChild(el('span','rank',rank+'/'+t.max));
+          icon.onclick=function(){addTalent(t.id);};
+          icon.oncontextmenu=function(e){e.preventDefault();removeTalent(t.id);};
+          icon.onmouseenter=function(e){showTip(t,rank,locked,e);};
+          icon.onmouseleave=hideTip;
+          box.appendChild(icon);
+          box.appendChild(el('span','tname',t.name));
+          tierBox.appendChild(box);
+        });
+        body.appendChild(tierBox);
+      });
+      col.appendChild(body);
+      root.appendChild(col);
+    });
+    var used=usedPoints();
+    document.getElementById('tm-level').textContent=Math.min(60,10+used);
+    document.getElementById('tm-used').textContent=used;
+    document.getElementById('pt-bm').textContent=treePoints('bm');
+    document.getElementById('pt-mm').textContent=treePoints('mm');
+    document.getElementById('pt-sv').textContent=treePoints('sv');
+  }
+
+  document.getElementById('btn-preset').onclick=function(){ talentState=Object.assign({},PRESET); renderTalent(); };
+  document.getElementById('btn-reset').onclick=function(){ talentState={}; renderTalent(); };
+
   renderRoute();
   renderTable("guide-spells", GUIDE_SPELLS);
   renderTable("guide-pet-families", GUIDE_PETS);
+  renderTalent();
   render();
 })();
 </script>
