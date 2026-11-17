@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://nose996.github.io/hunter-macro-helper/sitemap.xml
