@@ -40,8 +40,10 @@
   .card-name{font-size:15.5px;font-weight:600}
   .card-desc{color:var(--muted);font-size:13.5px;margin:6px 0 10px}
   .caret{margin-left:auto;color:var(--muted);flex:none;display:inline-flex}
-  .caret svg{width:14px;height:14px;transition:transform .15s ease}
-  .cat-group.collapsed .caret svg,.howto.collapsed .caret svg{transform:rotate(-90deg)}
+  .caret svg{width:14px;height:14px;display:block}
+  .caret .ic-right{display:none}
+  .cat-group.collapsed .ic-right,.howto.collapsed .ic-right{display:block}
+  .cat-group.collapsed .ic-down,.howto.collapsed .ic-down{display:none}
 
   .target{display:inline-flex;gap:4px;background:var(--panel2);border-radius:8px;padding:3px}
   .target button{border:none;background:none;color:var(--muted);font-size:12px;padding:4px 10px;border-radius:6px;cursor:pointer;font-family:inherit}
@@ -129,7 +131,7 @@
 
 <section class="wrap">
   <div class="howto" id="howtoBox">
-    <h2 class="howto-head" id="howtoHead">宏怎么放进游戏 <span class="caret" id="howtoCaret"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg></span></h2>
+    <h2 class="howto-head" id="howtoHead">宏怎么放进游戏 <span class="caret" id="howtoCaret"><svg class="ic-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg><svg class="ic-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></span></h2>
     <ol>
       <li>按 <code>Esc</code> → 打开「宏命令设置」→ 点「新建」，选个图标、起个名字。</li>
       <li>把上面代码块里的内容整段复制粘贴进去。</li>
@@ -263,7 +265,7 @@
       head.appendChild(label);
       var caret = document.createElement("span");
       caret.className = "caret";
-      caret.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg>';
+      caret.innerHTML = '<svg class="ic-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg><svg class="ic-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>';
       head.appendChild(caret);
       head.onclick = function(){
         group.classList.toggle("collapsed");
