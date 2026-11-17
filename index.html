@@ -29,6 +29,7 @@
   nav.tabs button.active{background:var(--accent);color:#FFF6E6;font-weight:600}
 
   nav.guide-tabs{border-bottom:1px solid var(--line)}
+  nav.guide-tabs .wrap{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
   nav.guide-tabs ul{display:flex;flex-wrap:wrap;gap:6px;list-style:none;padding:11px 0 0}
   nav.guide-tabs button{border:1px solid transparent;background:none;color:#4A3A24;font-size:14px;font-weight:500;padding:7px 14px;border-radius:8px;cursor:pointer;font-family:inherit}
   nav.guide-tabs button:hover{background:var(--panel2)}
@@ -271,6 +272,7 @@
         <li><button data-target="g-pet">宠物选择</button></li>
         <li><button data-target="g-race">种族专业</button></li>
       </ul>
+      <button id="guideToggleAll" class="toggle-all">全部收起</button>
     </div>
   </nav>
   <main class="wrap guide">
@@ -844,14 +846,25 @@
     };
   });
 
-  // ===== 指南章节导航定位 =====
+  // ===== 指南章节导航定位 + 全局收起/展开 =====
   var guideTabs=document.getElementById("guideTabs");
+  var guideToggleAll=document.getElementById("guideToggleAll");
+  function setGuideAll(collapsed){
+    document.querySelectorAll(".g-section").forEach(function(g){ g.classList.toggle("collapsed", collapsed); });
+    guideToggleAll.textContent = collapsed ? "全部展开" : "全部收起";
+  }
+  guideToggleAll.onclick=function(){
+    var anyOpen=document.querySelector(".g-section:not(.collapsed)");
+    setGuideAll(!!anyOpen);
+  };
   guideTabs.addEventListener("click", function(e){
     var b=e.target.closest("button");
-    if(!b) return;
+    if(!b || b.id==="guideToggleAll") return;
     var sec=document.getElementById(b.dataset.target);
     if(!sec) return;
-    guideTabs.querySelectorAll("button").forEach(function(x){ x.classList.toggle("active", x===b); });
+    guideTabs.querySelectorAll("button[data-target]").forEach(function(x){ x.classList.toggle("active", x===b); });
+    document.querySelectorAll(".g-section").forEach(function(g){ g.classList.toggle("collapsed", g!==sec); });
+    guideToggleAll.textContent="全部收起";
     sec.scrollIntoView({behavior:"smooth", block:"start"});
   });
 
