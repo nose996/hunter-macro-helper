@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>兽王猎宏命令助手 · 1–60 练级常用宏</title>
+<title>兽王猎练级助手 · 宏命令与 1–60 级指南</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%238C5A1B'/%3E%3Cpath d='M10 22 L16 9 L22 22 L16 18.5 Z' fill='%23FFF6E6'/%3E%3C/svg%3E">
 <style>
   :root{
@@ -93,11 +93,64 @@
   .fb-btn.primary{background:var(--accent);color:#FFF6E6}
   .fb-btn.primary:hover{background:#754916}
 
+  /* ===== 视图导航 ===== */
+  nav.viewnav{border-bottom:1px solid var(--line)}
+  nav.viewnav .wrap{display:flex;gap:6px;padding:11px 20px 0}
+  nav.viewnav button{border:none;background:none;color:#4A3A24;font-size:14px;font-weight:500;padding:8px 15px;border-radius:8px 8px 0 0;cursor:pointer;font-family:inherit;border-bottom:2px solid transparent}
+  nav.viewnav button:hover{background:var(--panel2)}
+  nav.viewnav button.active{color:var(--accent);font-weight:600;border-bottom-color:var(--accent)}
+
+  /* ===== 指南章节 ===== */
+  .guide{padding:26px 0 40px}
+  .g-section{padding:26px 0;border-bottom:1px solid var(--line)}
+  .g-section:last-child{border-bottom:none}
+  .g-section h2{font-family:"Noto Serif SC","Songti SC",serif;font-size:20px;margin-bottom:6px;padding-left:12px;border-left:4px solid var(--accent)}
+  .g-section h3{font-size:15px;margin:16px 0 10px;color:var(--accent)}
+  .g-section .sub{color:var(--muted);font-size:14px;margin-bottom:16px}
+
+  .table-scroll{overflow-x:auto}
+  table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:14px}
+  th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top;word-break:break-word}
+  th{color:var(--text);font-weight:600;font-size:13px;background:var(--panel2)}
+  tr:last-child td{border-bottom:none}
+
+  ul.points{margin:0;padding-left:20px}
+  ul.points li{margin-bottom:10px;font-size:14px}
+  ul.points li b{color:var(--text)}
+  .hint{color:var(--muted);font-size:13px}
+  .todo{display:inline-block;border:1px dashed var(--accent);color:var(--accent);background:var(--accent-soft);border-radius:6px;padding:1px 8px;font-size:12px;white-space:nowrap}
+
+  /* 路线图 */
+  .route{display:flex;flex-direction:column}
+  .stage{display:grid;grid-template-columns:96px 30px 1fr;gap:0 14px;padding:24px 0;position:relative}
+  .stage:not(:last-child)::after{content:"";position:absolute;left:calc(96px + 14px + 14px);top:52px;bottom:-6px;width:1px;background:var(--line)}
+  .stage-badge{text-align:right;padding-top:4px}
+  .stage-badge .lv{font-family:"Noto Serif SC","Songti SC",serif;font-size:19px;font-weight:700;color:var(--accent)}
+  .stage-badge .seg{display:block;font-size:12px;color:var(--muted);margin-top:2px}
+  .stage-dot{display:flex;justify-content:center;position:relative;z-index:1}
+  .stage-dot i{width:13px;height:13px;border-radius:50%;background:var(--panel2);border:2px solid var(--accent);margin-top:8px}
+  .stage-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;box-shadow:0 2px 10px rgba(90,60,20,.10)}
+  .stage-title{font-size:16px;font-weight:600;color:var(--text);margin-bottom:4px}
+  .stage-tag{color:var(--muted);font-size:13.5px;margin-bottom:10px}
+  .rg{display:grid;grid-template-columns:82px 1fr;gap:6px 12px;padding:9px 0;border-top:1px dashed var(--line)}
+  .rg:first-of-type{border-top:none;padding-top:2px}
+  .rg-tag{color:var(--accent);font-size:13px;font-weight:600;padding-top:1px}
+  .rg-body{font-size:14px;min-width:0}
+  .rg-body ul{margin:0;padding-left:18px}
+  .rg-body li{margin-bottom:6px}
+  .rg-body li:last-child{margin-bottom:0}
+  .rg-body b{color:var(--text)}
+
   @media (max-width:640px){
     .codebar{flex-direction:column}
     .copy{align-self:stretch}
     h1{font-size:23px}
     .fab{right:14px;bottom:14px;padding:10px 14px}
+    .stage{grid-template-columns:1fr;gap:8px;padding:18px 0}
+    .stage:not(:last-child)::after{display:none}
+    .stage-badge{text-align:left;display:flex;align-items:baseline;gap:10px}
+    .stage-dot{display:none}
+    .rg{grid-template-columns:1fr;gap:2px}
   }
 </style>
 </head>
@@ -106,15 +159,22 @@
 <header class="hero">
   <div class="wrap">
     <div class="kicker">WORLD OF WARCRAFT · FOREVER 玩家自用工具</div>
-    <h1>兽王猎宏命令助手</h1>
-    <p class="sub">只列动作条上做不到的宏：一键组合、技能序列、焦点目标和宠物指令；技能书里能拖的技能，直接拖到动作条即可。</p>
+    <h1>兽王猎练级助手</h1>
+    <p class="sub">宏命令速查 + 1–60 级练级指南：宏只列动作条上做不到的；技能书里能拖的技能，直接拖到动作条即可。</p>
     <div class="notice">
       <strong>口径提示：</strong>宏为经典旧世通用写法；技能中文名以游戏内实测为准。组合宏里若两个技能同处公共冷却，第二个可能按不出来，以实战为准；条目译名上线后回客户端核对。
     </div>
   </div>
 </header>
 
-<nav class="tabs">
+<nav class="viewnav">
+  <div class="wrap">
+    <button data-view="macros" class="active">宏命令</button>
+    <button data-view="guide">练级指南</button>
+  </div>
+</nav>
+
+<nav class="tabs" id="tabsNav">
   <div class="wrap">
     <ul id="tabs">
       <li><button data-cat="all" class="active">全部</button></li>
@@ -127,6 +187,7 @@
   </div>
 </nav>
 
+<div id="view-macros">
 <main class="wrap" id="list"></main>
 
 <section class="wrap">
@@ -141,9 +202,108 @@
     </ol>
   </div>
 </section>
+</div><!-- /view-macros -->
+
+<div id="view-guide" hidden>
+  <main class="wrap guide">
+
+    <section class="g-section">
+      <h2>练级路线图</h2>
+      <p class="sub">顺着等级往下翻，每段写这几级去哪张图、点啥天赋、带啥宠；地图为部落通用推荐路线，新图名称与任务密度以游戏内为准。标注「待核」的条目请回客户端核对。</p>
+      <div class="route" id="guide-route"></div>
+    </section>
+
+    <section class="g-section">
+      <h2>技能全表</h2>
+      <p class="sub">各等级首个等级技能；到训练师处记得及时学高等级技能。猛禽一击 10 级后价值大降，奥术射击 25 级后在练级中基本被召唤雄鹰取代。</p>
+      <div class="card table-scroll">
+        <table>
+          <colgroup><col style="width:14%"><col style="width:30%"><col style="width:56%"></colgroup>
+          <thead><tr><th>等级</th><th>技能</th><th>用途 / 备注</th></tr></thead>
+          <tbody id="guide-spells"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="g-section">
+      <h2>宠物选择与训练</h2>
+      <p class="sub">无限服宠物属性跟随你的装备动态成长；兽栏常备两只：一只输出、一只抗压。下面按“带什么宝宝、技能怎么学、日常怎么养”分开说，标注「待核」的等级坐标以游戏内实测为准。</p>
+      <div class="card">
+        <h3>练级分工：两只宝宝用到 60</h3>
+        <ul class="points">
+          <li><b>1–23 级：野猪开荒</b>。冲锋瞬间接怪定身，血甲厚、杂食什么都吃，任务扛怪最稳；10 级做完驯服职业任务直接抓主城周边野猪。</li>
+          <li><b>23 级起：换猫科当输出主力</b>。希尔斯布莱德丘陵抓山地狮，遍地刷新、1.2 攻速，平民神宠，不用蹲稀有；平时练级、单体打怪都用它。</li>
+          <li><b>精英和多只 ADD 切野猪</b>。一次引 2–3 只、单挑精英任务时，猫科扛不住就换野猪上场。</li>
+          <li><b>27 级补齐高级攻击技能</b>：4 级爪击、4 级撕咬；之后只随等级更新突进、撕咬等级，两只宝宝一路用到 60。</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>各家族定位（按需替换主力）</h3>
+        <div class="table-scroll">
+        <table>
+          <colgroup><col style="width:18%"><col style="width:46%"><col style="width:36%"></colgroup>
+          <thead><tr><th>家族</th><th>特点</th><th>适合场景</th></tr></thead>
+          <tbody id="guide-pet-families"></tbody>
+        </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>技能怎么学：先抓来领悟，再教给主宠</h3>
+        <p class="hint">宠物升级不会自动学新技能。爪击、撕咬、冲锋、突进、狂怒之嚎这类野外技能，必须靠“抓教学宠”传承；训练师只卖被动。</p>
+        <ul class="points">
+          <li><b>第一步：主宠进兽栏</b>，腾出出战位置。</li>
+          <li><b>第二步：抓一只自带目标技能的野兽</b>，喂到绿脸，带它出战打怪、释放该技能。</li>
+          <li><b>第三步：聊天框出黄字</b>“你学会了 XX（等级 N）”后，放生这只教学宠。</li>
+          <li><b>第四步：取回主宠</b>，用【训练野兽】消耗训练点数把技能教给它；主宠需达到学习该技能的等级。</li>
+        </ul>
+        <div class="rg">
+          <div class="rg-tag">训练师卖</div>
+          <div class="rg-body">主城猎人训练师旁：低吼、耐力、护甲、抗性等被动；其余攻击、冲锋、嚎叫技能靠野外抓宠学。</div>
+        </div>
+        <div class="rg">
+          <div class="rg-tag">跳级线索</div>
+          <div class="rg-body">高等级技能可直接学，不用先练 1–3 级：
+            <ul>
+              <li>4 级撕咬：希尔斯布莱德丘陵 24–25 级蜘蛛。</li>
+              <li>4 级爪击：希尔斯布莱德山地狮 / 灰谷野兽（25–26 老灰谷熊）。</li>
+              <li>2 级狂怒之嚎：银松森林巨型黑暗破坏者（狼），学完放生。</li>
+            </ul>
+          </div>
+        </div>
+        <p class="hint" style="margin-top:8px">训练点数 = 宠物等级 ×（忠诚等级 − 1），满级 300 点；分配优先耐力、护甲，剩余给伤害技能。注意：重置训练点数会抹除攻速隐藏被动，宠物回到 2.0 秒基础攻速。</p>
+      </div>
+
+      <div class="card">
+        <h3>日常养成要点</h3>
+        <ul class="points">
+          <li><b>低吼保持常驻</b>：宠物拉仇恨全靠低吼；没低吼怪会直接冲你本体。</li>
+          <li><b>喂食物保绿脸</b>：绿脸伤害 125%、黄脸 100%、红脸 75%；快乐度随时间下降、死亡大幅下降，靠喂食拉回；红脸太久宠物会逃走。猫科吃肉和鱼，野猪杂食。</li>
+          <li><b>忠诚度靠陪伴打怪</b>：分 6 级（不可靠→忠实），带它打经验、陪在身边才涨；期间不能长期红脸。</li>
+          <li><b>抓宠等级不能高于猎人</b>；别人给的团队增益（如王者祝福）对宠物无效，宠物吃你自己的装备成长。</li>
+          <li><b>待核线索</b>：30 级左右凄凉之地左上海湾有自带急奔的陆行鸟；36 级闪光平原有尖啸秃鹫；具体等级、坐标需回游戏实地核对。</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="g-section">
+      <h2>种族与专业</h2>
+      <div class="card">
+        <ul class="points">
+          <li><b>部落推荐兽人</b>：血怒提供 10% 攻强持续 15 秒，命令使宠物伤害 +5%；坚韧缩短眩晕时长。种族整体差异不大，非极限冲分按喜好选即可（牛头人同样可玩）。</li>
+          <li><b>主专业：制皮 + 剥皮</b>：制皮可做高敏捷皮甲练级装，剥皮供给原料，多余皮料还能出售。</li>
+          <li><b>副技能</b>：烹饪提供食物与经验增益，急救应急绷带，钓鱼供给烹饪或卖钱。</li>
+          <li><b>休息经验</b>：尽量在旅店/营地篝火处下线攒双倍经验；舒适睡袋可在野外当作休息区，站立每分钟叠 1% 经验增益（最多 3%）。</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+</div><!-- /view-guide -->
 
 <footer class="wrap">
-  <p>本页面为玩家自制非官方工具，与暴雪娱乐 / 网易无关。技能与宏命令内容整理自经典旧世通用写法，并对照无限服现有译名；服务器热修后若有变动，以游戏内为准。</p>
+  <p>本页面为玩家自制非官方工具，与暴雪娱乐 / 网易无关。宏命令整理自经典旧世通用写法；练级路线、技能、宠物与种族专业内容整理自公开英文练级指南并对照中文数据库核对译名；服务器热修后若有变动，待核条目以游戏内实测为准。</p>
   <p class="feedback-line"><button id="feedbackBtn" class="feedback-link">反馈问题 / 提建议</button></p>
 </footer>
 
@@ -416,6 +576,192 @@
     fbForm.reset();
   });
 
+  // ===== 练级指南：数据与渲染 =====
+  var GUIDE_ROUTES = [
+    {lv:"1–9", seg:"起步", title:"还没宠物，靠风筝", tag:"10 级前没有宠物扛怪，全程保持距离，别硬贴脸。",
+      blocks:[
+        {tag:"地图", items:[{text:"莫高雷（出生地），清新手村周边任务；顺手开通飞行点，把炉石绑在旅店。"}]},
+        {tag:"技能", items:[
+          {text:"1 级 猛禽一击：被贴脸时才用，优先保持距离。"},
+          {text:"4 级 毒蛇钉刺：持续伤害，目标很快死就别上。"},
+          {text:"6 级 奥术射击 / 猎人印记：印记给目标加攻强，宠物也吃到。"},
+          {text:"8 级 震荡射击：远程减速，风筝核心。"}]},
+        {tag:"手法", items:[{text:"拉开距离多打自动射击；被贴脸再补猛禽一击。"}]},
+        {tag:"武器", items:[{text:"5 级可做劣质火枪（工程 50，装备后绑定）。"}]}
+      ]},
+    {lv:"10–14", seg:"宠物上岗", title:"最关键的一级，宝宝替你扛怪", tag:"解锁宠物，兽王猎真正成型；你在远处输出，宠物近身拉住仇恨。",
+      blocks:[
+        {tag:"地图", items:[{text:"西进贫瘠之地，围绕十字路口接任务；13 级左右可下奥格瑞玛城内的怒焰裂谷。"}]},
+        {tag:"技能", items:[
+          {text:"10 级 雄鹰守护 / 召唤宠物；宠物的低吼、耐力、自然护甲技能都要学上。"},
+          {text:"12 级 治疗宠物：打高等级精英时尤为重要。"}]},
+        {tag:"天赋", items:[{text:"兽王先点致命守护、耐久训练、集中火力。"}]},
+        {tag:"宠物", items:[{text:"前期野猪扛怪稳，23 级后换猫科打输出；宠物技能靠抓教学宠领悟后教给主宠。"}]},
+        {tag:"手法", items:[{text:"让宝宝先打几下拉住仇恨再输出；低吼保持常驻；掉血及时治疗宠物。"}]}
+      ]},
+    {lv:"15–19", seg:"群体攻击", title:"群体输出上手", tag:"开始有范围技能，但别乱开引到旁边的怪。",
+      blocks:[
+        {tag:"地图", items:[{text:"贫瘠之地北部清完，再西进石爪山脉（烈日石居）过渡；顺路哀嚎洞穴，19 级毒蛇弓就在里面掉落。"}]},
+        {tag:"技能", items:[
+          {text:"16 级 献祭陷阱：点燃踩中的第一个敌人，放在目标必经之路。"},
+          {text:"18 级 多重射击：主要群体伤害，与瞄准射击共享冷却。"}]},
+        {tag:"武器", items:[{text:"19 级 毒蛇（弓，哀嚎洞穴·瑟芬迪斯领主掉落）。"}]},
+        {tag:"手法", items:[{text:"多重射击注意周围，别误引到旁边的怪。"}]}
+      ]},
+    {lv:"20–24", seg:"跑图硬控", title:"跑得更快，能控住怪", tag:"猎豹守护提速跑图，冰冻陷阱提供硬控。",
+      blocks:[
+        {tag:"地图", items:[{text:"石爪收尾后北上灰谷；或东渡到希尔斯布莱德丘陵（塔伦米尔）接任务。"}]},
+        {tag:"技能", items:[
+          {text:"20 级 瞄准射击 / 猎豹守护 / 冰冻陷阱。"},
+          {text:"24 级 追踪隐形：侦测潜行，部分任务和玩家对战有用。"}]},
+        {tag:"天赋", items:[{text:"寻路，配合猎豹守护让跑图和风筝更快。"}]},
+        {tag:"手法", items:[{text:"瞄准是单体 2 秒读条；冰冻陷阱硬控 10 秒，受到伤害会打破。"}]}
+      ]},
+    {lv:"25–29", seg:"雄鹰成型", title:"双雄鹰加主宠同时在场", tag:"召唤雄鹰是新服核心技能，理想状态是两只雄鹰和主宠一起打。",
+      blocks:[
+        {tag:"地图", items:[{text:"南下千针石林（乱风岗、闪光平原），灰谷与希尔斯布莱德收尾；26 级可去湿地挖掘场。"}]},
+        {tag:"技能", items:[
+          {text:"25 级 召唤雄鹰；26 级 急速射击（第一个正式爆发冷却）。"},
+          {text:"28 级 冰霜陷阱：区域减速，宠物拉不住群怪时用。"}]},
+        {tag:"武器", items:[
+          {text:"28 级 狩猎高手的猎弓（荆棘谷奈辛瓦里精英任务链）。"},
+          {text:"28 级 遗迹守护者长枪（湿地挖掘场，+6 敏捷）。", todo:true},
+          {text:"29 级 野猪火炮（剃刀沼泽任务奖励）。", todo:true}]},
+        {tag:"手法", items:[{text:"雄鹰快消失前再补拍，别提前刷新，省蓝；奥术射击 25 级后基本被雄鹰取代。"}]}
+      ]},
+    {lv:"30–39", seg:"控制续航", title:"补控制，为大招铺垫", tag:"学会假死脱战和宠物冲刺，天赋继续往兽王深处点。",
+      blocks:[
+        {tag:"地图", items:[{text:"凄凉之地、荆棘谷、阿拉希高地、尘泥沼泽轮换；33 级后推荐新图河林（河谷林地），任务密、对立阵营压力小。"}]},
+        {tag:"技能", items:[{text:"30 级 胁迫 / 假死 / 宠物冲刺。"}]},
+        {tag:"宠物", items:[{text:"抓一只自带冲刺的宠物，战斗中学会后教给主宠；凄凉之地陆行鸟、闪光平原秃鹫的等级坐标待回游戏核对。"}]},
+        {tag:"天赋", items:[{text:"继续往野兽戒律、狂乱、凶暴点，为狂野怒火铺垫。"}]},
+        {tag:"手法", items:[{text:"假死脱战前先召回宠物、留好退路；胁迫让宠物晕人应急。"}]}
+      ]},
+    {lv:"40–49", seg:"大招爆发", title:"狂野怒火，爆发期", tag:"兽王大招到手，配合乱射打爆发。",
+      blocks:[
+        {tag:"地图", items:[{text:"塔纳利斯（加基森）、菲拉斯（莫沙彻营地）、荒芜之地、悲伤沼泽轮换；42 级后可下祖尔法拉克。"}]},
+        {tag:"技能", items:[{text:"40 级 狂野怒火 / 乱射。"}]},
+        {tag:"武器", items:[
+          {text:"40 级 真理之弓（本阵营图书馆上交 25 本书兑换，40 级可装备）。", todo:true},
+          {text:"47 级 瑟银火枪（工程 260，装备后绑定）。"}]},
+        {tag:"手法", items:[{text:"狂野怒火是爆发大招；乱射是引导群体伤害，留够法力再开。"}]}
+      ]},
+    {lv:"50–60", seg:"毕业配点", title:"兽王 31 点，余下投射击", tag:"点出狂野怒火后，剩余点数补射击系被动，满级配点 31 / 20 / 0。",
+      blocks:[
+        {tag:"地图", items:[{text:"辛特兰、安戈洛环形山、艾萨拉；53 级后转东西瘟疫之地，55 级后冬泉谷，57 级后希利苏斯、费伍德森林。"}]},
+        {tag:"技能", items:[{text:"56 级 强击光环：伤害增益冷却。"}]},
+        {tag:"武器", items:[{text:"50 级 黑铁步枪（工程 275，装备后绑定，命中触发暗影射击）。"}]},
+        {tag:"天赋", items:[{text:"兽王 31 点点出狂野怒火后，剩余 20 点投射击：致命攻击、精确瞄准、疾速杀戮、效率、强击光环、致死射击。"}]},
+        {tag:"提醒", items:[{text:"到训练师处及时学高等级技能。"}]}
+      ]}
+  ];
+
+  var GUIDE_SPELLS = [
+    ["1","猛禽一击","近身近战技能；10 级前被贴脸时用，优先保持距离风筝。"],
+    ["4","毒蛇钉刺","持续伤害，全程用到满级；目标很快死就别上，没有直接伤害。"],
+    ["6","奥术射击 / 猎人印记","印记给目标加攻强（宠物也吃到）；奥术射击 25 级后与召唤雄鹰共享 6 秒冷却。"],
+    ["8","震荡射击","远程减速，10 级前风筝核心。"],
+    ["10","雄鹰守护 / 召唤宠物","最关键等级：解锁宠物，宠物承担大部分伤害与仇恨；宠物低吼、耐力、自然护甲技能要学上。"],
+    ["12","治疗宠物","奶宠物，打高等级精英时尤为重要。"],
+    ["16","献祭陷阱","点燃踩中的第一个敌人，放在目标必经之路。"],
+    ["18","多重射击","主要群体伤害，与瞄准射击共享冷却；注意别误引旁边的怪。"],
+    ["20","瞄准射击 / 猎豹守护 / 冰冻陷阱","瞄准为单体 2 秒读条；猎豹守护跑图加速；冰冻陷阱硬控 10 秒，伤害会打破。"],
+    ["24","追踪隐形","侦测潜行，部分任务和玩家对战有用。"],
+    ["25","召唤雄鹰","新服天赋技能，两只雄鹰加宠物同时在场为理想状态。"],
+    ["26","急速射击","第一个正式爆发冷却，提升攻速。"],
+    ["28","冰霜陷阱","区域减速 60%，宠物拉不住群怪时用。"],
+    ["30","胁迫 / 假死 / 宠物冲刺","胁迫见天赋表；假死脱离战斗（可能未命中，留好退路）；冲刺通过驯服会该技能的宠物学会。"],
+    ["40","狂野怒火 / 乱射","大招爆发；乱射为引导群体伤害，留够法力。"],
+    ["56","强击光环","伤害增益冷却。"]
+  ];
+
+  var GUIDE_PETS = [
+    ["猫科（狮 / 虎 / 豹）","伤害 +10%，可学爪击、撕咬、潜伏、突进；潜伏起手增伤，单体仇恨稳。","练级输出主力，兼顾 PVP，普通野怪可抓。"],
+    ["野猪","冲锋瞬间接怪定身，血甲优秀，杂食；可学撕咬、突进。冲锋偶有 8 码卡住的小问题。","抗压坦克，处理多 ADD、精英任务。"],
+    ["狼","专属狂怒之嚎，给 15 码内小队 / 团队近战攻强加成；单体伤害不如猫。","组队、副本辅助；2 级嚎叫可抓银松森林巨型黑暗破坏者（狼），学完放生。"],
+    ["食腐鸟 / 秃鹫","偏向群拉、降低怪物伤害，安全向。","独自练级、怕被围时兜底。"],
+    ["迅猛龙","10% 伤害加成，配野性撕咬，纯输出取向。","追求单体伤害。"],
+    ["陆行鸟","破甲向；也是急奔 / 突进类追击技能的来源之一。","按需补功能。"],
+    ["狐狸（新增家族）","专属欺诈者之舞：提高躲闪与攻击速度，持续 12 秒。","机动 / 生存向，实战表现待验证。"]
+  ];
+
+  function guideEl(tag, cls, text){
+    var e=document.createElement(tag);
+    if(cls) e.className=cls;
+    if(text!=null) e.textContent=text;
+    return e;
+  }
+
+  function renderRoute(){
+    var root=document.getElementById("guide-route");
+    root.textContent="";
+    GUIDE_ROUTES.forEach(function(s){
+      var stage=guideEl("div","stage");
+      var badge=guideEl("div","stage-badge");
+      badge.appendChild(guideEl("span","lv",s.lv));
+      badge.appendChild(guideEl("span","seg",s.seg));
+      var dot=guideEl("div","stage-dot");
+      dot.appendChild(guideEl("i"));
+      var card=guideEl("div","stage-card");
+      card.appendChild(guideEl("div","stage-title",s.title));
+      card.appendChild(guideEl("div","stage-tag",s.tag));
+      s.blocks.forEach(function(b){
+        var rg=guideEl("div","rg");
+        rg.appendChild(guideEl("div","rg-tag",b.tag));
+        var body=guideEl("div","rg-body");
+        var ul=guideEl("ul");
+        b.items.forEach(function(it){
+          var li=guideEl("li");
+          li.textContent=it.text;
+          if(it.todo){
+            li.appendChild(document.createTextNode(" "));
+            li.appendChild(guideEl("span","todo","译名待核"));
+          }
+          ul.appendChild(li);
+        });
+        body.appendChild(ul);
+        rg.appendChild(body);
+        card.appendChild(rg);
+      });
+      stage.appendChild(badge);
+      stage.appendChild(dot);
+      stage.appendChild(card);
+      root.appendChild(stage);
+    });
+  }
+
+  function renderTable(tbodyId, rows){
+    var tb=document.getElementById(tbodyId);
+    tb.textContent="";
+    rows.forEach(function(r){
+      var tr=guideEl("tr");
+      r.forEach(function(c){ tr.appendChild(guideEl("td",null,c)); });
+      tb.appendChild(tr);
+    });
+  }
+
+  // ===== 视图切换 =====
+  var viewMacros=document.getElementById("view-macros");
+  var viewGuide=document.getElementById("view-guide");
+  var tabsNav=document.getElementById("tabsNav");
+  var viewNav=document.querySelector(".viewnav");
+  function switchView(v){
+    viewMacros.hidden = v!=="macros";
+    viewGuide.hidden = v!=="guide";
+    tabsNav.hidden = v!=="macros";
+    [...viewNav.querySelectorAll("button")].forEach(function(b){
+      b.classList.toggle("active", b.dataset.view===v);
+    });
+    window.scrollTo(0,0);
+  }
+  viewNav.addEventListener("click", function(e){
+    var b=e.target.closest("button");
+    if(b) switchView(b.dataset.view);
+  });
+
+  renderRoute();
+  renderTable("guide-spells", GUIDE_SPELLS);
+  renderTable("guide-pet-families", GUIDE_PETS);
   render();
 })();
 </script>
