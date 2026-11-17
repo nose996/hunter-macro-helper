@@ -57,6 +57,23 @@
 
   footer{padding:22px 0 44px;color:var(--muted);font-size:12.5px}
   footer p{margin-bottom:8px}
+  .feedback-line{margin-top:10px}
+  .feedback-link{background:none;border:none;color:var(--muted);font-size:12.5px;text-decoration:underline;cursor:pointer;font-family:inherit;padding:0}
+  .feedback-link:hover{color:var(--accent)}
+
+  .modal-mask{position:fixed;inset:0;background:rgba(46,36,23,.42);display:flex;align-items:center;justify-content:center;padding:20px;z-index:30}
+  .modal-mask[hidden]{display:none}
+  .modal{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 12px 36px rgba(60,40,15,.25);max-width:440px;width:100%;padding:22px 22px 18px}
+  .modal h2{font-family:"Noto Serif SC","Songti SC",serif;font-size:18px;margin-bottom:6px}
+  .fb-hint{color:var(--muted);font-size:13px;margin-bottom:14px}
+  .modal label{display:block;font-size:13px;font-weight:600;margin-bottom:12px}
+  .modal select,.modal textarea,.modal input{width:100%;margin-top:5px;border:1px solid var(--line);background:var(--bg);border-radius:8px;padding:9px 11px;font-family:inherit;font-size:14px;color:var(--text)}
+  .modal textarea{resize:vertical}
+  .fb-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:6px}
+  .fb-btn{border-radius:8px;padding:9px 16px;font-size:13.5px;cursor:pointer;font-family:inherit;border:1px solid transparent}
+  .fb-btn.ghost{background:none;border-color:var(--line);color:var(--muted)}
+  .fb-btn.primary{background:var(--accent);color:#FFF6E6}
+  .fb-btn.primary:hover{background:#754916}
 
   @media (max-width:640px){
     .codebar{flex-direction:column}
@@ -107,7 +124,30 @@
 
 <footer class="wrap">
   <p>本页面为玩家自制非官方工具，与暴雪娱乐 / 网易无关。技能与宏命令内容整理自经典旧世通用写法，并对照无限服现有译名；服务器热修后若有变动，以游戏内为准。</p>
+  <p class="feedback-line"><button id="feedbackBtn" class="feedback-link">反馈问题 / 提建议</button></p>
 </footer>
+
+<div id="feedbackModal" class="modal-mask" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="fbTitle">
+    <h2 id="fbTitle">反馈问题</h2>
+    <p class="fb-hint">哪条宏不好用、什么现象、有没有红字报错，写下来即可；留言公开，联系方式不想留可以不填。</p>
+    <form id="fbForm">
+      <label>涉及宏
+        <select id="fbMacro"></select>
+      </label>
+      <label>问题描述
+        <textarea id="fbText" rows="4" placeholder="例如：假死宏按了没反应；印记挂不上；宝宝打错目标……"></textarea>
+      </label>
+      <label>联系方式（可选）
+        <input id="fbContact" type="text" placeholder="QQ 或游戏昵称，方便回访">
+      </label>
+      <div class="fb-actions">
+        <button type="button" id="fbCancel" class="fb-btn ghost">取消</button>
+        <button type="submit" class="fb-btn primary">提交反馈</button>
+      </div>
+    </form>
+  </div>
+</div>
 
 <script>
 (function(){
@@ -266,6 +306,55 @@
     state.cat = b.dataset.cat;
     [...tabs.querySelectorAll("button")].forEach(function(x){ x.classList.toggle("active", x === b); });
     render();
+  });
+
+  // ===== 反馈入口（落地渠道可替换：改 buildFeedbackUrl 即可）=====
+  var ISSUE_NEW = "https://github.com/nose996/hunter-macro-helper/issues/new";
+
+  function buildFeedbackUrl(payload){
+    var title = "反馈：" + payload.macro + (payload.text ? " - " + payload.text.slice(0, 30) : "");
+    var body = [
+      "### 涉及宏", payload.macro, "",
+      "### 问题描述", payload.text || "（未填写）", "",
+      "### 联系方式（可选）", payload.contact || "（未留）", "",
+      "---", "提交时间：" + new Date().toLocaleString("zh-CN")
+    ].join("\n");
+    return ISSUE_NEW + "?title=" + encodeURIComponent(title) + "&body=" + encodeURIComponent(body);
+  }
+
+  var modal = document.getElementById("feedbackModal");
+  var fbForm = document.getElementById("fbForm");
+  var fbMacro = document.getElementById("fbMacro");
+  var fbText = document.getElementById("fbText");
+  var fbContact = document.getElementById("fbContact");
+
+  var optOther = document.createElement("option");
+  optOther.value = "其他 / 通用问题";
+  optOther.textContent = "其他 / 通用问题";
+  fbMacro.appendChild(optOther);
+  MACROS.forEach(function(m){
+    var o = document.createElement("option");
+    o.value = m.name;
+    o.textContent = m.name;
+    fbMacro.appendChild(o);
+  });
+
+  function openModal(){ modal.hidden = false; fbText.focus(); }
+  function closeModal(){ modal.hidden = true; }
+
+  document.getElementById("feedbackBtn").onclick = openModal;
+  document.getElementById("fbCancel").onclick = closeModal;
+  modal.addEventListener("click", function(e){ if(e.target === modal) closeModal(); });
+  document.addEventListener("keydown", function(e){ if(e.key === "Escape" && !modal.hidden) closeModal(); });
+
+  fbForm.addEventListener("submit", function(e){
+    e.preventDefault();
+    var text = fbText.value.trim();
+    if(!text){ fbText.focus(); return; }
+    var payload = { macro: fbMacro.value, text: text, contact: fbContact.value.trim() };
+    window.open(buildFeedbackUrl(payload), "_blank");
+    closeModal();
+    fbForm.reset();
   });
 
   render();
