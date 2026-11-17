@@ -39,7 +39,9 @@
   .card-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
   .card-name{font-size:15.5px;font-weight:600}
   .card-desc{color:var(--muted);font-size:13.5px;margin:6px 0 10px}
-  .caret{margin-left:auto;color:var(--muted);font-size:12px;line-height:1;flex:none}
+  .caret{margin-left:auto;color:var(--muted);flex:none;display:inline-flex}
+  .caret svg{width:14px;height:14px;transition:transform .15s ease}
+  .cat-group.collapsed .caret svg,.howto.collapsed .caret svg{transform:rotate(-90deg)}
 
   .target{display:inline-flex;gap:4px;background:var(--panel2);border-radius:8px;padding:3px}
   .target button{border:none;background:none;color:var(--muted);font-size:12px;padding:4px 10px;border-radius:6px;cursor:pointer;font-family:inherit}
@@ -127,7 +129,7 @@
 
 <section class="wrap">
   <div class="howto" id="howtoBox">
-    <h2 class="howto-head" id="howtoHead">宏怎么放进游戏 <span class="caret" id="howtoCaret">▾</span></h2>
+    <h2 class="howto-head" id="howtoHead">宏怎么放进游戏 <span class="caret" id="howtoCaret"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg></span></h2>
     <ol>
       <li>按 <code>Esc</code> → 打开「宏命令设置」→ 点「新建」，选个图标、起个名字。</li>
       <li>把上面代码块里的内容整段复制粘贴进去。</li>
@@ -261,11 +263,10 @@
       head.appendChild(label);
       var caret = document.createElement("span");
       caret.className = "caret";
-      caret.textContent = "▾";
+      caret.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg>';
       head.appendChild(caret);
       head.onclick = function(){
-        var collapsed = group.classList.toggle("collapsed");
-        caret.textContent = collapsed ? "▸" : "▾";
+        group.classList.toggle("collapsed");
       };
       group.appendChild(head);
 
@@ -349,8 +350,6 @@
   function setAllGroups(collapsed){
     document.querySelectorAll(".cat-group").forEach(function(g){
       g.classList.toggle("collapsed", collapsed);
-      var ct = g.querySelector(".caret");
-      if(ct) ct.textContent = collapsed ? "▸" : "▾";
     });
     toggleAll.textContent = collapsed ? "全部展开" : "全部收起";
   }
@@ -362,8 +361,7 @@
   var howtoBox = document.getElementById("howtoBox");
   var howtoHead = document.getElementById("howtoHead");
   howtoHead.onclick = function(){
-    var collapsed = howtoBox.classList.toggle("collapsed");
-    document.getElementById("howtoCaret").textContent = collapsed ? "▸" : "▾";
+    howtoBox.classList.toggle("collapsed");
   };
 
   // ===== 反馈入口（落地渠道可替换：改 buildFeedbackUrl 即可）=====
