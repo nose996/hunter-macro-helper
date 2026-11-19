@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>兽王猎练级笔记 · 宏命令与 1–60 指南</title>
+<meta name="description" content="魔兽世界经典旧世 / 无限服兽王猎练级笔记：1–60 级练级路线、宠物选择与训练、技能全表，15 条常用猎人宏命令，野兽控制 / 射击 / 生存三系天赋模拟器，含兽王 31 / 射击 20 推荐配点与加点顺序。">
+<meta name="keywords" content="魔兽世界猎人,兽王猎,猎人宏命令,猎人天赋模拟器,猎人练级指南,1-60级,猎人宠物,怀旧服猎人,无限服,野兽控制,射击天赋,生存天赋">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://nose996.github.io/wow-class-notes/hunter/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="兽王猎练级笔记 · 宏命令与 1–60 指南">
+<meta property="og:description" content="1–60 级练级路线、宠物选择、常用猎人宏命令与三系天赋模拟器，兽王 31 / 射击 20 推荐配点。">
+<meta property="og:url" content="https://nose996.github.io/wow-class-notes/hunter/">
+<meta property="og:site_name" content="兽王猎练级笔记">
+<meta property="og:image" content="https://nose996.github.io/wow-class-notes/hunter/assets/share.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="兽王猎练级笔记 · 宏命令与 1–60 指南">
+<meta name="twitter:description" content="1–60 级练级路线、宠物选择、常用猎人宏命令与三系天赋模拟器，兽王 31 / 射击 20 推荐配点。">
+<meta name="twitter:image" content="https://nose996.github.io/wow-class-notes/hunter/assets/share.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%238F5E1E'/%3E%3Cpath d='M10 22 L16 9 L22 22 L16 18.5 Z' fill='%23FBF3E2'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --paper:#ECE4D1; --panel:#FDF9F0; --panel2:#F0E6D0; --ink:#292015; --ink2:#6B5B43;
+    --line:#D1C09C; --gold:#8F5E1E; --gold-soft:#EAD9B6; --green:#587344; --warn:#A84E32; --radius:6px;
+    --code-bg:#221A10; --code-text:#EBDBB6;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--paper);color:var(--ink);font-family:"Noto Sans SC","Microsoft YaHei","PingFang SC",system-ui,sans-serif;line-height:1.7;min-width:320px}
+  .wrap{max-width:920px;margin:0 auto;padding:0 22px}
+
+  header.hero{padding:34px 0 18px}
+  .crumb{display:inline-block;font-size:12.5px;color:var(--ink2);text-decoration:none;margin-bottom:12px;border-bottom:1px dotted #B99A64}
+  .crumb:hover{color:var(--gold);border-color:var(--gold)}
+  h1{font-family:"Noto Serif SC","Songti SC",serif;font-size:30px;line-height:1.3;font-weight:700;letter-spacing:.01em;color:var(--ink)}
+  .sub{color:var(--ink2);font-size:14px;margin-top:8px}
+  .notice{margin-top:12px;color:var(--ink2);font-size:12.5px;line-height:1.65}
+  .notice strong{color:var(--gold)}
+
+  nav.tabs{position:sticky;top:0;z-index:10;background:var(--paper);border-bottom:1px solid var(--line)}
+  nav.tabs .wrap{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  nav.tabs ul{display:flex;flex-wrap:wrap;gap:6px;list-style:none;padding:11px 0}
+  nav.tabs button{border:1px solid transparent;background:none;color:var(--ink2);font-size:13.5px;font-weight:500;padding:7px 13px;border-radius:6px;cursor:pointer;font-family:inherit}
+  nav.tabs button:hover{background:var(--panel2);color:var(--ink)}
+  nav.tabs button.active{background:var(--gold);color:#FBF3E2;font-weight:600}
+
+  nav.guide-tabs{border-bottom:1px solid var(--line)}
+  nav.guide-tabs .wrap{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  nav.guide-tabs ul{display:flex;flex-wrap:wrap;gap:6px;list-style:none;padding:11px 0}
+  nav.guide-tabs button{border:1px solid transparent;background:none;color:var(--ink2);font-size:13.5px;font-weight:500;padding:7px 13px;border-radius:6px;cursor:pointer;font-family:inherit}
+  nav.guide-tabs button:hover{background:var(--panel2);color:var(--ink)}
+  nav.guide-tabs button.active{background:var(--gold);color:#FBF3E2;font-weight:600}
+
+  main{padding:26px 0 40px}
+  .cat-group{margin-bottom:8px}
+  .cat-head{display:flex;align-items:center;gap:10px;width:100%;background:none;border:none;font-family:"Noto Serif SC","Songti SC",serif;font-size:18px;font-weight:700;color:var(--ink);padding:0;margin:26px 0 12px;cursor:pointer;user-select:none;text-align:left}
+  .cat-head::before{content:"";width:16px;height:2px;background:var(--gold);flex:none}
+  .cat-head:first-of-type{margin-top:0}
+  .cat-group.collapsed .card{display:none}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;margin-bottom:14px}
+  .card-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .card-name{font-size:15.5px;font-weight:600}
+  .card-desc{color:var(--ink2);font-size:13.5px;margin:6px 0 10px}
+  .caret{margin-left:auto;color:var(--ink2);flex:none;display:inline-flex}
+  .caret svg{width:14px;height:14px;display:block}
+  .caret .ic-right{display:none}
+  .cat-group.collapsed .ic-right,.howto.collapsed .ic-right,.g-section.collapsed .ic-right{display:block}
+  .cat-group.collapsed .ic-down,.howto.collapsed .ic-down,.g-section.collapsed .ic-down{display:none}
+
+  .target{display:inline-flex;gap:4px;background:var(--panel2);border-radius:6px;padding:3px}
+  .target button{border:none;background:none;color:var(--ink2);font-size:12px;padding:4px 10px;border-radius:5px;cursor:pointer;font-family:inherit}
+  .target button.active{background:var(--panel);color:var(--ink);font-weight:600;box-shadow:0 1px 2px rgba(60,40,15,.12)}
+
+  .codebar{display:flex;gap:10px;align-items:stretch}
+  pre{flex:1;background:var(--code-bg);color:var(--code-text);border-radius:6px;padding:12px 14px;font-family:ui-monospace,"Cascadia Code",Consolas,Menlo,monospace;font-size:13px;line-height:1.7;overflow-x:auto;white-space:pre}
+  .copy{flex:none;align-self:center;border:1px solid #5A4628;background:rgba(255,246,230,.07);color:#EBDBB6;border-radius:6px;padding:8px 14px;font-size:13px;cursor:pointer;font-family:inherit;white-space:nowrap}
+  .copy:hover{background:rgba(255,246,230,.15);border-color:#E6C88A}
+  .copy.done{background:var(--green);border-color:var(--green);color:#F2F8EC}
+  .note{margin-top:8px;font-size:12.5px;color:var(--ink2)}
+
+  .howto{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin-top:26px}
+  .howto h2{font-family:"Noto Serif SC","Songti SC",serif;font-size:18px;margin-bottom:12px}
+  .howto-head{display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none}
+  .howto-head h2{margin-bottom:0}
+  .howto.collapsed ol{display:none}
+  .howto ol{padding-left:20px}
+  .howto li{margin-bottom:8px;font-size:14px}
+  .howto code{background:var(--panel2);border-radius:4px;padding:1px 6px;font-size:13px}
+
+  .tabs .wrap{display:flex;align-items:center;gap:10px}
+  .toggle-all{margin-left:auto;background:none;border:1px solid var(--line);color:var(--ink2);font-size:12.5px;padding:6px 12px;border-radius:6px;cursor:pointer;font-family:inherit;white-space:nowrap}
+  .toggle-all:hover{background:var(--panel2);color:var(--ink)}
+
+  footer{padding:22px 0 44px;color:var(--ink2);font-size:12.5px}
+  footer p{margin-bottom:8px}
+  .feedback-line{margin-top:10px}
+  .feedback-link{background:none;border:none;color:var(--ink2);font-size:12.5px;text-decoration:underline;cursor:pointer;font-family:inherit;padding:0}
+  .feedback-link:hover{color:var(--gold)}
+
+  .fab-wrap{position:fixed;right:22px;bottom:22px;z-index:20;display:flex;flex-direction:column;gap:10px;align-items:flex-end}
+  .fab{display:inline-flex;align-items:center;gap:7px;background:var(--gold);color:#FBF3E2;border:none;border-radius:999px;padding:11px 16px;font-size:13.5px;font-weight:600;font-family:inherit;cursor:pointer;box-shadow:0 6px 18px rgba(60,40,15,.3)}
+  .fab:hover{background:#754916}
+  .fab.ghost{background:var(--panel);color:var(--gold);border:1px solid var(--gold);box-shadow:0 6px 18px rgba(60,40,15,.18)}
+  .fab.ghost:hover{background:var(--gold-soft)}
+  .fab svg{display:block}
+  .share-channels{display:flex;gap:14px;margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+  .share-link{color:var(--gold);font-size:13px;text-decoration:none;font-weight:600}
+  .share-link:hover{text-decoration:underline}
+  .share-card{display:flex;gap:12px;background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:12px;margin-bottom:14px}
+  .share-card img{width:124px;height:78px;object-fit:cover;border-radius:6px;flex:none}
+  .share-card .sc-body{min-width:0}
+  .share-card .sc-title{font-weight:700;font-size:14px;color:var(--ink);line-height:1.4}
+  .share-card .sc-desc{font-size:12px;color:var(--ink2);margin-top:4px;line-height:1.5}
+  .share-card .sc-url{font-size:11.5px;color:var(--ink2);margin-top:6px}
+
+  .modal-mask{position:fixed;inset:0;background:rgba(41,32,21,.45);display:flex;align-items:center;justify-content:center;padding:20px;z-index:30}
+  .modal-mask[hidden]{display:none}
+  .modal{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 12px 36px rgba(60,40,15,.25);max-width:440px;width:100%;padding:22px 22px 18px}
+  .modal h2{font-family:"Noto Serif SC","Songti SC",serif;font-size:18px;margin-bottom:6px}
+  .fb-hint{color:var(--ink2);font-size:13px;margin-bottom:14px}
+  .modal label{display:block;font-size:13px;font-weight:600;margin-bottom:12px}
+  .modal select,.modal textarea,.modal input{width:100%;margin-top:5px;border:1px solid var(--line);background:var(--paper);border-radius:6px;padding:9px 11px;font-family:inherit;font-size:14px;color:var(--ink)}
+  .modal textarea{resize:vertical}
+  .fb-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:6px}
+  .fb-btn{border-radius:6px;padding:9px 16px;font-size:13.5px;cursor:pointer;font-family:inherit;border:1px solid transparent}
+  .fb-btn.ghost{background:none;border-color:var(--line);color:var(--ink2)}
+  .fb-btn.primary{background:var(--gold);color:#FBF3E2}
+  .fb-btn.primary:hover{background:#754916}
+
+  /* ===== 视图导航 ===== */
+  nav.viewnav{border-bottom:1px solid var(--line)}
+  nav.viewnav .wrap{display:flex;gap:6px;padding:14px 22px}
+  nav.viewnav button{border:1px solid var(--line);background:transparent;color:var(--ink2);font-size:14px;font-weight:600;padding:8px 16px;border-radius:6px;cursor:pointer;font-family:inherit}
+  nav.viewnav button:hover{color:var(--ink);border-color:var(--gold)}
+  nav.viewnav button.active{background:var(--gold);border-color:var(--gold);color:#FBF3E2}
+
+  /* ===== 指南章节 ===== */
+  .guide{padding:26px 0 40px}
+  .guide-intro{margin:0 0 22px;padding:16px 18px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius)}
+  .guide-intro p{margin:0 0 12px;font-size:14px;color:var(--ink2);line-height:1.7}
+  .quick-chips{display:flex;gap:8px;flex-wrap:wrap}
+  .quick-chips button{border:1px solid var(--gold);background:transparent;color:var(--gold);font-size:13.5px;font-weight:600;padding:7px 14px;border-radius:6px;cursor:pointer;font-family:inherit}
+  .quick-chips button:hover{background:var(--gold-soft)}
+  .g-section{padding:26px 0;border-bottom:1px solid var(--line);scroll-margin-top:12px}
+  .g-section:last-child{border-bottom:none}
+  .g-head{display:flex;align-items:center;gap:10px;width:100%;background:none;border:none;font-family:"Noto Serif SC","Songti SC",serif;font-size:18.5px;font-weight:700;color:var(--ink);padding:0;margin-bottom:6px;cursor:pointer;user-select:none;text-align:left}
+  .g-head::before{content:"";width:16px;height:2px;background:var(--gold);flex:none}
+  .g-section h3{font-size:15px;font-weight:600;margin:16px 0 10px;color:var(--ink)}
+  .g-section .sub{color:var(--ink2);font-size:14px;margin-bottom:16px}
+  .g-section.collapsed .g-body{display:none}
+
+  .table-scroll{overflow-x:auto}
+  table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:14px}
+  th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top;word-break:break-word}
+  th{color:var(--ink);font-weight:600;font-size:13px;background:var(--panel2)}
+  tr:last-child td{border-bottom:none}
+
+  ul.points{margin:0;padding-left:20px}
+  ul.points li{margin-bottom:10px;font-size:14px}
+  ul.points li b{color:var(--ink)}
+  .hint{color:var(--ink2);font-size:13px}
+  .todo{display:inline-block;border:1px dashed var(--gold);color:var(--gold);background:var(--gold-soft);border-radius:6px;padding:1px 8px;font-size:12px;white-space:nowrap}
+
+  /* 路线图 */
+  .route{display:flex;flex-direction:column}
+  .stage{display:grid;grid-template-columns:96px 30px 1fr;gap:0 14px;padding:24px 0;position:relative}
+  .stage:not(:last-child)::after{content:"";position:absolute;left:calc(96px + 14px + 14px);top:52px;bottom:-6px;width:1px;background:var(--line)}
+  .stage-badge{text-align:right;padding-top:4px}
+  .stage-badge .lv{font-family:"Noto Serif SC","Songti SC",serif;font-size:19px;font-weight:700;color:var(--gold)}
+  .stage-badge .seg{display:block;font-size:12px;color:var(--ink2);margin-top:2px}
+  .stage-dot{display:flex;justify-content:center;position:relative;z-index:1}
+  .stage-dot i{width:13px;height:13px;border-radius:50%;background:var(--panel2);border:2px solid var(--gold);margin-top:8px}
+  .stage-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px}
+  .stage-title{font-size:16px;font-weight:600;color:var(--ink);margin-bottom:4px}
+  .stage-tag{color:var(--ink2);font-size:13.5px;margin-bottom:10px}
+  .rg{display:grid;grid-template-columns:82px 1fr;gap:6px 12px;padding:9px 0;border-top:1px dashed var(--line)}
+  .rg:first-of-type{border-top:none;padding-top:2px}
+  .rg-tag{color:var(--gold);font-size:13px;font-weight:600;padding-top:1px}
+  .rg-body{font-size:14px;min-width:0}
+  .rg-body ul{margin:0;padding-left:18px}
+  .rg-body li{margin-bottom:6px}
+  .rg-body li:last-child{margin-bottom:0}
+  .rg-body b{color:var(--ink)}
+
+  /* ===== 天赋模拟器 ===== */
+  .talent-wrap{padding:26px 0 40px}
+  .sim-frame{background:linear-gradient(180deg,#2A2015,#1C150D);border:1px solid #6B5330;border-radius:14px;padding:18px;box-shadow:0 6px 20px rgba(40,26,10,.35)}
+  .sim-bar{display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-bottom:16px}
+  .sim-stat{font-size:13px;color:#C9B894}
+  .sim-stat b{color:#F0D9A0;font-size:17px;font-family:"Noto Serif SC",serif;margin-left:2px}
+  .sim-stat.tree-bm b{color:#9BCB83}
+  .sim-stat.tree-mm b{color:#E5B25A}
+  .sim-stat.tree-sv b{color:#7FB6CC}
+  .sim-bar .spacer{flex:1}
+  .btn{border:1px solid #6B5330;background:#332716;color:#E9D9B4;border-radius:8px;padding:8px 14px;font-size:13px;cursor:pointer;font-family:inherit}
+  .btn:hover{border-color:#E6C88A}
+  .btn.primary{background:#E5B25A;color:#241A0C;border-color:#E5B25A;font-weight:600}
+
+  .sim-cols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+  .tree{border:1px solid #574226;border-radius:12px;overflow:hidden}
+  .tree.bm{background:linear-gradient(180deg,#22303A,#151A12)}
+  .tree.mm{background:linear-gradient(180deg,#3A2E18,#1A140B)}
+  .tree.sv{background:linear-gradient(180deg,#1E3430,#121A16)}
+  .tree-head{display:flex;align-items:center;gap:9px;padding:11px 13px;border-bottom:1px solid rgba(120,90,45,.4)}
+  .tree-ic{width:24px;height:24px;flex:none;display:flex;align-items:center;justify-content:center;border-radius:50%;background:#2A2013;border:1px solid #574226;color:#F0D9A0}
+  .tree-ic svg{width:15px;height:15px}
+  .tree-name{font-size:14px;font-weight:600;color:#F0D9A0}
+  .tree-pts{margin-left:auto;font-size:12.5px;color:#C9B894}
+  .tree-pts b{color:#F0D9A0}
+  .tree-body{padding:14px 12px;display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:auto;gap:18px 4px;min-height:120px;position:relative}
+  .talent{display:flex;flex-direction:column;align-items:center;gap:5px;width:60px;justify-self:center;position:relative;z-index:1}
+  .tree-lines{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:visible}
+  .tree-line{stroke:#5C4722;stroke-width:2;fill:none;stroke-linecap:round}
+  .tree-line.hot{stroke:#7E9A55}
+  .ticon{position:relative;width:48px;height:48px;border-radius:9px;border:1px solid #4A3A22;background:#221A10;cursor:pointer;padding:0;display:flex;align-items:center;justify-content:center;overflow:hidden;transition:border-color .15s,box-shadow .15s}
+  .ticon-img{width:100%;height:100%;object-fit:cover;display:block}
+  .talent.avail .ticon-img{filter:grayscale(.7) brightness(.65)}
+  .talent.on .ticon-img{filter:none}
+  .talent.locked .ticon-img{filter:grayscale(1) brightness(.38)}
+  .talent.avail .ticon{border-color:#6B5330}
+  .talent.avail .ticon:hover{border-color:#E6C88A;box-shadow:0 0 9px rgba(216,164,65,.4)}
+  .talent.on .ticon{border-color:#AAD372;background:#2E3316;box-shadow:0 0 11px rgba(170,211,114,.4)}
+  .talent.locked{opacity:.36}
+  .rank{position:absolute;right:3px;bottom:1px;font-size:10px;color:#E6C88A;text-shadow:0 1px 2px #000}
+  .rec-dot{position:absolute;left:3px;top:3px;width:7px;height:7px;border-radius:50%;background:#9BCB83;box-shadow:0 0 4px rgba(155,203,131,.8)}
+  .order-badge{position:absolute;left:2px;top:2px;min-width:15px;height:15px;padding:0 3px;border-radius:4px;background:rgba(20,14,6,.88);color:#E6C88A;font-size:10px;font-weight:700;line-height:15px;text-align:center}
+  .tname{font-size:11px;color:#C9B894;text-align:center;line-height:1.25}
+  .talent.on .tname{color:#F0D9A0}
+  .talent.locked .tname{color:#8A7A5E}
+
+  .tip{position:fixed;z-index:30;max-width:260px;background:#1C150C;border:1px solid #8A6A36;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#E9D9B4;box-shadow:0 6px 18px rgba(0,0,0,.6);display:none;pointer-events:none}
+  .tip .tip-name{font-size:14px;font-weight:600;color:#E6C88A;margin-bottom:3px}
+  .tip .tip-rank{color:#C9B894;margin-bottom:5px}
+  .tip .tip-desc{color:#D8C9A8;line-height:1.55}
+  .tip .tip-req{margin-top:6px;color:#B9A67F;font-size:11px}
+  .sim-note{margin-top:14px;font-size:13px;color:#B9A67F;line-height:1.7}
+
+  @media (max-width:640px){
+    .codebar{flex-direction:column}
+    .copy{align-self:stretch}
+    h1{font-size:23px}
+    .fab-wrap{right:14px;bottom:14px}
+    .fab{padding:10px 14px}
+    .stage{grid-template-columns:1fr;gap:8px;padding:18px 0}
+    .stage:not(:last-child)::after{display:none}
+    .stage-badge{text-align:left;display:flex;align-items:baseline;gap:10px}
+    .stage-dot{display:none}
+    .rg{grid-template-columns:1fr;gap:2px}
+    .sim-cols{grid-template-columns:1fr}
+    .tree-body{gap:14px 2px;padding:12px 8px}
+    .talent{width:52px}
+    .ticon{width:42px;height:42px}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <a class="crumb" href="../index.html">← 魔兽世界：无限 · 全职业笔记</a>
+    <h1>兽王猎练级笔记</h1>
+    <p class="sub">1–60 级路线 · 宏命令速查 · 天赋配点，经典旧世 / 无限服适用。</p>
+    <div class="notice">
+      <strong>口径提示：</strong>宏为经典旧世通用写法；技能中文名以游戏内实测为准。组合宏里若两个技能同处公共冷却，第二个可能按不出来，以实战为准；条目译名上线后回客户端核对。
+    </div>
+  </div>
+</header>
+
+<nav class="viewnav">
+  <div class="wrap">
+    <button data-view="guide" class="active">练级指南</button>
+    <button data-view="macros">宏命令</button>
+    <button data-view="talent">天赋模拟</button>
+  </div>
+</nav>
+
+<nav class="tabs" id="tabsNav" hidden>
+  <div class="wrap">
+    <ul id="tabs">
+      <li><button data-cat="all" class="active">全部</button></li>
+      <li><button data-cat="pet">宠物控制</button></li>
+      <li><button data-cat="dps">输出循环</button></li>
+      <li><button data-cat="survive">生存脱战</button></li>
+      <li><button data-cat="burst">爆发增益</button></li>
+    </ul>
+    <button id="toggleAll" class="toggle-all">全部展开</button>
+  </div>
+</nav>
+
+<div id="view-macros" hidden>
+<main class="wrap" id="list"></main>
+
+<section class="wrap">
+  <div class="howto" id="howtoBox">
+    <h2 class="howto-head" id="howtoHead">宏怎么放进游戏 <span class="caret" id="howtoCaret"><svg class="ic-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg><svg class="ic-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></span></h2>
+    <ol>
+      <li>按 <code>Esc</code> → 打开「宏命令设置」→ 点「新建」，选个图标、起个名字。</li>
+      <li>把上面代码块里的内容整段复制粘贴进去。</li>
+      <li>以 <code>#showtooltip</code> 开头的行不执行动作，只让动作条显示对应技能的图标、冷却转圈和可用状态；纯宝宝指令宏没有技能图标，所以不带这行。</li>
+      <li>把宏图标从列表拖到动作条，打怪时点按对应宏即可。</li>
+      <li>指向类宏自动按优先级选目标：鼠标悬停的敌对目标 &gt; 当前目标 &gt; 焦点；想固定盯某只怪，右键它头像设为焦点即可。</li>
+    </ol>
+  </div>
+</section>
+</div><!-- /view-macros -->
+
+<div id="view-guide">
+  <nav class="guide-tabs" id="guideTabs">
+    <div class="wrap">
+      <ul>
+        <li><button data-target="g-route" class="active">路线图</button></li>
+        <li><button data-target="g-spells">技能全表</button></li>
+        <li><button data-target="g-pet">宠物选择</button></li>
+        <li><button data-target="g-race">种族专业</button></li>
+      </ul>
+      <button id="guideToggleAll" class="toggle-all">全部收起</button>
+    </div>
+  </nav>
+  <main class="wrap guide">
+
+    <div class="guide-intro">
+      <p>顺着 1–60 级往下走：去哪张图、学什么技能、带什么宝宝都在本页；要抄一键宏命令去「宏命令」，配点方案去「天赋模拟」。</p>
+      <div class="quick-chips">
+        <button type="button" data-view="macros">宏命令速查</button>
+        <button type="button" data-view="talent">天赋配点</button>
+      </div>
+    </div>
+
+    <section class="g-section" id="g-route">
+      <button class="g-head" type="button">练级路线图 <span class="caret"><svg class="ic-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg><svg class="ic-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></span></button>
+      <div class="g-body">
+      <p class="sub">顺着等级往下翻，每段写这几级去哪张图、点啥天赋、带啥宠；地图为部落通用推荐路线，新图名称与任务密度以游戏内为准。标注「待核」的条目请回客户端核对。</p>
+      <div class="route" id="guide-route"></div>
+      </div>
+    </section>
+
+    <section class="g-section" id="g-spells">
+      <button class="g-head" type="button">技能全表 <span class="caret"><svg class="ic-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg><svg class="ic-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></span></button>
+      <div class="g-body">
+      <p class="sub">各等级首个等级技能；到训练师处记得及时学高等级技能。猛禽一击 10 级后价值大降，奥术射击 25 级后在练级中基本被召唤雄鹰取代。</p>
+      <div class="card table-scroll">
+        <table>
+          <colgroup><col style="width:14%"><col style="width:30%"><col style="width:56%"></colgroup>
+          <thead><tr><th>等级</th><th>技能</th><th>用途 / 备注</th></tr></thead>
+          <tbody id="guide-spells"></tbody>
+        </table>
+      </div>
+      </div>
+    </section>
+
+    <section class="g-section" id="g-pet">
+      <button class="g-head" type="button">宠物选择与训练 <span class="caret"><svg class="ic-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg><svg class="ic-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></span></button>
+      <div class="g-body">
+      <p class="sub">无限服宠物属性跟随你的装备动态成长；兽栏常备两只：一只输出、一只抗压。下面按“带什么宝宝、技能怎么学、日常怎么养”分开说，标注「待核」的等级坐标以游戏内实测为准。</p>
+      <div class="card">
+        <h3>练级分工：两只宝宝用到 60</h3>
+        <ul class="points">
+          <li><b>1–23 级：野猪开荒</b>。冲锋瞬间接怪定身，血甲厚、杂食什么都吃，任务扛怪最稳；10 级做完驯服职业任务直接抓主城周边野猪。</li>
+          <li><b>23 级起：换猫科当输出主力</b>。希尔斯布莱德丘陵抓山地狮，遍地刷新、1.2 攻速，平民神宠，不用蹲稀有；平时练级、单体打怪都用它。</li>
+          <li><b>精英和多只 ADD 切野猪</b>。一次引 2–3 只、单挑精英任务时，猫科扛不住就换野猪上场。</li>
+          <li><b>27 级补齐高级攻击技能</b>：4 级爪击、4 级撕咬；之后只随等级更新突进、撕咬等级，两只宝宝一路用到 60。</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>各家族定位（按需替换主力）</h3>
+        <div class="table-scroll">
+        <table>
+          <colgroup><col style="width:18%"><col style="width:46%"><col style="width:36%"></colgroup>
+          <thead><tr><th>家族</th><th>特点</th><th>适合场景</th></tr></thead>
+          <tbody id="guide-pet-families"></tbody>
+        </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>技能怎么学：先抓来领悟，再教给主宠</h3>
+        <p class="hint">宠物升级不会自动学新技能。爪击、撕咬、冲锋、突进、狂怒之嚎这类野外技能，必须靠“抓教学宠”传承；训练师只卖被动。</p>
+        <ul class="points">
+          <li><b>第一步：主宠进兽栏</b>，腾出出战位置。</li>
+          <li><b>第二步：抓一只自带目标技能的野兽</b>，喂到绿脸，带它出战打怪、释放该技能。</li>
+          <li><b>第三步：聊天框出黄字</b>“你学会了 XX（等级 N）”后，放生这只教学宠。</li>
+          <li><b>第四步：取回主宠</b>，用【训练野兽】消耗训练点数把技能教给它；主宠需达到学习该技能的等级。</li>
+        </ul>
+        <div class="rg">
+          <div class="rg-tag">训练师卖</div>
+          <div class="rg-body">主城猎人训练师旁：低吼、耐力、护甲、抗性等被动；其余攻击、冲锋、嚎叫技能靠野外抓宠学。</div>
+        </div>
+        <div class="rg">
+          <div class="rg-tag">跳级线索</div>
+          <div class="rg-body">高等级技能可直接学，不用先练 1–3 级：
+            <ul>
+              <li>4 级撕咬：希尔斯布莱德丘陵 24–25 级蜘蛛。</li>
+              <li>4 级爪击：希尔斯布莱德山地狮 / 灰谷野兽（25–26 老灰谷熊）。</li>
+              <li>2 级狂怒之嚎：银松森林巨型黑暗破坏者（狼），学完放生。</li>
+            </ul>
+          </div>
+        </div>
+        <p class="hint" style="margin-top:8px">训练点数 = 宠物等级 ×（忠诚等级 − 1），满级 300 点；分配优先耐力、护甲，剩余给伤害技能。注意：重置训练点数会抹除攻速隐藏被动，宠物回到 2.0 秒基础攻速。</p>
+      </div>
+
+      <div class="card">
+        <h3>日常养成要点</h3>
+        <ul class="points">
+          <li><b>低吼保持常驻</b>：宠物拉仇恨全靠低吼；没低吼怪会直接冲你本体。</li>
+          <li><b>喂食物保绿脸</b>：绿脸伤害 125%、黄脸 100%、红脸 75%；快乐度随时间下降、死亡大幅下降，靠喂食拉回；红脸太久宠物会逃走。猫科吃肉和鱼，野猪杂食。</li>
+          <li><b>忠诚度靠陪伴打怪</b>：分 6 级（不可靠→忠实），带它打经验、陪在身边才涨；期间不能长期红脸。</li>
+          <li><b>抓宠等级不能高于猎人</b>；别人给的团队增益（如王者祝福）对宠物无效，宠物吃你自己的装备成长。</li>
+          <li><b>待核线索</b>：30 级左右凄凉之地左上海湾有自带急奔的陆行鸟；36 级闪光平原有尖啸秃鹫；具体等级、坐标需回游戏实地核对。</li>
+        </ul>
+      </div>
+      </div>
+    </section>
+
+    <section class="g-section" id="g-race">
+      <button class="g-head" type="button">种族与专业 <span class="caret"><svg class="ic-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg><svg class="ic-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></span></button>
+      <div class="g-body">
+      <div class="card">
+        <ul class="points">
+          <li><b>部落推荐兽人</b>：血怒提供 10% 攻强持续 15 秒，命令使宠物伤害 +5%；坚韧缩短眩晕时长。种族整体差异不大，非极限冲分按喜好选即可（牛头人同样可玩）。</li>
+          <li><b>主专业：制皮 + 剥皮</b>：制皮可做高敏捷皮甲练级装，剥皮供给原料，多余皮料还能出售。</li>
+          <li><b>副技能</b>：烹饪提供食物与经验增益，急救应急绷带，钓鱼供给烹饪或卖钱。</li>
+          <li><b>休息经验</b>：尽量在旅店/营地篝火处下线攒双倍经验；舒适睡袋可在野外当作休息区，站立每分钟叠 1% 经验增益（最多 3%）。</li>
+        </ul>
+      </div>
+      </div>
+    </section>
+
+  </main>
+</div><!-- /view-guide -->
+
+<div id="view-talent" hidden>
+  <main class="wrap talent-wrap">
+    <div class="sim-frame">
+      <div class="sim-bar">
+        <span class="sim-stat">等级 <b id="tm-level">10</b></span>
+        <span class="sim-stat">已投入 <b id="tm-used">0</b> / 51</span>
+        <span class="sim-stat tree-bm">兽王 <b id="pt-bm">0</b></span>
+        <span class="sim-stat tree-mm">射击 <b id="pt-mm">0</b></span>
+        <span class="sim-stat tree-sv">生存 <b id="pt-sv">0</b></span>
+        <span class="spacer"></span>
+        <button id="btn-preset" class="btn primary">推荐配点</button>
+        <button id="btn-reset" class="btn">重置</button>
+      </div>
+      <div class="sim-cols" id="sim-cols"></div>
+      <p class="sim-note">左键点击加点，右键点击减点；默认载入推荐配点（兽王 31 / 射击 20 / 生存 0），点亮天赋左上角数字为推荐加点先后。前置门槛：本系投入 0 / 5 / 10 / 15 / 20 / 25 / 30 点逐层解锁。图标取自客户端同源图标集，具体数值与译名以游戏内实测为准。</p>
+    </div>
+    <div id="tip" class="tip"></div>
+  </main>
+</div><!-- /view-talent -->
+
+<footer class="wrap">
+  <p>本页面为玩家自制非官方工具，与暴雪娱乐 / 网易无关。宏命令整理自经典旧世通用写法；练级路线、技能、宠物与种族专业内容整理自公开英文练级指南并对照中文数据库核对译名；服务器热修后若有变动，待核条目以游戏内实测为准。</p>
+  <p class="feedback-line"><button id="shareBtn" class="feedback-link">分享给朋友</button><button id="feedbackBtn" class="feedback-link">反馈问题 / 提建议</button></p>
+  <p class="feedback-line" id="siteStats">本站访问 <span id="busuanzi_value_site_pv">–</span> 次 · 访客 <span id="busuanzi_value_site_uv">–</span> 人（计数由第三方不蒜子提供）</p>
+</footer>
+
+<div id="feedbackModal" class="modal-mask" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="fbTitle">
+    <h2 id="fbTitle">反馈问题</h2>
+    <p class="fb-hint">哪条宏不好用、什么现象、有没有红字报错，写下来即可；留言公开，联系方式不想留可以不填。</p>
+    <form id="fbForm">
+      <label>涉及宏
+        <select id="fbMacro"></select>
+      </label>
+      <label>问题描述
+        <textarea id="fbText" rows="4" placeholder="例如：假死宏按了没反应；印记挂不上；宝宝打错目标……"></textarea>
+      </label>
+      <label>联系方式（可选）
+        <input id="fbContact" type="text" placeholder="QQ 或游戏昵称，方便回访">
+      </label>
+      <div class="fb-actions">
+        <button type="button" id="fbCancel" class="fb-btn ghost">取消</button>
+        <button type="submit" class="fb-btn primary">提交反馈</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="shareModal" class="modal-mask" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="shareTitle">
+    <h2 id="shareTitle">分享这个笔记</h2>
+    <p class="fb-hint">把链接发给玩猎人的朋友，粘贴到 QQ / 微信群、游戏论坛即可；页面打开即用，不用装插件。</p>
+    <div class="share-card">
+      <img src="assets/share.png" alt="分享卡片预览">
+      <div class="sc-body">
+        <div class="sc-title">兽王猎练级笔记 · 宏命令与 1–60 指南</div>
+        <div class="sc-desc">1–60 级练级路线、宠物选择、常用猎人宏命令与三系天赋模拟器，含推荐配点。</div>
+        <div class="sc-url">nose996.github.io/wow-class-notes/hunter</div>
+      </div>
+    </div>
+    <label>链接
+      <input id="shareUrl" type="text" readonly>
+    </label>
+    <div class="fb-actions">
+      <button type="button" id="shareCopy" class="fb-btn primary">复制链接</button>
+      <button type="button" id="shareCancel" class="fb-btn ghost">关闭</button>
+    </div>
+    <div class="share-channels">
+      <a id="shareWeibo" class="share-link" target="_blank" rel="noopener">微博</a>
+      <a id="shareTg" class="share-link" target="_blank" rel="noopener">Telegram</a>
+      <a id="shareX" class="share-link" target="_blank" rel="noopener">X / Twitter</a>
+    </div>
+  </div>
+</div>
+
+<div class="fab-wrap">
+  <button id="shareFab" class="fab ghost" aria-label="分享给朋友">
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>
+    分享
+  </button>
+  <button id="feedbackFab" class="fab" aria-label="反馈问题">
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7a8.5 8.5 0 0 1-.9-3.8 8.38 8.38 0 0 1 8.5-8.5 8.38 8.38 0 0 1 8.5 8.5z"/></svg>
+    反馈
+  </button>
+</div>
+
+<script>
+(function(){
+  var CATS = {
+    pet:    "宠物控制",
+    dps:    "输出循环",
+    survive:"生存脱战",
+    burst:  "爆发增益"
+  };
+
+  // 指向类宏条件优先级：[@mouseover] > 当前目标 [harm,nodead] > [@focus] 兜底
+  var MACROS = [
+    {id:"pet_attack", cat:"pet", name:"宠物攻击（指向 / 当前目标 / 焦点）",
+      desc:"一条宏三种目标：鼠标悬停的敌对目标优先，其次当前目标，当前目标无效再打焦点。",
+      code:["/petattack [@mouseover,harm,nodead] [harm,nodead] [@focus,harm,nodead]"]},
+    {id:"pet_follow", cat:"pet", name:"宠物跟随",
+      desc:"指令类，召回宝宝回到身边，拉开距离、转场或假死前用。",
+      code:["/petfollow"]},
+    {id:"pet_passive", cat:"pet", name:"宠物被动、停止攻击",
+      desc:"指令类，宝宝切被动并停下，避免它追太远引到额外的怪。",
+      code:["/petpassive"]},
+    {id:"pet_manage", cat:"pet", name:"宠物管理一键（召唤 / 复活 / 治疗）",
+      desc:"宠物状态一键管理：宝宝不在时召唤，死亡时复活，在场时治疗。",
+      code:["#showtooltip", "/cast [nopet] 召唤宠物; [@pet,dead] 复活宠物; 治疗宠物"]},
+    {id:"mark_pet", cat:"pet", name:"印记起手 + 宠物上（指向优先）",
+      desc:"先挂猎人印记加攻强，再让宝宝扑上；目标优先级：鼠标指向 > 当前目标 > 焦点。",
+      code:["#showtooltip 猎人印记", "/cast [@mouseover,harm,nodead] [harm,nodead] [@focus,harm,nodead] 猎人印记", "/petattack [@mouseover,harm,nodead] [harm,nodead] [@focus,harm,nodead]"]},
+
+    {id:"pull_opener", cat:"dps", name:"一键开怪（选敌 + 印记 + 宠物）",
+      desc:"练级开怪一键：清掉死亡/友方目标，自动选最近敌人，开自动射击、宝宝上、挂印记。",
+      code:["#showtooltip 猎人印记", "/cleartarget [dead]", "/targetenemy [noharm]", "/cast !自动射击", "/petattack", "/cast 猎人印记"]},
+    {id:"sting_arcane", cat:"dps", name:"毒蛇钉刺 → 奥术射击",
+      desc:"技能序列：按顺序打两个技能，切换目标后自动重置。",
+      code:["#showtooltip 毒蛇钉刺", "/castsequence reset=target 毒蛇钉刺, 奥术射击"]},
+    {id:"sting_picker", cat:"dps", name:"钉刺选择（Shift 抽蓝 / Ctrl 降命中）",
+      desc:"平时毒蛇钉刺；对法系按 Shift 蝰蛇钉刺抽蓝，对近战按 Ctrl 毒蝎钉刺降低命中。",
+      code:["#showtooltip", "/cast [mod:shift] 蝰蛇钉刺; [mod:ctrl] 毒蝎钉刺; 毒蛇钉刺"]},
+
+    {id:"aspect_switch", cat:"survive", name:"守护自动切换（战斗雄鹰 / 脱战猎豹）",
+      desc:"战斗中自动雄鹰守护，脱战猎豹守护加速跑图，按 Shift 切灵猴守护；技能名前的 ! 防止再按把守护关掉。",
+      code:["#showtooltip", "/cast [mod:shift] !灵猴守护; [combat] !雄鹰守护; !猎豹守护"]},
+    {id:"trap_picker", cat:"survive", name:"陷阱三合一（Shift 冰冻 / Ctrl 冰霜）",
+      desc:"平时爆炸陷阱；按 Shift 冰冻陷阱控场，按 Ctrl 冰霜陷阱减速；三个陷阱共用冷却。",
+      code:["#showtooltip", "/cast [mod:shift] 冰冻陷阱; [mod:ctrl] 冰霜陷阱; 爆炸陷阱"]},
+    {id:"feign", cat:"survive", name:"假死脱战（召回宝宝）",
+      desc:"先停手、宝宝被动召回，再假死脱离战斗；假死成功后再手动绷带回血。",
+      note:"绷带不要绑进宏：假死没成功时引导绷带会引怪，脱战后手动点绷带即可。",
+      code:["#showtooltip 假死", "/stopattack", "/petpassive", "/petfollow", "/cast 假死"]},
+    {id:"feign_trap", cat:"survive", name:"假死接冰冻陷阱",
+      desc:"假死脱战、宝宝切被动，再在脚下放冰冻陷阱；被多只怪缠住时冻住其中一只。",
+      code:["#showtooltip 冰冻陷阱", "/cast 假死", "/petpassive", "/cast 冰冻陷阱"]},
+    {id:"stop_attack", cat:"survive", name:"停止攻击",
+      desc:"指令类，立刻停手，配合拉开距离或假死脱战。",
+      code:["/stopattack"]},
+
+    {id:"aspect_rapid", cat:"burst", name:"雄鹰守护 + 急速射击",
+      desc:"一键组合：开守护后接急速射击，一波小怪或压血线时爆发。",
+      code:["#showtooltip 雄鹰守护", "/cast 雄鹰守护", "/cast 急速射击"]},
+    {id:"wrath_intim", cat:"burst", name:"狂野怒火 + 胁迫",
+      desc:"一键组合：兽王大招一起开，胁迫晕住目标，集中爆发期使用。",
+      code:["#showtooltip 狂野怒火", "/cast 狂野怒火", "/cast 胁迫"]}
+  ];
+
+  var list = document.getElementById("list");
+  var tabs = document.getElementById("tabs");
+  var state = { cat:"all" };
+
+  function resolveCode(codeLines){
+    return codeLines.join("\n");
+  }
+
+  function render(){
+    var groups = {};
+    MACROS.forEach(function(m){
+      if(state.cat !== "all" && m.cat !== state.cat) return;
+      (groups[m.cat] = groups[m.cat] || []).push(m);
+    });
+
+    list.innerHTML = "";
+    Object.keys(CATS).forEach(function(cat){
+      var items = groups[cat];
+      if(!items || !items.length) return;
+      var group = document.createElement("div");
+      group.className = "cat-group";
+
+      var head = document.createElement("button");
+      head.className = "cat-head";
+      var label = document.createElement("span");
+      label.textContent = CATS[cat];
+      head.appendChild(label);
+      var caret = document.createElement("span");
+      caret.className = "caret";
+      caret.innerHTML = '<svg class="ic-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg><svg class="ic-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>';
+      head.appendChild(caret);
+      head.onclick = function(){
+        group.classList.toggle("collapsed");
+      };
+      group.appendChild(head);
+
+      items.forEach(function(m){
+        var card = document.createElement("div");
+        card.className = "card";
+
+        var cardHead = document.createElement("div");
+        cardHead.className = "card-head";
+        var name = document.createElement("span");
+        name.className = "card-name";
+        name.textContent = m.name;
+        cardHead.appendChild(name);
+        card.appendChild(cardHead);
+
+        var desc = document.createElement("div");
+        desc.className = "card-desc";
+        desc.textContent = m.desc;
+        card.appendChild(desc);
+
+        var bar = document.createElement("div");
+        bar.className = "codebar";
+        var pre = document.createElement("pre");
+        pre.textContent = resolveCode(m.code);
+        bar.appendChild(pre);
+
+        var btn = document.createElement("button");
+        btn.className = "copy";
+        btn.textContent = "复制";
+        btn.onclick = function(){
+          var text = pre.textContent;
+          function done(){ btn.classList.add("done"); btn.textContent = "已复制"; setTimeout(function(){ btn.classList.remove("done"); btn.textContent = "复制"; }, 1500); }
+          fallbackCopy(text, done);
+          if(navigator.clipboard && navigator.clipboard.writeText){
+            navigator.clipboard.writeText(text).catch(function(){});
+          }
+        };
+        bar.appendChild(btn);
+        card.appendChild(bar);
+
+        if(m.note){
+          var note = document.createElement("div");
+          note.className = "note";
+          note.textContent = m.note;
+          card.appendChild(note);
+        }
+        group.appendChild(card);
+      });
+      list.appendChild(group);
+    });
+
+    if(!list.children.length){
+      var empty = document.createElement("p");
+      empty.className = "card-desc";
+      empty.textContent = "该分类暂无模板。";
+      list.appendChild(empty);
+    }
+    toggleAll.textContent = "全部收起";
+  }
+
+  function fallbackCopy(text, done){
+    var ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    try{ document.execCommand("copy"); done(); }catch(e){}
+    document.body.removeChild(ta);
+  }
+
+  tabs.addEventListener("click", function(e){
+    var b = e.target.closest("button");
+    if(!b) return;
+    state.cat = b.dataset.cat;
+    [...tabs.querySelectorAll("button")].forEach(function(x){ x.classList.toggle("active", x === b); });
+    render();
+  });
+
+  // ===== 折叠：分组全局展开/收起 + 操作说明区 =====
+  var toggleAll = document.getElementById("toggleAll");
+  function setAllGroups(collapsed){
+    document.querySelectorAll(".cat-group").forEach(function(g){
+      g.classList.toggle("collapsed", collapsed);
+    });
+    toggleAll.textContent = collapsed ? "全部展开" : "全部收起";
+  }
+  toggleAll.onclick = function(){
+    var anyOpen = document.querySelector(".cat-group:not(.collapsed)");
+    setAllGroups(!!anyOpen);
+  };
+
+  var howtoBox = document.getElementById("howtoBox");
+  var howtoHead = document.getElementById("howtoHead");
+  howtoHead.onclick = function(){
+    howtoBox.classList.toggle("collapsed");
+  };
+
+  // ===== 反馈入口（落地渠道可替换：改 buildFeedbackUrl 即可）=====
+  var ISSUE_NEW = "https://github.com/nose996/wow-class-notes/issues/new";
+
+  function buildFeedbackUrl(payload){
+    var title = "反馈：" + payload.macro + (payload.text ? " - " + payload.text.slice(0, 30) : "");
+    var body = [
+      "### 涉及宏", payload.macro, "",
+      "### 问题描述", payload.text || "（未填写）", "",
+      "### 联系方式（可选）", payload.contact || "（未留）", "",
+      "---", "提交时间：" + new Date().toLocaleString("zh-CN")
+    ].join("\n");
+    return ISSUE_NEW + "?title=" + encodeURIComponent(title) + "&body=" + encodeURIComponent(body);
+  }
+
+  var modal = document.getElementById("feedbackModal");
+  var fbForm = document.getElementById("fbForm");
+  var fbMacro = document.getElementById("fbMacro");
+  var fbText = document.getElementById("fbText");
+  var fbContact = document.getElementById("fbContact");
+
+  var optOther = document.createElement("option");
+  optOther.value = "其他 / 通用问题";
+  optOther.textContent = "其他 / 通用问题";
+  fbMacro.appendChild(optOther);
+  MACROS.forEach(function(m){
+    var o = document.createElement("option");
+    o.value = m.name;
+    o.textContent = m.name;
+    fbMacro.appendChild(o);
+  });
+
+  function openModal(){ modal.hidden = false; fbText.focus(); }
+  function closeModal(){ modal.hidden = true; }
+
+  document.getElementById("feedbackBtn").onclick = openModal;
+  document.getElementById("feedbackFab").onclick = openModal;
+  document.getElementById("fbCancel").onclick = closeModal;
+  modal.addEventListener("click", function(e){ if(e.target === modal) closeModal(); });
+  document.addEventListener("keydown", function(e){ if(e.key === "Escape" && !modal.hidden) closeModal(); });
+
+  fbForm.addEventListener("submit", function(e){
+    e.preventDefault();
+    var text = fbText.value.trim();
+    if(!text){ fbText.focus(); return; }
+    var payload = { macro: fbMacro.value, text: text, contact: fbContact.value.trim() };
+    window.open(buildFeedbackUrl(payload), "_blank");
+    closeModal();
+    fbForm.reset();
+  });
+
+  // ===== 分享 =====
+  var shareModal=document.getElementById("shareModal");
+  var shareUrl=document.getElementById("shareUrl");
+  var shareCopy=document.getElementById("shareCopy");
+  var shareTitle="兽王猎练级笔记：1–60 级路线、猎人宏命令与天赋模拟器";
+  var shareText="";
+  function shareLink(){ return location.origin + location.pathname; }
+  function openShare(){
+    var url=shareLink();
+    shareUrl.value=url;
+    shareText=shareTitle+"\n"+url;
+    var eu=encodeURIComponent(url), et=encodeURIComponent(shareTitle);
+    document.getElementById("shareWeibo").href="https://service.weibo.com/share/share.php?url="+eu+"&title="+et;
+    document.getElementById("shareTg").href="https://t.me/share/url?url="+eu+"&text="+et;
+    document.getElementById("shareX").href="https://twitter.com/intent/tweet?url="+eu+"&text="+et;
+    shareModal.hidden=false;
+  }
+  function closeShare(){ shareModal.hidden=true; }
+  function copyText(text, done){
+    function fallback(){
+      var ta=document.createElement("textarea");
+      ta.value=text; ta.style.position="fixed"; ta.style.opacity="0";
+      document.body.appendChild(ta); ta.select();
+      try{ document.execCommand("copy"); }catch(err){}
+      document.body.removeChild(ta); done();
+    }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(done, fallback);
+    } else { fallback(); }
+  }
+  document.getElementById("shareBtn").onclick=openShare;
+  document.getElementById("shareFab").onclick=openShare;
+  document.getElementById("shareCancel").onclick=closeShare;
+  shareModal.addEventListener("click", function(e){ if(e.target===shareModal) closeShare(); });
+  shareCopy.onclick=function(){
+    copyText(shareText, function(){
+      var old=shareCopy.textContent; shareCopy.textContent="已复制";
+      setTimeout(function(){ shareCopy.textContent=old; },1500);
+    });
+  };
+  document.addEventListener("keydown", function(e){ if(e.key==="Escape" && !shareModal.hidden) closeShare(); });
+
+  // ===== 练级指南：数据与渲染 =====
+  var GUIDE_ROUTES = [
+    {lv:"1–9", seg:"起步", title:"还没宠物，靠风筝", tag:"10 级前没有宠物扛怪，全程保持距离，别硬贴脸。",
+      blocks:[
+        {tag:"地图", items:[{text:"莫高雷（出生地），清新手村周边任务；顺手开通飞行点，把炉石绑在旅店。"}]},
+        {tag:"技能", items:[
+          {text:"1 级 猛禽一击：被贴脸时才用，优先保持距离。"},
+          {text:"4 级 毒蛇钉刺：持续伤害，目标很快死就别上。"},
+          {text:"6 级 奥术射击 / 猎人印记：印记给目标加攻强，宠物也吃到。"},
+          {text:"8 级 震荡射击：远程减速，风筝核心。"}]},
+        {tag:"手法", items:[{text:"拉开距离多打自动射击；被贴脸再补猛禽一击。"}]},
+        {tag:"武器", items:[{text:"5 级可做劣质火枪（工程 50，装备后绑定）。"}]}
+      ]},
+    {lv:"10–14", seg:"宠物上岗", title:"最关键的一级，宝宝替你扛怪", tag:"解锁宠物，兽王猎真正成型；你在远处输出，宠物近身拉住仇恨。",
+      blocks:[
+        {tag:"地图", items:[{text:"西进贫瘠之地，围绕十字路口接任务；13 级左右可下奥格瑞玛城内的怒焰裂谷。"}]},
+        {tag:"技能", items:[
+          {text:"10 级 雄鹰守护 / 召唤宠物；宠物的低吼、耐力、自然护甲技能都要学上。"},
+          {text:"12 级 治疗宠物：打高等级精英时尤为重要。"}]},
+        {tag:"天赋", items:[{text:"兽王先点致命守护、耐久训练、集中火力。"}]},
+        {tag:"宠物", items:[{text:"前期野猪扛怪稳，23 级后换猫科打输出；宠物技能靠抓教学宠领悟后教给主宠。"}]},
+        {tag:"手法", items:[{text:"让宝宝先打几下拉住仇恨再输出；低吼保持常驻；掉血及时治疗宠物。"}]}
+      ]},
+    {lv:"15–19", seg:"群体攻击", title:"群体输出上手", tag:"开始有范围技能，但别乱开引到旁边的怪。",
+      blocks:[
+        {tag:"地图", items:[{text:"贫瘠之地北部清完，再西进石爪山脉（烈日石居）过渡；顺路哀嚎洞穴，19 级毒蛇弓就在里面掉落。"}]},
+        {tag:"技能", items:[
+          {text:"16 级 献祭陷阱：点燃踩中的第一个敌人，放在目标必经之路。"},
+          {text:"18 级 多重射击：主要群体伤害，与瞄准射击共享冷却。"}]},
+        {tag:"武器", items:[{text:"19 级 毒蛇（弓，哀嚎洞穴·瑟芬迪斯领主掉落）。"}]},
+        {tag:"手法", items:[{text:"多重射击注意周围，别误引到旁边的怪。"}]}
+      ]},
+    {lv:"20–24", seg:"跑图硬控", title:"跑得更快，能控住怪", tag:"猎豹守护提速跑图，冰冻陷阱提供硬控。",
+      blocks:[
+        {tag:"地图", items:[{text:"石爪收尾后北上灰谷；或东渡到希尔斯布莱德丘陵（塔伦米尔）接任务。"}]},
+        {tag:"技能", items:[
+          {text:"20 级 瞄准射击 / 猎豹守护 / 冰冻陷阱。"},
+          {text:"24 级 追踪隐形：侦测潜行，部分任务和玩家对战有用。"}]},
+        {tag:"天赋", items:[{text:"寻路，配合猎豹守护让跑图和风筝更快。"}]},
+        {tag:"手法", items:[{text:"瞄准是单体 2 秒读条；冰冻陷阱硬控 10 秒，受到伤害会打破。"}]}
+      ]},
+    {lv:"25–29", seg:"雄鹰成型", title:"双雄鹰加主宠同时在场", tag:"召唤雄鹰是新服核心技能，理想状态是两只雄鹰和主宠一起打。",
+      blocks:[
+        {tag:"地图", items:[{text:"南下千针石林（乱风岗、闪光平原），灰谷与希尔斯布莱德收尾；26 级可去湿地挖掘场。"}]},
+        {tag:"技能", items:[
+          {text:"25 级 召唤雄鹰；26 级 急速射击（第一个正式爆发冷却）。"},
+          {text:"28 级 冰霜陷阱：区域减速，宠物拉不住群怪时用。"}]},
+        {tag:"武器", items:[
+          {text:"28 级 狩猎高手的猎弓（荆棘谷奈辛瓦里精英任务链）。"},
+          {text:"28 级 遗迹守护者长枪（湿地挖掘场，+6 敏捷）。", todo:true},
+          {text:"29 级 野猪火炮（剃刀沼泽任务奖励）。", todo:true}]},
+        {tag:"手法", items:[{text:"雄鹰快消失前再补拍，别提前刷新，省蓝；奥术射击 25 级后基本被雄鹰取代。"}]}
+      ]},
+    {lv:"30–39", seg:"控制续航", title:"补控制，为大招铺垫", tag:"学会假死脱战和宠物冲刺，天赋继续往兽王深处点。",
+      blocks:[
+        {tag:"地图", items:[{text:"凄凉之地、荆棘谷、阿拉希高地、尘泥沼泽轮换；33 级后推荐新图河林（河谷林地），任务密、对立阵营压力小。"}]},
+        {tag:"技能", items:[{text:"30 级 胁迫 / 假死 / 宠物冲刺。"}]},
+        {tag:"宠物", items:[{text:"抓一只自带冲刺的宠物，战斗中学会后教给主宠；凄凉之地陆行鸟、闪光平原秃鹫的等级坐标待回游戏核对。"}]},
+        {tag:"天赋", items:[{text:"继续往野兽戒律、狂乱、凶暴点，为狂野怒火铺垫。"}]},
+        {tag:"手法", items:[{text:"假死脱战前先召回宠物、留好退路；胁迫让宠物晕人应急。"}]}
+      ]},
+    {lv:"40–49", seg:"大招爆发", title:"狂野怒火，爆发期", tag:"兽王大招到手，配合乱射打爆发。",
+      blocks:[
+        {tag:"地图", items:[{text:"塔纳利斯（加基森）、菲拉斯（莫沙彻营地）、荒芜之地、悲伤沼泽轮换；42 级后可下祖尔法拉克。"}]},
+        {tag:"技能", items:[{text:"40 级 狂野怒火 / 乱射。"}]},
+        {tag:"武器", items:[
+          {text:"40 级 真理之弓（本阵营图书馆上交 25 本书兑换，40 级可装备）。", todo:true},
+          {text:"47 级 瑟银火枪（工程 260，装备后绑定）。"}]},
+        {tag:"手法", items:[{text:"狂野怒火是爆发大招；乱射是引导群体伤害，留够法力再开。"}]}
+      ]},
+    {lv:"50–60", seg:"毕业配点", title:"兽王 31 点，余下投射击", tag:"点出狂野怒火后，剩余点数补射击系被动，满级配点 31 / 20 / 0。",
+      blocks:[
+        {tag:"地图", items:[{text:"辛特兰、安戈洛环形山、艾萨拉；53 级后转东西瘟疫之地，55 级后冬泉谷，57 级后希利苏斯、费伍德森林。"}]},
+        {tag:"技能", items:[{text:"56 级 强击光环：伤害增益冷却。"}]},
+        {tag:"武器", items:[{text:"50 级 黑铁步枪（工程 275，装备后绑定，命中触发暗影射击）。"}]},
+        {tag:"天赋", items:[{text:"兽王 31 点点出狂野怒火后，剩余 20 点投射击：致命攻击、精确瞄准、疾速杀戮、效率、强击光环、致死射击。"}]},
+        {tag:"提醒", items:[{text:"到训练师处及时学高等级技能。"}]}
+      ]}
+  ];
+
+  var GUIDE_SPELLS = [
+    ["1","猛禽一击","近身近战技能；10 级前被贴脸时用，优先保持距离风筝。"],
+    ["4","毒蛇钉刺","持续伤害，全程用到满级；目标很快死就别上，没有直接伤害。"],
+    ["6","奥术射击 / 猎人印记","印记给目标加攻强（宠物也吃到）；奥术射击 25 级后与召唤雄鹰共享 6 秒冷却。"],
+    ["8","震荡射击","远程减速，10 级前风筝核心。"],
+    ["10","雄鹰守护 / 召唤宠物","最关键等级：解锁宠物，宠物承担大部分伤害与仇恨；宠物低吼、耐力、自然护甲技能要学上。"],
+    ["12","治疗宠物","奶宠物，打高等级精英时尤为重要。"],
+    ["16","献祭陷阱","点燃踩中的第一个敌人，放在目标必经之路。"],
+    ["18","多重射击","主要群体伤害，与瞄准射击共享冷却；注意别误引旁边的怪。"],
+    ["20","瞄准射击 / 猎豹守护 / 冰冻陷阱","瞄准为单体 2 秒读条；猎豹守护跑图加速；冰冻陷阱硬控 10 秒，伤害会打破。"],
+    ["24","追踪隐形","侦测潜行，部分任务和玩家对战有用。"],
+    ["25","召唤雄鹰","新服天赋技能，两只雄鹰加宠物同时在场为理想状态。"],
+    ["26","急速射击","第一个正式爆发冷却，提升攻速。"],
+    ["28","冰霜陷阱","区域减速 60%，宠物拉不住群怪时用。"],
+    ["30","胁迫 / 假死 / 宠物冲刺","胁迫见天赋表；假死脱离战斗（可能未命中，留好退路）；冲刺通过驯服会该技能的宠物学会。"],
+    ["40","狂野怒火 / 乱射","大招爆发；乱射为引导群体伤害，留够法力。"],
+    ["56","强击光环","伤害增益冷却。"]
+  ];
+
+  var GUIDE_PETS = [
+    ["猫科（狮 / 虎 / 豹）","伤害 +10%，可学爪击、撕咬、潜伏、突进；潜伏起手增伤，单体仇恨稳。","练级输出主力，兼顾 PVP，普通野怪可抓。"],
+    ["野猪","冲锋瞬间接怪定身，血甲优秀，杂食；可学撕咬、突进。冲锋偶有 8 码卡住的小问题。","抗压坦克，处理多 ADD、精英任务。"],
+    ["狼","专属狂怒之嚎，给 15 码内小队 / 团队近战攻强加成；单体伤害不如猫。","组队、副本辅助；2 级嚎叫可抓银松森林巨型黑暗破坏者（狼），学完放生。"],
+    ["食腐鸟 / 秃鹫","偏向群拉、降低怪物伤害，安全向。","独自练级、怕被围时兜底。"],
+    ["迅猛龙","10% 伤害加成，配野性撕咬，纯输出取向。","追求单体伤害。"],
+    ["陆行鸟","破甲向；也是急奔 / 突进类追击技能的来源之一。","按需补功能。"],
+    ["狐狸（新增家族）","专属欺诈者之舞：提高躲闪与攻击速度，持续 12 秒。","机动 / 生存向，实战表现待验证。"]
+  ];
+
+  function guideEl(tag, cls, text){
+    var e=document.createElement(tag);
+    if(cls) e.className=cls;
+    if(text!=null) e.textContent=text;
+    return e;
+  }
+  var el=guideEl;
+
+  function renderRoute(){
+    var root=document.getElementById("guide-route");
+    root.textContent="";
+    GUIDE_ROUTES.forEach(function(s){
+      var stage=guideEl("div","stage");
+      var badge=guideEl("div","stage-badge");
+      badge.appendChild(guideEl("span","lv",s.lv));
+      badge.appendChild(guideEl("span","seg",s.seg));
+      var dot=guideEl("div","stage-dot");
+      dot.appendChild(guideEl("i"));
+      var card=guideEl("div","stage-card");
+      card.appendChild(guideEl("div","stage-title",s.title));
+      card.appendChild(guideEl("div","stage-tag",s.tag));
+      s.blocks.forEach(function(b){
+        var rg=guideEl("div","rg");
+        rg.appendChild(guideEl("div","rg-tag",b.tag));
+        var body=guideEl("div","rg-body");
+        var ul=guideEl("ul");
+        b.items.forEach(function(it){
+          var li=guideEl("li");
+          li.textContent=it.text;
+          if(it.todo){
+            li.appendChild(document.createTextNode(" "));
+            li.appendChild(guideEl("span","todo","译名待核"));
+          }
+          ul.appendChild(li);
+        });
+        body.appendChild(ul);
+        rg.appendChild(body);
+        card.appendChild(rg);
+      });
+      stage.appendChild(badge);
+      stage.appendChild(dot);
+      stage.appendChild(card);
+      root.appendChild(stage);
+    });
+  }
+
+  function renderTable(tbodyId, rows){
+    var tb=document.getElementById(tbodyId);
+    tb.textContent="";
+    rows.forEach(function(r){
+      var tr=guideEl("tr");
+      r.forEach(function(c){ tr.appendChild(guideEl("td",null,c)); });
+      tb.appendChild(tr);
+    });
+  }
+
+  // ===== 指南章节折叠 =====
+  document.querySelectorAll(".g-head").forEach(function(head){
+    head.onclick = function(){
+      head.closest(".g-section").classList.toggle("collapsed");
+    };
+  });
+
+  // ===== 指南章节导航定位 + 全局收起/展开 =====
+  var guideTabs=document.getElementById("guideTabs");
+  var guideToggleAll=document.getElementById("guideToggleAll");
+  function setGuideAll(collapsed){
+    document.querySelectorAll(".g-section").forEach(function(g){ g.classList.toggle("collapsed", collapsed); });
+    guideToggleAll.textContent = collapsed ? "全部展开" : "全部收起";
+  }
+  guideToggleAll.onclick=function(){
+    var anyOpen=document.querySelector(".g-section:not(.collapsed)");
+    setGuideAll(!!anyOpen);
+  };
+  guideTabs.addEventListener("click", function(e){
+    var b=e.target.closest("button");
+    if(!b || b.id==="guideToggleAll") return;
+    var sec=document.getElementById(b.dataset.target);
+    if(!sec) return;
+    guideTabs.querySelectorAll("button[data-target]").forEach(function(x){ x.classList.toggle("active", x===b); });
+    document.querySelectorAll(".g-section").forEach(function(g){ g.classList.toggle("collapsed", g!==sec); });
+    guideToggleAll.textContent="全部收起";
+    sec.scrollIntoView({behavior:"smooth", block:"start"});
+  });
+
+  // ===== 视图切换 =====
+  var viewMacros=document.getElementById("view-macros");
+  var viewGuide=document.getElementById("view-guide");
+  var viewTalent=document.getElementById("view-talent");
+  var tabsNav=document.getElementById("tabsNav");
+  var viewNav=document.querySelector(".viewnav");
+  function switchView(v){
+    viewMacros.hidden = v!=="macros";
+    viewGuide.hidden = v!=="guide";
+    viewTalent.hidden = v!=="talent";
+    tabsNav.hidden = v!=="macros";
+    [...viewNav.querySelectorAll("button")].forEach(function(b){
+      b.classList.toggle("active", b.dataset.view===v);
+    });
+    if(v==="talent"){ requestAnimationFrame(function(){ renderTalent(); }); }
+    window.scrollTo(0,0);
+  }
+  viewNav.addEventListener("click", function(e){
+    var b=e.target.closest("button");
+    if(b) switchView(b.dataset.view);
+  });
+  document.querySelectorAll(".quick-chips button[data-view]").forEach(function(b){
+    b.addEventListener("click", function(){ switchView(b.dataset.view); });
+  });
+
+  // ===== 天赋模拟器 =====
+  var TALENTS = [
+    {id:'deadly_aspects', tree:'bm', tier:0,  max:5, name:'致命守护', rec:1, desc:'雄鹰守护激活时，自动射击有10%几率使远程攻速提高30%，持续12秒。'},
+    {id:'endurance',      tree:'bm', tier:0,  max:5, name:'耐久训练', rec:1, desc:'宠物生命值和护甲提高15%。'},
+    {id:'focused_fire',   tree:'bm', tier:5,  max:2, name:'集中火力', rec:1, desc:'宠物激活时，你和宠物造成的所有伤害提高2%。'},
+    {id:'improved_monkey',tree:'bm', tier:5,  max:3, name:'强化灵猴守护', desc:'灵猴守护躲闪加成提高6%，宠物获得50%效果。'},
+    {id:'improved_revive', tree:'bm', tier:5,  max:2, name:'强化复活宠物', desc:'复活宠物施法时间减6秒、耗蓝降40%，复活生命提高30%。'},
+    {id:'pathfinding',     tree:'bm', tier:10, max:2, name:'寻路', desc:'猎豹/豹群守护速度加成提高6%。'},
+    {id:'bestial_swiftness',tree:'bm',tier:10,max:1, name:'野兽迅捷', rec:1, desc:'宠物移动速度提高30%。'},
+    {id:'unleashed_fury', tree:'bm', tier:10, max:5, name:'狂怒释放', rec:1, desc:'宠物和雄鹰造成的伤害提高15%。'},
+    {id:'improved_mend',  tree:'bm', tier:15, max:2, name:'强化治疗宠物', desc:'治疗宠物有50%几率净化1个负面效果，耗蓝降20%。'},
+    {id:'ferocity',       tree:'bm', tier:15, max:5, name:'凶暴', rec:1, desc:'宠物和雄鹰的爆击几率提高10%。'},
+    {id:'summon_hawk',    tree:'bm', tier:15, max:1, name:'召唤雄鹰', rec:1, desc:'雄鹰俯冲攻击目标18秒，同时最多2只；与奥术射击共享冷却。'},
+    {id:'soul_link',      tree:'bm', tier:20, max:2, name:'灵魂联结', desc:'宠物激活时，你和宠物每5秒回复1%生命值。'},
+    {id:'intimidation',   tree:'bm', tier:20, max:1, name:'胁迫', rec:1, desc:'宠物下次攻击眩晕目标3秒，该次攻击必爆，产生大量仇恨。'},
+    {id:'bestial_discipline',tree:'bm',tier:20,max:2, name:'野兽戒律', rec:1, desc:'宠物集中值回复提速20%，施法时保持50%法力回复。'},
+    {id:'frenzy',         tree:'bm', tier:25, max:5, name:'狂乱', rec:1, desc:'宠物爆击后100%几率获得30%攻速，持续8秒。'},
+    {id:'bestial_wrath',  tree:'bm', tier:30, max:1, name:'狂野怒火', rec:1, desc:'宠物伤害提高50%，持续18秒，进入疯狂状态。'},
+    {id:'hawk_eye',       tree:'mm', tier:0,  max:3, name:'鹰眼', desc:'远程武器射程延长6码。'},
+    {id:'improved_concussive',tree:'mm',tier:0,max:5,name:'强化震荡射击', desc:'震荡射击20%几率令目标昏迷3秒。'},
+    {id:'lethal_attacks', tree:'mm', tier:0,  max:5, name:'致命攻击', rec:1, desc:'所有攻击爆击几率提高5%。'},
+    {id:'improved_sting', tree:'mm', tier:5,  max:3, name:'强化钉刺', desc:'毒蛇钉刺伤害提高20%，蝰蛇钉刺冷却减6秒，毒蝎钉刺持续延长。'},
+    {id:'efficiency',     tree:'mm', tier:5,  max:5, name:'效率', rec:1, desc:'射击、钉刺和近战技能耗蓝降低15%。'},
+    {id:'careful_aim',    tree:'mm', tier:5,  max:5, name:'精确瞄准', rec:1, desc:'攻击强度提高，数值相当于智力的100%。'},
+    {id:'rapid_killing', tree:'mm', tier:10, max:2, name:'疾速杀戮', rec:1, desc:'急速射击冷却减2分钟；击杀后下一射击20秒内伤害提高20%。'},
+    {id:'improved_arcane',tree:'mm', tier:10, max:5, name:'强化奥术射击', desc:'奥术射击冷却缩短1.5秒。'},
+    {id:'lone_wolf',      tree:'mm', tier:10, max:1, name:'独来独往', desc:'没有激活宠物时，所有攻击伤害提高20%。'},
+    {id:'trueshot_aura',  tree:'mm', tier:15, max:1, name:'强击光环', rec:1, desc:'45码内小队/团队远程攻强提高20点。'},
+    {id:'mortal_shots',   tree:'mm', tier:15, max:5, name:'致死射击', rec:1, desc:'远程技能爆击伤害加成提高30%。'},
+    {id:'rapid_recovery', tree:'mm', tier:20, max:2, name:'急速恢复', desc:'毒蛇钉刺下施法保持50%回蓝；疾速杀戮消耗后提升至100%。'},
+    {id:'barrage',        tree:'mm', tier:20, max:3, name:'弹幕', desc:'多重射击、瞄准射击、乱射伤害提高15%。'},
+    {id:'scatter',        tree:'mm', tier:20, max:1, name:'驱散射击', desc:'短程射击造成50%武器伤害并困惑4秒，伤害打断。'},
+    {id:'ranged_spec',    tree:'mm', tier:25, max:5, name:'远程武器专精', desc:'远程武器伤害提高5%。'},
+    {id:'sniper',         tree:'mm', tier:30, max:1, name:'狙击', desc:'长距离射击外加320点伤害，接下来3次射击射程延长10码。'},
+    {id:'improved_tracking',tree:'sv',tier:0,  max:5, name:'强化追踪', desc:'对被追踪类型生物造成的所有伤害提高5%。'},
+    {id:'deflection',     tree:'sv', tier:0,  max:5, name:'偏斜', desc:'招架几率提高5%。'},
+    {id:'entrapment',     tree:'sv', tier:5,  max:5, name:'诱捕', desc:'陷阱触发时目标被定身5秒。'},
+    {id:'savage_strikes', tree:'sv', tier:5,  max:2, name:'野蛮打击', desc:'所有近战技能爆击几率提高4%。'},
+    {id:'survivalist',    tree:'sv', tier:5,  max:5, name:'生存专家', desc:'总生命值提高10%。'},
+    {id:'improved_trip',  tree:'sv', tier:5,  max:3, name:'强化摔绊', desc:'摔绊20%几率令目标5秒无法移动。'},
+    {id:'trap_mastery',   tree:'sv', tier:10, max:2, name:'灵巧陷阱', desc:'冰冻/冰霜陷阱持续+30%，献祭/爆炸陷阱伤害+30%。'},
+    {id:'surefooted',     tree:'sv', tier:10, max:3, name:'稳固', desc:'命中几率提高3%，移动限制持续时间缩短30%。'},
+    {id:'deterrence',     tree:'sv', tier:10, max:1, name:'威慑', desc:'躲闪和招架几率提高25%，持续10秒。'},
+    {id:'survival_tactics',tree:'sv',tier:15, max:2, name:'生存战术', desc:'陷阱和假死命中几率提高10%。'},
+    {id:'predator_claws', tree:'sv', tier:15, max:5, name:'掠食者之锋', desc:'近战技能爆击伤害+30%，副手武器伤害+50%。'},
+    {id:'counterattack',   tree:'sv', tier:15, max:1, name:'反击', desc:'招架后可用，50%武器伤害外加13点，定身5秒。'},
+    {id:'wild_hunt',      tree:'sv', tier:20, max:2, name:'游刃有余', desc:'陷阱和近战耗蓝降60%；爆击后施法保持50%回蓝30秒。'},
+    {id:'expose_prey',    tree:'sv', tier:20, max:2, name:'暴露猎物', desc:'对印记目标攻击有10%几率激活猫鼬撕咬。'},
+    {id:'survival_disc',  tree:'sv', tier:20, max:2, name:'生存专家的戒律', desc:'陷阱和威慑冷却缩短40%。'},
+    {id:'raptor_kick',    tree:'sv', tier:20, max:1, name:'陆行鸟踢击', desc:'100%近战武器伤害，移速提高30%持续3秒。'},
+    {id:'lightning_reflexes',tree:'sv',tier:25,max:5,name:'闪电反射', desc:'敏捷提高15%。'},
+    {id:'tear',           tree:'sv', tier:30, max:1, name:'裂伤打击', desc:'猫鼬撕咬附加流血，21秒内造成其40%伤害。'}
+  ];
+  var TREE_META = {
+    bm:{name:'野兽控制', stat:'pt-bm'},
+    mm:{name:'射击',     stat:'pt-mm'},
+    sv:{name:'生存',     stat:'pt-sv'}
+  };
+  var PRESET = {
+    deadly_aspects:5, focused_fire:2, endurance:5, bestial_swiftness:1, unleashed_fury:5,
+    summon_hawk:1, ferocity:5, intimidation:1, bestial_discipline:2, frenzy:3, bestial_wrath:1,
+    lethal_attacks:5, careful_aim:5, rapid_killing:2, efficiency:5, trueshot_aura:1, mortal_shots:2
+  };
+  // 推荐加点先后：先兽王出狂野怒火，再补射击
+  var PRESET_ORDER = [
+    'deadly_aspects','endurance','focused_fire','bestial_swiftness','unleashed_fury',
+    'ferocity','summon_hawk','intimidation','bestial_discipline','frenzy','bestial_wrath',
+    'lethal_attacks','efficiency','careful_aim','rapid_killing','trueshot_aura','mortal_shots'
+  ];
+  var ORDER_INDEX = {};
+  PRESET_ORDER.forEach(function(id,i){ ORDER_INDEX[id]=i+1; });
+  var MAX_POINTS = 51;
+  var talentState = Object.assign({}, PRESET);
+
+  var TREE_ICON = {
+    bm:'<svg viewBox="0 0 24 24" fill="currentColor"><ellipse cx="12" cy="15" rx="4" ry="3.2"/><circle cx="6.5" cy="9.5" r="1.8"/><circle cx="10" cy="7" r="1.8"/><circle cx="14" cy="7" r="1.8"/><circle cx="17.5" cy="9.5" r="1.8"/></svg>',
+    mm:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="20" x2="18" y2="6"/><path d="M14 5h5v5"/><path d="M6 18l-2 2 3-1"/></svg>',
+    sv:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/></svg>'
+  };
+  var ICON_MAP = {
+    '致命守护':['shared','talents-spell_nature_ravenform'],'耐久训练':['shared','talents-spell_nature_reincarnation'],
+    '集中火力':['hunter','talents-inv_weapon_crossbow_10'],'强化灵猴守护':['hunter','talents-ability_hunter_aspectofthemonkey'],
+    '强化复活宠物':['hunter','talents-ability_hunter_beastsoothe'],'寻路':['hunter','talents-ability_mount_jungletiger'],
+    '野兽迅捷':['hunter','talents-ability_druid_dash'],'狂怒释放':['shared','talents-ability_bullrush'],
+    '强化治疗宠物':['hunter','talents-ability_hunter_mendpet'],'凶暴':['shared','talents-inv_misc_monsterclaw_04'],
+    '召唤雄鹰':['hunter','talents-ability_hunter_animalhandler'],'灵魂联结':['hunter','talents-ability_druid_demoralizingroar'],
+    '胁迫':['hunter','talents-ability_devour'],'野兽戒律':['shared','talents-spell_nature_abolishmagic'],
+    '狂乱':['hunter','talents-inv_misc_monsterclaw_03'],'狂野怒火':['hunter','talents-ability_druid_ferociousbite'],
+    '鹰眼':['hunter','talents-ability_townwatch'],'强化震荡射击':['shared','talents-spell_frost_stun'],
+    '致命攻击':['shared','talents-ability_searingarrow'],'强化钉刺':['hunter','talents-ability_hunter_quickshot'],
+    '效率':['shared','talents-spell_frost_wizardmark'],'精确瞄准':['hunter','talents-ability_hunter_zenarchery'],
+    '疾速杀戮':['hunter','talents-ability_hunter_rapidkilling'],'强化奥术射击':['hunter','talents-ability_impalingbolt'],
+    '独来独往':['hunter','talents-ability_mount_whitedirewolf'],'强击光环':['hunter','talents-ability_trueshot'],
+    '致死射击':['hunter','talents-ability_piercedamage'],'急速恢复':['hunter','talents-ability_hunter_rapidregeneration'],
+    '弹幕':['hunter','talents-ability_upgrademoonglaive'],'驱散射击':['hunter','talents-ability_golemstormbolt'],
+    '远程武器专精':['hunter','talents-inv_weapon_rifle_06'],'狙击':['hunter','talents-hunter_pvp_snipershot'],
+    '强化追踪':['hunter','talents-inv_misc_head_dragon_black'],'偏斜':['shared','talents-ability_parry'],
+    '诱捕':['shared','talents-spell_nature_stranglevines'],'野蛮打击':['shared','talents-ability_racial_bloodrage'],
+    '生存专家':['shared','talents-spell_shadow_twilight'],'强化摔绊':['hunter','talents-ability_rogue_trip'],
+    '灵巧陷阱':['hunter','talents-spell_nature_timestop'],'稳固':['shared','talents-ability_kick'],
+    '威慑':['shared','talents-ability_whirlwind'],'生存战术':['hunter','talents-ability_ensnare'],
+    '掠食者之锋':['shared','talents-ability_dualwield'],'反击':['shared','talents-ability_warrior_challange'],
+    '游刃有余':['hunter','talents-ability_hunter_resourcefulness'],'暴露猎物':['hunter','talents-ability_hunter_swiftstrike'],
+    '生存专家的戒律':['hunter','talents-ability_hunter_mastertactitian'],'陆行鸟踢击':['hunter','talents-ability_hunter_pet_tallstrider'],
+    '闪电反射':['shared','talents-spell_nature_invisibilty'],'裂伤打击':['shared','talents-ability_gouge']
+  };
+
+  // 列位 c 与父子连线 r（依游戏内天赋树截图核对；r 为父天赋 id，无连线则省略）
+  var COL_REQ = {
+    // 野兽控制
+    deadly_aspects:{c:1}, endurance:{c:2},
+    focused_fire:{c:0}, improved_monkey:{c:1}, improved_revive:{c:2},
+    pathfinding:{c:0}, bestial_swiftness:{c:1}, unleashed_fury:{c:2},
+    improved_mend:{c:0}, ferocity:{c:2}, summon_hawk:{c:3},
+    soul_link:{c:0}, intimidation:{c:1,r:'bestial_swiftness'}, bestial_discipline:{c:3},
+    frenzy:{c:2,r:'ferocity'}, bestial_wrath:{c:1,r:'intimidation'},
+    // 射击
+    hawk_eye:{c:0}, improved_concussive:{c:1}, lethal_attacks:{c:2},
+    improved_sting:{c:0}, efficiency:{c:1}, careful_aim:{c:2},
+    rapid_killing:{c:0}, improved_arcane:{c:1}, lone_wolf:{c:3},
+    trueshot_aura:{c:1}, mortal_shots:{c:2,r:'careful_aim'},
+    rapid_recovery:{c:0,r:'rapid_killing'}, barrage:{c:2}, scatter:{c:3},
+    ranged_spec:{c:2}, sniper:{c:1,r:'trueshot_aura'},
+    // 生存
+    improved_tracking:{c:1}, deflection:{c:2},
+    entrapment:{c:0}, savage_strikes:{c:1}, survivalist:{c:2}, improved_trip:{c:3},
+    trap_mastery:{c:0}, surefooted:{c:1}, deterrence:{c:2},
+    survival_tactics:{c:0}, predator_claws:{c:1}, counterattack:{c:2,r:'deterrence'},
+    wild_hunt:{c:0}, expose_prey:{c:1}, survival_disc:{c:2}, raptor_kick:{c:3},
+    lightning_reflexes:{c:2}, tear:{c:1,r:'expose_prey'}
+  };
+  function talentById(id){ for(var i=0;i<TALENTS.length;i++){ if(TALENTS[i].id===id) return TALENTS[i]; } return null; }
+  function treePoints(tree){ return TALENTS.reduce(function(s,t){ return s + (t.tree===tree ? (talentState[t.id]||0) : 0); },0); }
+  function usedPoints(){ return TALENTS.reduce(function(s,t){ return s + (talentState[t.id]||0); },0); }
+  function canAddTalent(t){
+    if((talentState[t.id]||0) >= t.max) return false;
+    if(usedPoints() >= MAX_POINTS) return false;
+    if(treePoints(t.tree) < t.tier) return false;
+    return true;
+  }
+  function addTalent(id){ var t=talentById(id); if(!t||!canAddTalent(t)) return; talentState[id]=(talentState[id]||0)+1; renderTalent(); }
+  function removeTalent(id){ var t=talentById(id); if(!t||(talentState[id]||0)<=0) return; talentState[id]--; if(talentState[id]===0) delete talentState[id]; renderTalent(); }
+
+  var tip=document.getElementById('tip');
+  function showTip(t, rank, locked, evt){
+    tip.textContent='';
+    tip.appendChild(el('div','tip-name',t.name));
+    tip.appendChild(el('div','tip-rank', rank+'/'+t.max+(locked?' · 未解锁':'')));
+    tip.appendChild(el('div','tip-desc',t.desc));
+    if(ORDER_INDEX[t.id]) tip.appendChild(el('div','tip-req','推荐加点第 '+ORDER_INDEX[t.id]+' 步'));
+    if(t.tier>0) tip.appendChild(el('div','tip-req','需本系投入 '+t.tier+' 点解锁'));
+    tip.style.display='block';
+    var r=evt.currentTarget.getBoundingClientRect();
+    var left=r.right+10, top=r.top;
+    if(left+260>window.innerWidth) left=r.left-270;
+    if(top+130>window.innerHeight) top=window.innerHeight-140;
+    tip.style.left=Math.max(8,left)+'px';
+    tip.style.top=Math.max(8,top)+'px';
+  }
+  function hideTip(){ tip.style.display='none'; }
+
+  var SVG_NS='http://www.w3.org/2000/svg';
+  function drawLines(body){
+    var svg=document.createElementNS(SVG_NS,'svg');
+    svg.setAttribute('class','tree-lines');
+    svg.setAttribute('width', body.offsetWidth);
+    svg.setAttribute('height', body.offsetHeight);
+    body.appendChild(svg);
+    var br=body.getBoundingClientRect();
+    TALENTS.forEach(function(t){
+      var m=COL_REQ[t.id]; if(!m||!m.r) return;
+      var p=body.querySelector('[data-id="'+m.r+'"]');
+      var c=body.querySelector('[data-id="'+t.id+'"]');
+      if(!p||!c) return;
+      var pr=p.getBoundingClientRect(), cr=c.getBoundingClientRect();
+      var px=pr.left-br.left+pr.width/2, py=pr.bottom-br.top;
+      var cx=cr.left-br.left+cr.width/2, cy=cr.top-br.top;
+      var on=((talentState[t.id]||0)>0)&&((talentState[m.r]||0)>0);
+      var path=document.createElementNS(SVG_NS,'path');
+      var d=(Math.abs(px-cx)<1)?('M'+px+' '+py+' V'+cy):('M'+px+' '+py+' V'+((py+cy)/2)+' H'+cx+' V'+cy);
+      path.setAttribute('d',d);
+      path.setAttribute('class','tree-line'+(on?' hot':''));
+      svg.appendChild(path);
+    });
+  }
+
+  function renderTalent(){
+    var root=document.getElementById('sim-cols');
+    root.textContent='';
+    var lineBodies=[];
+    ['bm','mm','sv'].forEach(function(tree){
+      var meta=TREE_META[tree];
+      var col=el('div','tree '+tree);
+      var head=el('div','tree-head');
+      var ic=el('span','tree-ic'); ic.innerHTML=TREE_ICON[tree]; head.appendChild(ic);
+      head.appendChild(el('span','tree-name',meta.name));
+      var pts=el('span','tree-pts','');
+      pts.innerHTML='<b>'+treePoints(tree)+'</b> 点';
+      head.appendChild(pts);
+      col.appendChild(head);
+      var body=el('div','tree-body');
+      var tiers=[0,5,10,15,20,25,30];
+      var layers=tiers.map(function(tier){
+        var list=TALENTS.filter(function(t){ return t.tree===tree && t.tier===tier; });
+        return {list:list, cols:list.map(function(t){ return (COL_REQ[t.id]||{}).c!=null?(COL_REQ[t.id].c):1; })};
+      });
+      layers.forEach(function(layer, li){
+        layer.list.forEach(function(t, i){
+          var col=layer.cols[i];
+          var meta=COL_REQ[t.id]||{};
+          var rank=talentState[t.id]||0;
+          var locked=treePoints(tree) < t.tier;
+          var box=el('div','talent'+(locked?' locked':rank>0?' on':' avail'));
+          box.dataset.id=t.id;
+          box.style.gridRow=String(li+1);
+          box.style.gridColumn=String(col+1);
+          var icon=el('button','ticon');
+          var im=ICON_MAP[t.name];
+          var img=el('img','ticon-img'); img.alt=t.name;
+          if(im) img.src='assets/'+im[0]+'.svg#'+im[1];
+          icon.appendChild(img);
+          if(rank>0 && ORDER_INDEX[t.id]){
+            icon.appendChild(el('span','order-badge',String(ORDER_INDEX[t.id])));
+          } else if(t.rec){
+            icon.appendChild(el('span','rec-dot'));
+          }
+          icon.appendChild(el('span','rank',rank+'/'+t.max));
+          icon.onclick=function(){addTalent(t.id);};
+          icon.oncontextmenu=function(e){e.preventDefault();removeTalent(t.id);};
+          icon.onmouseenter=function(e){showTip(t,rank,locked,e);};
+          icon.onmouseleave=hideTip;
+          box.appendChild(icon);
+          box.appendChild(el('span','tname',t.name));
+          body.appendChild(box);
+        });
+      });
+      col.appendChild(body);
+      root.appendChild(col);
+      lineBodies.push(body);
+    });
+    requestAnimationFrame(function(){ lineBodies.forEach(drawLines); });
+    var used=usedPoints();
+    document.getElementById('tm-level').textContent=Math.min(60,10+used);
+    document.getElementById('tm-used').textContent=used;
+    document.getElementById('pt-bm').textContent=treePoints('bm');
+    document.getElementById('pt-mm').textContent=treePoints('mm');
+    document.getElementById('pt-sv').textContent=treePoints('sv');
+  }
+
+  document.getElementById('btn-preset').onclick=function(){ talentState=Object.assign({},PRESET); renderTalent(); };
+  document.getElementById('btn-reset').onclick=function(){ talentState={}; renderTalent(); };
+
+  renderRoute();
+  renderTable("guide-spells", GUIDE_SPELLS);
+  renderTable("guide-pet-families", GUIDE_PETS);
+  renderTalent();
+  render();
+})();
+</script>
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+setTimeout(function(){
+  var pv=document.getElementById('busuanzi_value_site_pv');
+  if(pv && (pv.textContent.trim()===''||pv.textContent.trim()==='–')){
+    var line=document.getElementById('siteStats'); if(line) line.style.display='none';
+  }
+},5000);
+</script>
+</body>
+</html>
